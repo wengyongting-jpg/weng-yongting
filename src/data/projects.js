@@ -34,7 +34,7 @@ export const projects = [
     detail:
       "Designed a hybrid AI architecture combining deterministic health calculations and rule-based scoring with LLM-based personalized communication, structured user and health data models, and Prompt/Context Injection strategies.",
     tech: ["LLM API", "Prompt Engineering", "Next.js", "TypeScript", "PostgreSQL", "Drizzle ORM"],
-    url: "https://3000-ih5ljj0qvpqoouz0f69vt.e2b.app/",
+    url: "https://period-ai.vercel.app/",
     caseStudy: [
       {
         no: "01",

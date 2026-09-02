@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "predeploy": "vite build",
+    "predeploy": "vite build --base /weng-yongting/",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {

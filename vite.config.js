@@ -3,7 +3,6 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
-  // GitHub Pages serves at /weng-yongting/, so set the base path accordingly.
-  base: '/weng-yongting/',
+  // Default base is '/'. For GitHub Pages, the predeploy script passes --base.
   plugins: [react()],
 })
