@@ -13,7 +13,7 @@ function About() {
             <p>{profile.summary}</p>
             <div className="metadata">
               <div><small>BASED IN</small><strong>{profile.location}</strong></div>
-              <div><small>EDUCATION</small><strong>{profile.education.short} {profile.education.level}, {profile.education.program}</strong></div>
+              <div><small>EDUCATION</small><strong>{profile.education.short} {profile.education.level}, {profile.education.program} · {profile.education.period}</strong></div>
               <div><small>FOCUS</small><strong>{profile.focus}</strong></div>
               <div><small>INTERESTS</small><strong>{profile.interests.join(" · ")}</strong></div>
             </div>

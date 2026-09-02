@@ -1,4 +1,4 @@
-import { experiences, research, competitions, leadership, skillGroups } from "../data/index.js";
+import { profile, experiences, research, competitions, leadership, skillGroups } from "../data/index.js";
 
 function Resume() {
   return (
@@ -67,6 +67,24 @@ function Resume() {
             </div>
           </article>
         ))}
+      </div>
+
+      <h3 className="resume-subhead">EDUCATION</h3>
+      <div className="metadata">
+        <div>
+          <small>{profile.education.short} · {profile.education.period}</small>
+          <strong>{profile.education.level}, {profile.education.program}</strong>
+        </div>
+        <div>
+          <small>STUDY DIRECTIONS</small>
+          <strong>{profile.education.directions.join(" · ")}</strong>
+        </div>
+        <div>
+          <small>{profile.education.undergrad.program.toUpperCase()}</small>
+          <strong>
+            {profile.education.undergrad.courses.map((c) => `${c.name} — ${c.grade}`).join(" · ")}
+          </strong>
+        </div>
       </div>
 
       <h3 className="resume-subhead">SKILLS</h3>
