@@ -3,10 +3,8 @@ import { Outlet, Link, NavLink, useLocation } from "react-router-dom";
 import { profile } from "../data/index.js";
 
 const NAV = [
-  { to: "/work", label: "WORK" },
-  { to: "/lab", label: "LAB" },
-  { to: "/thinking", label: "THINKING" },
-  { to: "/now", label: "NOW" },
+  { to: "/work", label: "PROJECTS" },
+  { to: "/experiments", label: "EXPERIMENTS" },
   { to: "/about", label: "ABOUT" },
   { to: "/resume", label: "RESUME" },
 ];

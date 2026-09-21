@@ -10,7 +10,7 @@ function Article() {
 
   return (
     <article className="section-wrap case-study">
-      <p className="eyebrow">04 / THINKING</p>
+      <p className="eyebrow">03 / EXPERIMENTS</p>
       <h2 className="case-title">{article.title}</h2>
       <p className="case-subtitle">{article.date} · {article.venue}</p>
       <p className="case-overview">{article.excerpt}</p>
@@ -21,7 +21,7 @@ function Article() {
         </section>
       ))}
       <p className="case-actions">
-        <Link className="text-link" to="/thinking">← BACK TO THINKING</Link>
+        <Link className="text-link" to="/experiments">← BACK TO EXPERIMENTS</Link>
       </p>
     </article>
   );

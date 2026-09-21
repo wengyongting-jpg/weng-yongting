@@ -66,7 +66,7 @@ export const portfolioOS = [
     key: "ai-lab",
     title: "AI LAB",
     blurb: "AI products, LLM applications, and safety-aware AI design.",
-    to: "/lab",
+    to: "/experiments",
     cta: "ENTER LAB",
   },
   {
@@ -98,7 +98,7 @@ export const portfolioOS = [
     key: "thinking-room",
     title: "THINKING ROOM",
     blurb: "Decision memos and reflections on enterprise AI.",
-    to: "/thinking",
+    to: "/experiments",
     cta: "READ MEMOS",
   },
 ];
