@@ -40,7 +40,13 @@ export const projects = [
         no: "01",
         heading: "Problem",
         body:
-          "Personalized health support sits in a grey zone between lifestyle guidance and medical reasoning. Four pain points framed the problem: health information is fragmented across different records; users find it difficult to interpret changes in their own cycle, symptoms, and mood over time; generic health information does not reflect an individual's context; and AI health products create safety risks if the LLM generates inappropriate or overconfident medical advice. A generic chatbot cannot be trusted here — it must understand each user's context, avoid overstating certainty, and never substitute for clinical judgement.",
+          "Personalized health support sits between lifestyle guidance and medical reasoning. A generic chatbot cannot be trusted here — it must understand each user's context, avoid overstating certainty, and never substitute for clinical judgement.",
+        points: [
+          "Health information is fragmented across different records.",
+          "Users find it difficult to interpret changes in cycle, symptoms, and mood over time.",
+          "Generic health information does not reflect an individual's context.",
+          "AI health products create safety risks if the LLM generates overconfident medical advice.",
+        ],
       },
       {
         no: "02",
@@ -179,7 +185,13 @@ export const projects = [
         no: "01",
         heading: "Problem",
         body:
-          "Refund processing is document-heavy and rule-bound. Four pain points framed the problem: receipt information is initially stored in documents rather than structured data; manual extraction and validation can be repetitive; different cases may require different processing decisions; and cases with insufficient confidence or rule violations should not necessarily be processed automatically. Manual handling is slow and inconsistent; full automation is unsafe because some decisions should not be made without a person.",
+          "Refund processing is document-heavy and rule-bound. Manual handling is slow and inconsistent, while full automation is unsafe because some decisions should not be made without a person.",
+        points: [
+          "Receipt information is initially stored in documents rather than structured data.",
+          "Manual extraction and validation can be repetitive.",
+          "Different cases may require different processing decisions.",
+          "Cases with insufficient confidence or rule violations should not necessarily be processed automatically.",
+        ],
       },
       {
         no: "02",
@@ -934,7 +946,13 @@ export const projects = [
         no: "01",
         heading: "Problem",
         body:
-          "International students renting in Singapore for the first time face four difficulties: rental posts on platforms like Facebook and Carousell are unstructured, with rent, lease, utilities, deposit, and room type scattered across long text; students may not know local rental rules or potential risks; comparing multiple listings manually is tedious; and students who are not confident in English may struggle to ask landlords the right questions. A generic chatbot cannot solve this — it would need to extract facts without fabricating, ground risk assessments in listing evidence, and know what it does not know.",
+          "International students renting in Singapore for the first time face four core difficulties. A generic chatbot cannot solve this — it would need to extract facts without fabricating, ground risk assessments in listing evidence, and know what it does not know.",
+        points: [
+          "Rental posts on Facebook and Carousell are unstructured, with rent, lease, utilities, deposit, and room type scattered across long text.",
+          "Students may not know local rental rules or potential risks.",
+          "Comparing multiple listings manually is tedious.",
+          "Students not confident in English may struggle to ask landlords the right questions.",
+        ],
       },
       {
         no: "02",
@@ -974,8 +992,10 @@ export const projects = [
         no: "05",
         heading: "AI Module Design",
         body:
-          "Both modules use Gemini 2.5 Flash with temperature 0.1 and structured JSON responses. Module A extracts facts from a raw listing — rent, room type, location, availability, lease duration, utilities, deposit, agent fee, and more — preserving qualifiers like 'around', 'probably', 'negotiable', and 'TBD' rather than rounding them to fixed values. Module B assesses preference fit, identifies evidence-grounded concerns, exposes information gaps, recommends next actions, and drafts clarification questions for the landlord. Each risk output requires both listing evidence and, in the full system, an applicable knowledge entry.",
+          "Both modules use Gemini 2.5 Flash with temperature 0.1 and structured JSON responses. Module A extracts facts from a raw listing while preserving qualifiers; Module B assesses preference fit, identifies evidence-grounded concerns, exposes information gaps, recommends next actions, and drafts clarification questions for the landlord. Each risk output requires both listing evidence and an applicable knowledge entry.",
         points: [
+          "Module A extracts rent, room type, location, availability, lease duration, utilities, deposit, agent fee, and more.",
+          "Qualifiers like 'around', 'probably', 'negotiable', and 'TBD' are preserved rather than rounded to fixed values.",
           "Module A preserves uncertainty — 'Not mentioned' for absent facts, 'Needs verification' for ambiguous ones.",
           "Module B never makes unsupported conclusions — insufficient evidence triggers a clarification request, not a guess.",
           "Risk findings require two-part grounding: listing evidence plus a knowledge entry, preventing a general rental rule from becoming a finding without supporting detail.",

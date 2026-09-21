@@ -26,9 +26,11 @@ function Work() {
                 </p>
                 <h3>{p.name}</h3>
                 <p className="work-subtitle">{p.subtitle}</p>
-                {/* Prefer the concise value proposition on cards; fall back to the full summary. */}
-                <p className="work-summary">{p.valueProp || p.summary}</p>
-                {p.proofPoint && <p className="work-proof">{p.proofPoint}</p>}
+                <ul className="tech-list work-tech-compact">
+                  {p.tech.slice(0, 4).map((t) => (
+                    <li key={t}>{t}</li>
+                  ))}
+                </ul>
                 <span className="text-link">VIEW CASE STUDY <b>↗</b></span>
               </div>
               <span className="work-arrow" aria-hidden="true">→</span>
