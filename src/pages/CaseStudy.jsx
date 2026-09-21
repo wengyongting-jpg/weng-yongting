@@ -29,6 +29,23 @@ function CaseStudy() {
         </p>
         {project.event && <p className="case-event">{project.event}</p>}
         <p className="case-overview">{project.summary}</p>
+        {project.video && project.video.type === "youtube" && (
+          <figure className="case-video">
+            <div className="case-video-frame">
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${project.video.id}`}
+                title={project.video.title || `${project.name} — demo video`}
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            </div>
+            {project.video.caption && (
+              <figcaption className="case-video-caption">{project.video.caption}</figcaption>
+            )}
+          </figure>
+        )}
       </header>
 
       <div className="case-sections">

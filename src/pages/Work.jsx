@@ -21,6 +21,8 @@ function Work() {
                   {p.domain} · {p.year}
                   {p.status && <span className="work-status">STATUS / {p.status.toUpperCase()}</span>}
                   {p.teamProject && <span className="work-status is-team">TEAM PROJECT</span>}
+                  {p.video && <span className="work-status is-demo">▶ VIDEO DEMO</span>}
+                  {!p.video && p.links && p.links.length > 0 && <span className="work-status is-demo">◆ DEMO</span>}
                 </p>
                 <h3>{p.name}</h3>
                 <p className="work-subtitle">{p.subtitle}</p>

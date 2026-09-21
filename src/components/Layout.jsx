@@ -55,7 +55,10 @@ function Layout() {
       <footer>
         <span>© {new Date().getFullYear()} {profile.wordmark}</span>
         <span>{profile.focus}</span>
-        <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="footer-link">LINKEDIN <b>↗</b></a>
+        <span className="footer-links">
+          <a href={profile.github} target="_blank" rel="noopener noreferrer" className="footer-link">GITHUB <b>↗</b></a>
+          <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="footer-link">LINKEDIN <b>↗</b></a>
+        </span>
       </footer>
     </>
   );

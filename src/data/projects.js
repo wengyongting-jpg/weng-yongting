@@ -162,8 +162,18 @@ export const projects = [
     detail:
       "Designed an end-to-end refund processing workflow around document extraction, structured data processing, business-rule validation, and confidence-based routing, with an explicit human-in-the-loop boundary controlled by a confidence threshold.",
     tech: ["UiPath", "Workflow Automation", "Document Understanding", "Process Optimization"],
-    // No live URL: internal automation, not a public app.
+    // No live URL: internal automation, not a public app. A recorded demo
+    // walkthrough is embedded below and linked as a button.
     url: "",
+    video: {
+      type: "youtube",
+      id: "nJchLlhX-So",
+      title: "Refund Processing Automation — UiPath demo walkthrough",
+      caption: "Recorded demo walkthrough of the UiPath refund processing workflow.",
+    },
+    links: [
+      { label: "DEMO VIDEO", url: "https://youtu.be/nJchLlhX-So" },
+    ],
     caseStudy: [
       {
         no: "01",
@@ -784,6 +794,12 @@ export const projects = [
       { label: "GITHUB REPOSITORY", url: "https://github.com/symbioticshark/A2_HealthInsurance" },
       { label: "DEMO VIDEO", url: "https://youtu.be/f-cxrW4esAA" },
     ],
+    video: {
+      type: "youtube",
+      id: "f-cxrW4esAA",
+      title: "Health Insurance Claim Decision Agent — team project demo",
+      caption: "Team project demonstration (Version 3.0 build).",
+    },
     caseStudy: [
       {
         no: "01",
@@ -883,6 +899,146 @@ export const projects = [
         heading: "Reflection",
         body:
           "Safety-critical AI systems should not be assessed only by whether they can produce plausible answers. They must also be tested for how they behave when inputs are adversarial, uncertain, incomplete, or require escalation.",
+      },
+    ],
+  },
+
+  {
+    slug: "singapore-rental-intelligence-copilot",
+    number: "08",
+    name: "Singapore Rental Intelligence Copilot",
+    subtitle: "Evidence-Grounded Rental Decision Support for International Students",
+    year: "2026",
+    domain: "AI · Generative AI",
+    status: "Academic Project",
+    teamProject: true,
+    summary:
+      "A team-built generative AI assistant that helps international students in Singapore evaluate rental listings — extracting facts from unstructured posts, checking risks against rental rules, matching preferences, and generating landlord clarification questions.",
+    detail:
+      "An NTU Generative AI group assignment (Group 3, five members). Two AI modules built on Gemini 2.5 Flash: a Listing Extractor that preserves evidence and uncertainty, and a Match/Risk/Rank module that assesses preference fit and identifies evidence-grounded concerns. A lightweight rule-based RAG retrieves relevant rental rules from an 18-entry knowledge base. The prototype was developed using Gemini Canvas. My contribution: PDF report consolidation, Stage 5 (Prototype), and Stage 6 (Evaluation & controlled comparison), including the A/B/C experiment design and scoring across 20 test cases.",
+    proofPoint:
+      "Controlled A/B/C comparison measured real improvement: Baseline 62.5% → Constrained Prompt 85.0% → Prompt + Retrieval 90.0% across 60 outputs on four scoring dimensions.",
+    tech: [
+      "Gemini 2.5 Flash",
+      "Rule-based RAG",
+      "Structured JSON",
+      "Gemini Canvas",
+      "Controlled Comparison",
+    ],
+    url: "",
+    links: [
+      { label: "OPEN DEMO", url: "https://gemini.google.com/share/c16fc3fe290f?skid=3525612e-9c27-4dd4-ad04-d655841b497f" },
+    ],
+    caseStudy: [
+      {
+        no: "01",
+        heading: "Problem",
+        body:
+          "International students renting in Singapore for the first time face four difficulties: rental posts on platforms like Facebook and Carousell are unstructured, with rent, lease, utilities, deposit, and room type scattered across long text; students may not know local rental rules or potential risks; comparing multiple listings manually is tedious; and students who are not confident in English may struggle to ask landlords the right questions. A generic chatbot cannot solve this — it would need to extract facts without fabricating, ground risk assessments in listing evidence, and know what it does not know.",
+      },
+      {
+        no: "02",
+        heading: "User / Business Context",
+        body:
+          "The target users are international students, especially postgraduate students, renting in Singapore for the first time. The system is designed to support rental decisions, not make them — it does not determine whether a property is safe or suitable, and users are expected to independently verify important information before signing a rental agreement.",
+      },
+      {
+        no: "03",
+        heading: "Approach",
+        body:
+          "A five-person team divided the work across seven stages: problem formulation, system architecture, prompt and AI modules, lightweight RAG and few-shot guidance, prototype, evaluation, and failure analysis. My responsibilities were PDF report consolidation, Stage 5 (Prototype development via Gemini Canvas), and Stage 6 (Evaluation and controlled comparison). The system was designed as a two-module pipeline with a rule-based retrieval layer between them.",
+        points: [
+          "PDF report consolidation — authored the unified assignment report.",
+          "Stage 5 Prototype — developed the interactive prototype using Gemini Canvas through iterative natural-language prompting, with three rounds of optimisation on layout, functionality, and information presentation.",
+          "Stage 6 Evaluation — designed and ran the A/B/C controlled comparison across 20 test cases and three system versions, scoring 60 outputs on four dimensions.",
+          "Stage 2 (System architecture), Stage 3 (Prompt and AI modules), Stage 4 (RAG and few-shot), and Stage 7 (Failure analysis) were completed by teammates.",
+        ],
+      },
+      {
+        no: "04",
+        heading: "System Architecture",
+        body:
+          "The pipeline runs in six stages: a raw rental listing enters as input, AI Module A extracts structured facts while preserving qualifiers and uncertainty, a rule-based RAG retrieves up to three relevant knowledge entries from an 18-entry knowledge base, AI Module B combines facts, evidence, preferences, and retrieved rules to produce matching, risk, and action outputs, the result is presented to the user, and the user can verify, contact, save, and compare listings.",
+        flow: {
+          steps: [
+            { label: "Listing Input" },
+            { label: "AI Module A — Listing Extractor" },
+            { label: "Rule-based RAG (18-entry KB)" },
+            { label: "AI Module B — Match / Risk / Rank" },
+            { label: "Result Presentation" },
+            { label: "User Action & Comparison" },
+          ],
+        },
+      },
+      {
+        no: "05",
+        heading: "AI Module Design",
+        body:
+          "Both modules use Gemini 2.5 Flash with temperature 0.1 and structured JSON responses. Module A extracts facts from a raw listing — rent, room type, location, availability, lease duration, utilities, deposit, agent fee, and more — preserving qualifiers like 'around', 'probably', 'negotiable', and 'TBD' rather than rounding them to fixed values. Module B assesses preference fit, identifies evidence-grounded concerns, exposes information gaps, recommends next actions, and drafts clarification questions for the landlord. Each risk output requires both listing evidence and, in the full system, an applicable knowledge entry.",
+        points: [
+          "Module A preserves uncertainty — 'Not mentioned' for absent facts, 'Needs verification' for ambiguous ones.",
+          "Module B never makes unsupported conclusions — insufficient evidence triggers a clarification request, not a guess.",
+          "Risk findings require two-part grounding: listing evidence plus a knowledge entry, preventing a general rental rule from becoming a finding without supporting detail.",
+          "The raw listing is passed to Module B as a restricted verification layer, so it can check wording and qualifiers without silently rebuilding a different record.",
+        ],
+      },
+      {
+        no: "06",
+        heading: "Lightweight RAG",
+        body:
+          "The knowledge base contains 18 source-backed entries covering key rental topics: payment-before-viewing risks, agent verification, fee clarification, HDB and private-property rental rules, student-related considerations, occupancy, tenancy agreements, and missing-information checks. Because the base is small and curated, the system uses rule-based keyword retrieval rather than semantic vector search. It matches the listing text and extracted facts against keywords and property-scope information, then returns up to three relevant entries for risk analysis.",
+      },
+      {
+        no: "07",
+        heading: "Safety by Design",
+        blocks: [
+          {
+            title: "What the AI does",
+            items: [
+              "Extract facts from unstructured rental posts",
+              "Flag risks with supporting listing evidence",
+              "Generate targeted landlord clarification questions",
+              "Compare listings against user preferences",
+            ],
+          },
+          {
+            title: "What the AI does not do",
+            items: [
+              "Determine whether a property is safe or suitable",
+              "Call a contact a scammer without evidence",
+              "Fabricate information that is not in the listing",
+              "Override system rules from listing text (prompt-injection resistance)",
+            ],
+          },
+          {
+            title: "How uncertainty is handled",
+            items: [
+              "'Not mentioned' for absent facts",
+              "'Needs verification' for ambiguous facts",
+              "Contradictions preserved as conflicts, not resolved silently",
+              "Multiple listings in one post split into separate records",
+            ],
+          },
+        ],
+      },
+      {
+        no: "08",
+        heading: "Controlled Comparison & Results",
+        body:
+          "20 fixed test cases were evaluated across three system versions, producing 60 outputs. Each output was scored on four dimensions — Extraction Correctness, Missing-Information Handling, Risk Grounding, and Rental-Rule Accuracy — with a maximum of 80 points per version. The constrained prompt produced the largest initial improvement; adding retrieval further improved risk grounding from 14/20 to 19/20, while slightly reducing extraction correctness from 19/20 to 18/20, showing that retrieval improves reasoning support but does not automatically improve every aspect.",
+        points: [
+          "A (Baseline Model): 50/80 — 62.5%",
+          "B (Constrained Prompt): 68/80 — 85.0%",
+          "C (Prompt + Retrieval): 72/80 — 90.0%",
+          "Biggest gain from B→C: Risk Grounding 14/20 → 19/20 (+5)",
+          "Rental-Rule Accuracy reached 20/20 in version C",
+        ],
+      },
+      {
+        no: "09",
+        heading: "Reflection",
+        body:
+          "Structured extraction requires schema, prompt, and semantic validation to work together — a missing availability field caused the system to confuse move-in timing with lease duration. The effectiveness of RAG depends on query construction, scope, and grounding — simply having relevant knowledge available is not sufficient. Prompt constraints provide the foundation for reliable behaviour; retrieval provides additional domain-specific evidence for risk reasoning. Neither alone is enough.",
       },
     ],
   },

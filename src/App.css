@@ -134,7 +134,14 @@
 .case-status { padding:4px 8px; border:1px solid var(--line-strong); color:#c9c9cf; font-size:9px; letter-spacing:.12em; }
 .case-status.is-team { color:#9fd3b0; border-color:rgba(159,211,176,.4); }
 .case-event { color:#bcbcc1; font-size:12px; letter-spacing:.06em; margin:0 0 34px; }
-.case-overview { color:#d0d0d4; font-size:clamp(17px,1.6vw,23px); line-height:1.55; margin:0 0 65px; }
+.case-overview { color:#d0d0d4; font-size:clamp(17px,1.6vw,23px); line-height:1.55; margin:0 0 48px; }
+
+/* ===== Embedded demo video (case study header) ===== */
+.case-video { margin:0 0 65px; max-width:860px; }
+.case-video-frame { position:relative; width:100%; aspect-ratio:16/9; border:1px solid var(--line); background:#000; }
+.case-video-frame iframe { position:absolute; inset:0; width:100%; height:100%; border:0; display:block; }
+.case-video-caption { margin:14px 0 0; color:var(--muted); font-size:11px; letter-spacing:.08em; line-height:1.6; }
+.work-status.is-demo { color:#cfc6e8; border-color:rgba(180,165,225,.4); }
 .case-sections { display:flex; flex-direction:column; }
 .case-section { display:grid; grid-template-columns:minmax(150px,.32fr) 1fr; gap:clamp(24px,5vw,80px); padding:clamp(40px,5vw,64px) 0; border-bottom:1px solid var(--line); }
 .case-section-label { position:sticky; top:96px; align-self:start; display:flex; flex-direction:column; gap:10px; }
@@ -307,6 +314,7 @@ footer { display:flex; justify-content:space-between; align-items:center; paddin
 .footer-link { text-decoration:none; color:#77777e; transition:color .2s; }
 .footer-link b { font-weight:400; }
 .footer-link:hover { color:var(--ink); }
+.footer-links { display:flex; gap:18px; }
 
 /* ===== Animations ===== */
 @keyframes panel-in { from { opacity:0; transform:translateY(16px) scale(.985); } to { opacity:1; transform:none; } }

@@ -37,4 +37,16 @@ export const selectedProjects = [
       { label: "Demo", url: "https://youtu.be/f-cxrW4esAA" },
     ],
   },
+  {
+    year: "2026",
+    name: "Singapore Rental Intelligence Copilot",
+    meta: "NTU Generative AI · Academic Team Project",
+    achievements: [
+      "Co-developed a generative AI assistant that extracts facts from unstructured rental listings, checks risks against an 18-entry rental-rule knowledge base, and generates evidence-grounded landlord clarification questions for international students.",
+      "Designed and ran a controlled A/B/C comparison across 20 test cases and three system versions, scoring 60 outputs on four dimensions — measuring real improvement from 62.5% (baseline) to 85.0% (constrained prompt) to 90.0% (prompt + retrieval).",
+    ],
+    links: [
+      { label: "Demo", url: "https://gemini.google.com/share/c16fc3fe290f?skid=3525612e-9c27-4dd4-ad04-d655841b497f" },
+    ],
+  },
 ];
