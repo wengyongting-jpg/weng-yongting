@@ -54,3 +54,50 @@ export const profile = {
   // Verified contact links.
   linkedin: "https://www.linkedin.com/in/yongting-c",
 };
+
+// "Portfolio OS" — the five directional entry points on the homepage.
+// Each is a wayfinding label that maps to a real route, so the map improves
+// navigation rather than adding decorative complexity. No new content is
+// invented here: these are lenses onto pages that already exist.
+export const portfolioOS = [
+  {
+    id: "01",
+    key: "ai-lab",
+    title: "AI LAB",
+    blurb: "AI products, LLM applications, and safety-aware AI design.",
+    to: "/lab",
+    cta: "ENTER LAB",
+  },
+  {
+    id: "02",
+    key: "automation-bay",
+    title: "AUTOMATION BAY",
+    blurb: "Workflow automation, human-in-the-loop systems, process improvement.",
+    to: "/work/refund-processing-automation",
+    cta: "VIEW CASE",
+  },
+  {
+    id: "03",
+    key: "data-observatory",
+    title: "DATA OBSERVATORY",
+    blurb: "Research, analytics, market intelligence, and decision support.",
+    to: "/work/huafu-market-intelligence",
+    cta: "VIEW CASE",
+  },
+  {
+    id: "04",
+    key: "business-archive",
+    title: "BUSINESS ARCHIVE",
+    blurb: "Audit, finance, operations, process diagnosis, transformation context.",
+    to: "/resume",
+    cta: "SEE RECORD",
+  },
+  {
+    id: "05",
+    key: "thinking-room",
+    title: "THINKING ROOM",
+    blurb: "Decision memos and reflections on enterprise AI.",
+    to: "/thinking",
+    cta: "READ MEMOS",
+  },
+];

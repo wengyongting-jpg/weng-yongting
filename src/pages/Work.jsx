@@ -17,10 +17,16 @@ function Work() {
             <Link to={`/work/${p.slug}`} className="work-row-link">
               <span className="work-no">{p.number}</span>
               <div className="work-row-main">
-                <p className="work-kicker">{p.domain} · {p.year}</p>
+                <p className="work-kicker">
+                  {p.domain} · {p.year}
+                  {p.status && <span className="work-status">STATUS / {p.status.toUpperCase()}</span>}
+                  {p.teamProject && <span className="work-status is-team">TEAM PROJECT</span>}
+                </p>
                 <h3>{p.name}</h3>
                 <p className="work-subtitle">{p.subtitle}</p>
-                <p className="work-summary">{p.summary}</p>
+                {/* Prefer the concise value proposition on cards; fall back to the full summary. */}
+                <p className="work-summary">{p.valueProp || p.summary}</p>
+                {p.proofPoint && <p className="work-proof">{p.proofPoint}</p>}
                 <span className="text-link">VIEW CASE STUDY <b>↗</b></span>
               </div>
               <span className="work-arrow" aria-hidden="true">→</span>

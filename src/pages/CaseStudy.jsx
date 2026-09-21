@@ -22,7 +22,12 @@ function CaseStudy() {
       <header className="case-header">
         <h2 className="case-title">{project.name}</h2>
         <p className="case-subtitle">{project.subtitle}</p>
-        <p className="case-meta">{project.year} · {project.domain}</p>
+        <p className="case-meta">
+          {project.year} · {project.domain}
+          {project.status && <span className="case-status">STATUS / {project.status.toUpperCase()}</span>}
+          {project.teamProject && <span className="case-status is-team">TEAM PROJECT</span>}
+        </p>
+        {project.event && <p className="case-event">{project.event}</p>}
         <p className="case-overview">{project.summary}</p>
       </header>
 
@@ -44,6 +49,51 @@ function CaseStudy() {
               )}
               {block.note && <p className="case-section-note">{block.note}</p>}
               {block.flow && <FlowDiagram flow={block.flow} />}
+              {block.safety && (
+                <div className="safety-grid">
+                  {[block.safety.can, block.safety.cannot, block.safety.escalation]
+                    .filter(Boolean)
+                    .map((col, i) => (
+                      <div
+                        className={`safety-col ${
+                          ["is-can", "is-cannot", "is-escalation"][i]
+                        }`}
+                        key={col.label}
+                      >
+                        <p className="safety-col-label">{col.label}</p>
+                        <ul>
+                          {col.items.map((it) => (
+                            <li key={it}>{it}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                </div>
+              )}
+              {block.chips && (
+                <div className="chip-groups">
+                  {block.chips.map((group) => (
+                    <div className="chip-group" key={group.label}>
+                      <p className="chip-group-label">{group.label}</p>
+                      <ul className="chip-list">
+                        {group.items.map((it) => (
+                          <li key={it}>{it}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {block.blocks && (
+                <div className="case-blocks">
+                  {block.blocks.map((b) => (
+                    <div className="case-block-panel" key={b.title}>
+                      <p className="case-block-title">{b.title}</p>
+                      <p className="case-block-body">{b.body}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </section>
         ))}
@@ -61,6 +111,18 @@ function CaseStudy() {
             LIVE DEMO <b>↗</b>
           </a>
         )}
+        {/* Multiple confirmed public links (e.g. GitHub + demo video). First is primary. */}
+        {project.links && project.links.map((lnk, i) => (
+          <a
+            key={lnk.url}
+            className={`button ${i === 0 ? "button-primary" : "button-quiet"}`}
+            href={lnk.url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {lnk.label} <b>↗</b>
+          </a>
+        ))}
         <Link className="text-link" to="/work">← BACK TO WORK</Link>
       </p>
 

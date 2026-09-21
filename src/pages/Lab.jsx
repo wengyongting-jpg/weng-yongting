@@ -1,5 +1,6 @@
 import ExperimentCard from "../components/ExperimentCard.jsx";
-import { experiments } from "../data/index.js";
+import UpcomingProjectCard from "../components/UpcomingProjectCard.jsx";
+import { experiments, upcomingProjects } from "../data/index.js";
 
 // AI LAB — a public learning surface for Enterprise AI experimentation.
 //
@@ -27,6 +28,25 @@ function Lab() {
           <ExperimentCard key={e.id} experiment={e} />
         ))}
       </div>
+
+      {upcomingProjects.length > 0 && (
+        <div className="lab-upcoming">
+          <div className="section-heading">
+            <p className="eyebrow">IN THE WORKSHOP</p>
+            <h2>NEXT<br /><span>CASES.</span></h2>
+          </div>
+          <p className="lab-intro">
+            Reserved slots for projects being prepared for the portfolio. Until verified details
+            are in, a slot stays empty on purpose — an unfinished case is shown as reserved,
+            never dressed up as a finished one.
+          </p>
+          <div className="experiment-grid">
+            {upcomingProjects.map((p) => (
+              <UpcomingProjectCard key={p.key} project={p} />
+            ))}
+          </div>
+        </div>
+      )}
     </section>
   );
 }

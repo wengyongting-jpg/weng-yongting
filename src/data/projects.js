@@ -81,33 +81,68 @@ export const projects = [
       },
       {
         no: "06",
-        heading: "AI / Automation Logic",
+        heading: "System Architecture",
         body:
-          "The end-to-end design moves from understanding the user to enforcing safety before any response reaches them. The key split: deterministic logic is used where accuracy and consistency matter; the LLM is used where personalization and natural-language interaction create value.",
+          "The end-to-end design moves from the user's health context to an enforced safety boundary before any response is shown. The key split: deterministic logic is used where accuracy and consistency matter; the LLM is used only for the communication layer, where personalization and natural language create value.",
         flow: {
           steps: [
-            { label: "User Scenario" },
-            { label: "Pain Point" },
-            { label: "Functional Requirements" },
-            { label: "AI Interaction" },
-            { label: "Deterministic Logic + LLM" },
-            { label: "Safety Boundary" },
-            { label: "User Experience" },
+            { label: "User Health Context" },
+            { label: "Structured User Data" },
+            { label: "Deterministic Rules & Calculations" },
+            { label: "Prompt / Context Injection" },
+            { label: "LLM Communication Layer" },
+            { label: "Safety Boundary Check" },
+            { label: "User Response" },
           ],
         },
       },
       {
         no: "07",
+        heading: "Safety by Design",
+        body:
+          "Because the product sits next to health decisions, its boundaries are designed as explicit, auditable rules rather than left to the model's discretion. It supports wellness communication and reflection — it does not replace clinical judgement.",
+        safety: {
+          can: {
+            label: "WHAT AI CAN DO",
+            items: [
+              "Context-aware wellness communication",
+              "Personalized explanations grounded in the user's own records",
+              "Conversational support",
+              "Pattern and record reflection within defined boundaries",
+            ],
+          },
+          cannot: {
+            label: "WHAT AI CANNOT DO",
+            items: [
+              "Clinical diagnosis",
+              "Medication decisions",
+              "Emergency assessment",
+              "Claims of medical certainty",
+            ],
+          },
+          escalation: {
+            label: "ESCALATION",
+            items: [
+              "Severe, unusual, or rapidly worsening symptoms",
+              "Anything the rules flag as outside safe wellness-support scope",
+              "Situations that call for qualified medical support — the user is directed to seek it",
+            ],
+          },
+        },
+      },
+      {
+        no: "08",
         heading: "Key Design Decisions",
         points: [
           "Split reasoning: rule-bound health logic stays deterministic; conversational empathy uses the LLM.",
-          "Context injection over fine-tuning, to keep the model grounded and controllable.",
-          "Safety boundaries designed as explicit rules, not left to the model's discretion.",
+          "The LLM is used for communication, not clinical reasoning — it explains and supports, it does not decide.",
+          "Context injection over fine-tuning, to keep the model grounded, controllable, and honest about what it knows.",
+          "Safety boundaries designed as explicit, auditable rules, not left to the model's discretion.",
           "Use deterministic logic where accuracy and consistency matter; use the LLM where personalization and natural-language interaction create value.",
         ],
       },
       {
-        no: "08",
+        no: "09",
         heading: "What I Learned",
         body:
           "Used AI coding tools to support implementation and iteratively tested AI response quality and safety. The clearest lesson: in health-adjacent products, the architecture — not the prompt — is what makes an LLM safe to ship. The deciding design choice is where to use deterministic logic versus where to use the LLM.",
@@ -383,6 +418,471 @@ export const projects = [
         heading: "What I Learned",
         body:
           "Analysis is only as reliable as the data and assumptions behind it. A clean framework forces assumptions into the open, and that transparency — more than precision — is what makes investment research trustworthy. The core lesson: the value is in transforming fragmented information into structured, decision-useful intelligence, not in collecting more of it.",
+      },
+    ],
+  },
+
+  // ==========================================================================
+  // 05 · SalesPilot — Hackathon Project (NUS-ISS "Show Me Your Agents")
+  // Status: IN PROGRESS. Prototype / in-progress portfolio work — NOT a
+  // deployed commercial product. No confirmed public demo/GitHub URL, so no
+  // `url` is set and no GitHub/Demo button is shown.
+  // New optional block types used here: `blocks` (editorial panels) and
+  // `chips` (labelled chip lists). Both are rendered by CaseStudy.jsx.
+  // ==========================================================================
+  {
+    slug: "salespilot",
+    number: "05",
+    name: "SalesPilot",
+    subtitle: "Agentic WhatsApp Sales Opportunity Assistant",
+    year: "2026",
+    domain: "Agentic AI · Sales Enablement",
+    status: "In Progress",
+    event: "NUS-ISS Show Me Your Agents Hackathon · September 2026",
+    valueProp:
+      "Turning customer conversations into dynamic sales opportunities — not just automated replies.",
+    proofPoint:
+      "A stateful opportunity-intelligence agent: it scores each conversation 0–100 and escalates high-value or negotiation-stage cases to a human seller.",
+    summary:
+      "An agentic WhatsApp assistant that reads conversation history to identify a customer's sales stage, detect signals, maintain an Opportunity Profile, compute a 0–100 Opportunity Value Score, and choose the next best action — automating routine enquiries while escalating high-value situations to a human.",
+    detail:
+      "Led the initial product concept and early build: product design, agent logic, RAG requirements, human-in-the-loop design, and overall integration direction.",
+    tech: ["Agent Logic", "RAG Requirements", "Human-in-the-Loop", "AWS", "GitHub"],
+    // No confirmed public demo/GitHub URL — intentionally omitted.
+    url: "",
+    caseStudy: [
+      {
+        no: "01",
+        heading: "Challenge",
+        body:
+          "Sales teams lose time answering high-volume recurring enquiries — product availability, pricing, delivery charges, operating hours — while the signals that actually matter stay buried in fragmented WhatsApp conversations: purchase intent, hesitation, competitor comparison, expansion opportunity, and risk. A team cannot treat every message equally, but it is hard to see who is approaching purchase, who is hesitating, who is comparing competitors, and who needs human attention.",
+      },
+      {
+        no: "02",
+        heading: "Context",
+        body:
+          "Sales representatives receive a high volume of enquiries through WhatsApp every day and have limited capacity. The system must automate routine enquiries but preserve human judgement for high-value, sensitive, uncertain, or negotiation-stage situations.",
+      },
+      {
+        no: "03",
+        heading: "My Role",
+        body:
+          "Led the initial concept and early product build. Owned the product design, agent logic, RAG requirements, human-in-the-loop design, and the overall integration direction. This is a hackathon team project; contributions beyond these areas are shared team work rather than solely mine.",
+      },
+      {
+        no: "04",
+        heading: "Key Decision",
+        body:
+          "Do not build a reply-generation chatbot. Build a stateful sales-opportunity agent that continuously interprets conversation history, updates the customer's sales stage, identifies signals, scores opportunity value, and recommends the correct next action. SalesPilot is positioned as opportunity intelligence, not a generic Q&A bot.",
+      },
+      {
+        no: "05",
+        heading: "Solution",
+        body:
+          "After every customer message, SalesPilot runs a stateful loop: it recalls conversation memory, detects the customer's current state, extracts sales signals, updates the Opportunity Profile, recomputes the Opportunity Value Score, and picks the next best action — either an automated AI response or a deliberate handoff to a human seller — while keeping the dashboard in sync.",
+        flow: {
+          steps: [
+            { label: "Customer Message" },
+            { label: "Conversation Memory" },
+            { label: "State Detection" },
+            { label: "Sales Signal Detection" },
+            { label: "Opportunity Profile Update" },
+            { label: "Opportunity Value Score" },
+            { label: "Next Best Action" },
+          ],
+          branch: [
+            { label: "AI Response", note: "routine · low-risk" },
+            { label: "Human Handoff", note: "high-value · sensitive · negotiation" },
+          ],
+        },
+        chips: [
+          {
+            label: "OPPORTUNITY STATES",
+            items: [
+              "Cold Lead",
+              "Potential Interest",
+              "Evaluation & Hesitation",
+              "High Intent",
+              "Closed / Active",
+              "Dormant / Lost",
+            ],
+          },
+          {
+            label: "EXAMPLE SIGNALS",
+            items: [
+              "Purchase",
+              "Hesitation",
+              "Competitor Comparison",
+              "Expansion",
+              "Withdrawal",
+              "Conversion",
+              "Negotiation",
+              "Explicit Human Request",
+              "Compliance / Risk Signal",
+            ],
+          },
+        ],
+        points: [
+          "Detect the customer's changing stage in the buying journey.",
+          "Track sales signals across conversation history.",
+          "Convert signals into a 0–100 Opportunity Value Score.",
+          "Prioritise customer opportunities instead of treating every enquiry equally.",
+          "Recommend the Next Best Action.",
+          "Escalate high-value, sensitive, uncertain, or negotiation-related situations to a human seller.",
+          "Preserve context when a human takes over.",
+          "Synchronise opportunity information to the dashboard.",
+        ],
+        note:
+          "Diagram continues to a Dashboard that surfaces the synchronised opportunity information for the sales team.",
+      },
+      {
+        no: "06",
+        heading: "Innovation",
+        blocks: [
+          {
+            title: "DYNAMIC OPPORTUNITY RECOGNITION",
+            body:
+              "SalesPilot continuously tracks the customer's buying journey and updates opportunity stage, helping sales teams distinguish between customers approaching purchase and customers who still need nurturing.",
+          },
+          {
+            title: "SALES SIGNAL DETECTION",
+            body:
+              "The agent detects observable purchase, hesitation, competitor, expansion, negotiation, and risk signals that would otherwise remain hidden across high-volume chat histories.",
+          },
+          {
+            title: "OPPORTUNITY VALUE SCORING",
+            body:
+              "SalesPilot converts conversation signals into a 0–100 Opportunity Value Score, helping sales teams prioritise scarce human attention.",
+          },
+          {
+            title: "AI-TO-HUMAN HANDOFF",
+            body:
+              "Routine enquiries can be automated, while high-value, sensitive, uncertain, or negotiation-stage cases are deliberately escalated to a salesperson.",
+          },
+        ],
+      },
+      {
+        no: "07",
+        heading: "Demo Journey",
+        body:
+          "A representative journey the agent is designed to handle end to end — from first interest through negotiation, human takeover, and expansion:",
+        flow: {
+          steps: [
+            { label: "Potential Interest" },
+            { label: "Evaluation & Hesitation" },
+            { label: "Competitor Signal" },
+            { label: "Opportunity Score Updates" },
+            { label: "High Intent" },
+            { label: "Negotiation" },
+            { label: "Human Takeover" },
+            { label: "Closed / Active" },
+            { label: "Expansion Opportunity" },
+          ],
+        },
+        note:
+          "Proof assets in preparation: agent workflow diagram, chat interface screenshots, opportunity dashboard, HITL handoff screen, and demo journey screenshots. A final demo video and public project repository will be linked only once completed and confirmed publicly accessible.",
+      },
+      {
+        no: "08",
+        heading: "Outcome",
+        body:
+          "In progress. SalesPilot is being prepared for hackathon demonstration and submission. The current focus is validating a complete customer journey, finalising the demo, report, deployment, and public project materials.",
+      },
+      {
+        no: "09",
+        heading: "Reflection",
+        body:
+          "The value of sales AI is not only faster replies. It is the ability to identify changing customer intent, prioritise limited sales capacity, and bring a human seller into the conversation at the right moment.",
+      },
+    ],
+  },
+
+  // ==========================================================================
+  // 06 · Grounded Enterprise Policy & Procedure Assistant — Individual Project
+  // Status: PROTOTYPE / IN PROGRESS. Enterprise AI / AI Product prototype —
+  // NO claimed production deployment, user adoption, award, or business metric.
+  // No confirmed public demo/GitHub URL, so no button is shown.
+  // ==========================================================================
+  {
+    slug: "grounded-enterprise-policy-assistant",
+    number: "06",
+    name: "Grounded Enterprise Policy & Procedure Assistant",
+    subtitle: "Evidence-Based Internal Knowledge Assistant",
+    year: "2026",
+    domain: "Enterprise AI · RAG",
+    status: "Prototype",
+    event: "Individual Project · September 2026",
+    valueProp:
+      "Turning enterprise policy documents into grounded, traceable answers instead of unsupported LLM responses.",
+    proofPoint:
+      "Retrieval-first by design: it checks whether retrieved evidence is sufficient before answering — and refuses when it is not.",
+    summary:
+      "An Enterprise AI assistant that answers internal policy and procedure questions from retrieved document evidence: it retrieves before it answers, cites the source used, and refuses when evidence is insufficient or ambiguous.",
+    detail:
+      "Individual end-to-end build: problem definition, information architecture, RAG workflow, retrieval logic, answer constraints, citation and evidence mechanisms, refusal/escalation logic, and overall product design.",
+    tech: [
+      "RAG",
+      "Document Retrieval",
+      "Chunking",
+      "TF-IDF Vectorisation",
+      "Cosine Similarity Retrieval",
+      "Foundation Model",
+      "Python",
+      "Streamlit",
+      "Evaluation Set",
+    ],
+    url: "",
+    caseStudy: [
+      {
+        no: "01",
+        heading: "Challenge",
+        body:
+          "Employees need fast answers about internal policies and procedures, but traditional document search is slow and fragmented, and documents can be misunderstood. A generic LLM makes it worse: it may hallucinate, fail to cite a source, answer questions it should not, or rely on incomplete or outdated policy information.",
+      },
+      {
+        no: "02",
+        heading: "Context",
+        body:
+          "Internal policy questions require more than helpful language. The answer must be based on authorised documents, traceable to a source, and careful when evidence is missing or uncertain.",
+      },
+      {
+        no: "03",
+        heading: "My Role",
+        body:
+          "Individual Project / End-to-End Builder. Defined the problem, information architecture, RAG workflow, retrieval logic, answer constraints, citation mechanisms, evidence threshold, refusal / escalation logic, and product design.",
+      },
+      {
+        no: "04",
+        heading: "Key Decision",
+        body:
+          "The LLM cannot answer first and search later. It must retrieve enterprise-document evidence first, assess whether that evidence is sufficient, then generate a grounded answer with citations — and refuse when evidence is absent, incomplete, or ambiguous.",
+        flow: {
+          steps: [
+            { label: "Question" },
+            { label: "Retrieve Evidence" },
+            { label: "Assess Evidence Sufficiency" },
+            { label: "Generate Grounded Answer with Citation" },
+          ],
+          branch: [
+            { label: "Answer with Citation", note: "evidence sufficient" },
+            { label: "Refuse / Escalate", note: "evidence insufficient" },
+          ],
+        },
+      },
+      {
+        no: "05",
+        heading: "Solution",
+        body:
+          "A retrieval-augmented pipeline turns enterprise policy and procedure documents into grounded answers. Documents are processed and chunked, indexed as TF-IDF vectors, and matched to each question by cosine similarity. At query time, retrieved evidence passes an evidence-threshold check before the foundation model composes a response — which either cites its sources or refuses.",
+        flow: {
+          steps: [
+            { label: "Enterprise Policy & Procedure Documents" },
+            { label: "Document Processing" },
+            { label: "Chunking" },
+            { label: "TF-IDF Indexing" },
+            { label: "Cosine Similarity Retrieval" },
+            { label: "Retrieved Evidence" },
+            { label: "Evidence Threshold Check" },
+            { label: "Foundation Model Response" },
+          ],
+          branch: [
+            { label: "Citation", note: "grounded answer" },
+            { label: "Refusal / Escalation", note: "insufficient evidence" },
+          ],
+        },
+        points: [
+          "Retrieval-Augmented Generation instead of unsupported free-form generation.",
+          "Document retrieval and structured chunking.",
+          "TF-IDF vectorisation and cosine-similarity retrieval.",
+          "Evidence-backed answers with citations.",
+          "Evidence thresholds before answer generation.",
+          "Refusal when sources are insufficient.",
+          "Clarification when a question is underspecified (for example, goods vs services).",
+        ],
+      },
+      {
+        no: "06",
+        heading: "Safety & Governance by Design",
+        blocks: [
+          {
+            title: "GROUNDED ANSWERS",
+            body:
+              "The assistant responds from retrieved enterprise policy and procedure evidence rather than unsupported model memory.",
+          },
+          {
+            title: "TRACEABLE CITATIONS",
+            body:
+              "Users can see the relevant source or document reference behind an answer.",
+          },
+          {
+            title: "REFUSAL AND ESCALATION",
+            body:
+              "When evidence is insufficient, incomplete, or ambiguous, the assistant does not fabricate confidence. It signals uncertainty and directs the user to verify with the relevant policy owner.",
+          },
+        ],
+      },
+      {
+        no: "07",
+        heading: "Proof",
+        body:
+          "Proof assets in preparation: assistant prototype screenshots, the retrieval workflow diagram, the citation interface, evaluation-set examples, an example accepted answer with evidence, and an example refusal / escalation case.",
+        note:
+          "No public GitHub or demo links are shown because none are confirmed publicly accessible.",
+      },
+      {
+        no: "08",
+        heading: "Outcome",
+        body:
+          "An MVP / prototype designed to validate enterprise document retrieval, evidence citation, and refusal / escalation under uncertainty. It is currently presented as an Enterprise AI and AI Product prototype, with no claimed production deployment, user adoption, award, or formal business metric.",
+      },
+      {
+        no: "09",
+        heading: "Reflection",
+        body:
+          "In enterprise AI, useful answers are not enough. Trust depends on whether an answer is grounded in authorised evidence, traceable to a source, and able to recognise when the system should not answer.",
+      },
+    ],
+  },
+
+  // ==========================================================================
+  // 07 · PE6201 A2 — Health Insurance Claim Decision Agent — ACADEMIC TEAM PROJECT
+  // Six-member team build (repo release Version 3.0). Weng Yongting's verified
+  // contribution is EVALUATION + SAFETY TESTING, NOT the full agent/insurance
+  // architecture. Do NOT imply she built the core agent loop, insurance tools,
+  // all guardrails, cost model, decision ledger, or the end-to-end system.
+  // Public links are confirmed and shown as buttons via the `links` array.
+  // ==========================================================================
+  {
+    slug: "health-insurance-claim-decision-agent",
+    number: "07",
+    name: "Health Insurance Claim Decision Agent",
+    subtitle: "Evaluation Harness & Escalation Safety Testing",
+    year: "2026",
+    domain: "AI Agent · Evaluation · Safety",
+    teamProject: true,
+    event: "PE6201 A2 · Academic Team Project · Six-member team · Repository Version 3.0",
+    valueProp:
+      "A team-built insurance claim decision agent, evaluated through scripted and live-model test workflows with safety guardrails and reproducible result analysis.",
+    proofPoint:
+      "Designed hostile-input and escalation safety cases within a shared 40-case evaluation suite.",
+    summary:
+      "A team-built health-insurance claim decision agent supporting deterministic scripted evaluation, live LLM evaluation, safety guardrails, cost tracking, and reproducible result analysis. Weng Yongting owned the evaluation-harness and scripted-evaluation work (D4 and D5(a)) and designed six hostile-input and escalation safety cases within the shared 40-case test suite.",
+    detail:
+      "Contributed evaluation-harness and scripted-evaluation work to a Version 3.0 team build. Designed hostile-input and escalation safety cases; contributed to shared evaluation, live-model testing, report preparation, and demo assembly. Did not independently build the core agent loop, insurance tools, guardrails, cost model, decision ledger, or the full end-to-end system.",
+    tech: [
+      "Evaluation Harness",
+      "Scripted Evaluation",
+      "Live-Model Evaluation",
+      "Safety Guardrails",
+      "Hostile-Input Testing",
+      "Reproducible Analysis",
+    ],
+    // Confirmed public links — rendered as buttons on the case-study page.
+    // `url` is intentionally left empty; multiple labelled buttons come from `links`.
+    url: "",
+    links: [
+      { label: "GITHUB REPOSITORY", url: "https://github.com/symbioticshark/A2_HealthInsurance" },
+      { label: "DEMO VIDEO", url: "https://youtu.be/f-cxrW4esAA" },
+    ],
+    caseStudy: [
+      {
+        no: "01",
+        heading: "Challenge",
+        body:
+          "Insurance claim decisions are safety-sensitive. An AI system must handle incomplete, adversarial, ambiguous, and escalation-triggering inputs without generating unsafe or unsupported decisions.",
+      },
+      {
+        no: "02",
+        heading: "Context",
+        body:
+          "The project was a six-member academic team build of a health-insurance claim decision agent. The system combines deterministic scripted evaluation, live LLM evaluation, safety guardrails, cost tracking, and reproducible result analysis. The repository release is Version 3.0, using a layered architecture, session-based history and comparison, safer configuration, transactional result writing, guardrails, and reproducible failure testing.",
+      },
+      {
+        no: "03",
+        heading: "My Role",
+        body:
+          "Co-owned the evaluation-harness and scripted-evaluation work for D4 and D5(a) with one teammate. Designed hostile-input and escalation safety cases, contributing six cases to the shared 40-case evaluation suite (CLM-8941, CLM-8952, CLM-9023, CLM-9024, CLM-9025, CLM-9026). Also contributed to shared evaluation, a live-model evaluation battery, report preparation, and demo assembly. The core agent loop, insurance tools, guardrails, cost model, and decision ledger were team work, not built solely by me.",
+      },
+      {
+        no: "04",
+        heading: "Key Decision",
+        body:
+          "Treat testing as part of safety design, not as a final technical check. The evaluation suite deliberately includes hostile-input and escalation scenarios to test whether the system can refuse, route, or safely handle risky cases instead of producing unsupported claim decisions.",
+      },
+      {
+        no: "05",
+        heading: "Evaluation Workflow",
+        body:
+          "Each claim scenario runs through a repeatable, comparable pipeline: a scripted case drives the agent, a guardrail check gates the behaviour, the result is compared against the expected outcome and recorded, and anything unsafe or uncertain branches to failure analysis or safe escalation.",
+        flow: {
+          steps: [
+            { label: "Claim Scenario" },
+            { label: "Scripted Evaluation Case" },
+            { label: "Agent / Tool Decision" },
+            { label: "Guardrail Check" },
+            { label: "Expected Outcome Comparison" },
+            { label: "Result Recording" },
+          ],
+          branch: [
+            { label: "Failure Analysis", note: "mismatch · unsafe behaviour" },
+            { label: "Safe Escalation", note: "uncertain · risky case" },
+          ],
+        },
+      },
+      {
+        no: "06",
+        heading: "Safety Testing",
+        blocks: [
+          {
+            title: "SCRIPTED EVALUATION",
+            body:
+              "Repeatable test cases make agent behaviour comparable across versions and changes.",
+          },
+          {
+            title: "HOSTILE-INPUT TESTING",
+            body:
+              "Adversarial and unsafe inputs test whether the system maintains safe behaviour under pressure.",
+          },
+          {
+            title: "ESCALATION SAFETY",
+            body:
+              "Cases requiring uncertainty handling or escalation help verify that the agent does not make unsupported insurance decisions.",
+          },
+        ],
+      },
+      {
+        no: "07",
+        heading: "Proof",
+        body:
+          "The project repository (Version 3.0) and demo video are publicly available — see the buttons below. Weng Yongting's evaluation and safety-testing contribution sits within the shared team suite:",
+        chips: [
+          {
+            label: "EVALUATION SUITE",
+            items: [
+              "40 shared evaluation cases",
+              "6 hostile-input & escalation cases (designed by Weng Yongting)",
+              "Version 3.0 repository structure",
+              "Scripted evaluation & reproducible result analysis",
+              "Team project attribution",
+            ],
+          },
+          {
+            label: "OWNED CASES",
+            items: ["CLM-8941", "CLM-8952", "CLM-9023", "CLM-9024", "CLM-9025", "CLM-9026"],
+          },
+        ],
+      },
+      {
+        no: "08",
+        heading: "Outcome",
+        body:
+          "Contributed evaluation-harness and scripted-evaluation work to a Version 3.0 team health-insurance claim decision agent. The project established a reproducible evaluation workflow with scripted cases, live-model evaluation, safety guardrails, and documented team contributions.",
+      },
+      {
+        no: "09",
+        heading: "Reflection",
+        body:
+          "Safety-critical AI systems should not be assessed only by whether they can produce plausible answers. They must also be tested for how they behave when inputs are adversarial, uncertain, incomplete, or require escalation.",
       },
     ],
   },
