@@ -223,12 +223,7 @@ function CaseStudy() {
             {project.materials.body && (
               <p className="case-detail-section-text">{project.materials.body}</p>
             )}
-            <SlideDeck
-              slides={project.materials.slides}
-              deckUrl={project.materials.deckUrl}
-              appendixUrl={project.materials.appendixUrl}
-              appendixSize={project.materials.appendixSize}
-            />
+            <SlideDeck slides={project.materials.slides} />
           </div>
         </section>
       )}

@@ -7,24 +7,18 @@
 //
 // 幻灯片 PNG 由 _extract/render_slides.py 生成（1600x900），
 // 存放在 public/projects/<slug>/slides/slide-NN.png。
-// 原始 deck PDF 复制为 public/projects/<slug>/deck.pdf。
+// 演示稿只以图片形式展示，不提供 PPT/PDF 下载（deck PDF 已移除；
+// mm118 的论文 PDF 除外保留）。
 
 // 生成幻灯片 URL 数组的辅助函数
+// 必须拼上 BASE_URL：本地 dev 为 "/"，GitHub Pages 为 "/weng-yongting/"，
+// 否则部署后图片会解析到域名根而 404（naturalWidth=0）。
 function makeSlides(slug, count) {
+  const base = import.meta.env.BASE_URL;
   return Array.from({ length: count }, (_, i) =>
-    `/projects/${slug}/slides/slide-${String(i + 1).padStart(2, "0")}.png`
+    `${base}projects/${slug}/slides/slide-${String(i + 1).padStart(2, "0")}.png`
   );
 }
-
-// 各项目 PDF 大小（MB，已计算）
-const PDF_SIZE = {
-  zhiyi: "15.2MB",
-  rebecca: "7.1MB",
-  "mm118-paper": "1.8MB",
-  "commercial-launch": "4.4MB",
-  angu: "46.6MB",
-  "icbc-etongyou": "1.7MB",
-};
 
 export const caseDetailProjects = [
   // =========================================================
@@ -81,13 +75,10 @@ export const caseDetailProjects = [
       ],
     },
     materials: {
-      heading: "Author deck & paper PDF",
+      heading: "Author presentation (19 slides)",
       body:
-        "19-slide author presentation and the published paper. Scroll vertically to walk through the deck.",
+        "The author presentation slides shown as an image gallery.",
       slides: makeSlides("mm118-paper", 19),
-      deckUrl: "/projects/mm118-paper/deck.pdf",
-      appendixUrl: "/projects/mm118-paper/deck.pdf",
-      appendixSize: PDF_SIZE["mm118-paper"],
     },
   },
 
@@ -151,13 +142,10 @@ export const caseDetailProjects = [
       ],
     },
     materials: {
-      heading: "Challenge Cup deck (27 slides)",
+      heading: "Presentation slides (27)",
       body:
-        "Full deck presented at the 2024 Challenge Cup. Scroll vertically to walk through the case study.",
+        "The 2024 Challenge Cup presentation shown as an image gallery.",
       slides: makeSlides("zhiyi", 27),
-      deckUrl: "/projects/zhiyi/deck.pdf",
-      appendixUrl: "/projects/zhiyi/deck.pdf",
-      appendixSize: PDF_SIZE.zhiyi,
     },
   },
 
@@ -218,12 +206,9 @@ export const caseDetailProjects = [
       ],
     },
     materials: {
-      heading: "National finals deck (36 slides)",
-      body: "Full deck from the national finals round. Scroll vertically to walk through.",
+      heading: "Presentation slides (36)",
+      body: "The national finals presentation shown as an image gallery.",
       slides: makeSlides("rebecca", 36),
-      deckUrl: "/projects/rebecca/deck.pdf",
-      appendixUrl: "/projects/rebecca/deck.pdf",
-      appendixSize: PDF_SIZE.rebecca,
     },
   },
 
@@ -282,12 +267,9 @@ export const caseDetailProjects = [
       ],
     },
     materials: {
-      heading: "Industry briefing (24 slides)",
-      body: "Full PDF briefing. Scroll vertically to walk through the case.",
+      heading: "Presentation slides (24)",
+      body: "The industry briefing shown as an image gallery.",
       slides: makeSlides("commercial-launch", 24),
-      deckUrl: "/projects/commercial-launch/deck.pdf",
-      appendixUrl: "/projects/commercial-launch/deck.pdf",
-      appendixSize: PDF_SIZE["commercial-launch"],
     },
   },
 
@@ -347,12 +329,9 @@ export const caseDetailProjects = [
       ],
     },
     materials: {
-      heading: "Challenge Cup deck (20 slides)",
-      body: "Full deck from the small-track entry. Scroll vertically to walk through.",
+      heading: "Presentation slides (20)",
+      body: "The small-track presentation shown as an image gallery.",
       slides: makeSlides("angu", 20),
-      deckUrl: "/projects/angu/deck.pdf",
-      appendixUrl: "/projects/angu/deck.pdf",
-      appendixSize: PDF_SIZE.angu,
     },
   },
 
@@ -412,12 +391,9 @@ export const caseDetailProjects = [
       ],
     },
     materials: {
-      heading: "Concept deck (33 slides)",
-      body: "Full PDF concept deck. Scroll vertically to walk through.",
+      heading: "Presentation slides (33)",
+      body: "The concept presentation shown as an image gallery.",
       slides: makeSlides("icbc-etongyou", 33),
-      deckUrl: "/projects/icbc-etongyou/deck.pdf",
-      appendixUrl: "/projects/icbc-etongyou/deck.pdf",
-      appendixSize: PDF_SIZE["icbc-etongyou"],
     },
   },
 
