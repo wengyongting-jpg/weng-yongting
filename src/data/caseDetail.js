@@ -569,6 +569,19 @@ export const caseDetailProjects = [
       { type: "neutral", text: "Hackathon team project" },
     ],
     event: "NUS-ISS Show Me Your Agents Hackathon · September 2026",
+    // 已确认公开的仓库 / 演示视频 / 部署环境（管理端 + 顾客端）
+    links: [
+      { label: "GITHUB REPOSITORY", url: "https://github.com/wengyongting-jpg/SalesPilot-main" },
+      { label: "DEMO VIDEO", url: "https://youtu.be/f2Oylb9kTA8" },
+      { label: "ADMIN DASHBOARD", url: "http://47.128.144.8/admin/index.html#/inbox" },
+      { label: "CUSTOMER CHAT", url: "http://47.128.144.8/customer/index.html" },
+    ],
+    video: {
+      type: "youtube",
+      id: "f2Oylb9kTA8",
+      title: "SalesPilot — NUS-ISS hackathon agent demo",
+      caption: "Agent demo: WhatsApp customer conversation → opportunity scoring → human handoff.",
+    },
     context: {
       heading: "A stateful sales-opportunity agent, not a reply-generation chatbot",
       body:
@@ -601,16 +614,16 @@ export const caseDetailProjects = [
       tags: ["Agent Logic", "RAG Requirements", "Human-in-the-Loop", "AWS", "Opportunity scoring"],
     },
     results: {
-      heading: "In progress — prepared for hackathon demonstration",
+      heading: "Demo complete — repository, video and live deployment published",
       body:
-        "SalesPilot is being prepared for hackathon demonstration and submission. The current focus is validating a complete customer journey and finalising the demo, report, and deployment materials. No adoption or business metrics are claimed.",
+        "The complete agent journey was built and presented for the hackathon: customer conversation, opportunity scoring, next-best action, and human handoff. Source code, a recorded demo video, and two deployed surfaces (the sales-team admin dashboard and the customer chat interface) are publicly accessible. No production adoption or business metrics are claimed — this is a hackathon demonstration build.",
       metrics: [
         { value: "0–100", label: "Opportunity Value Score", note: "signal-driven" },
-        { value: "2", label: "Response modes", note: "AI reply · human handoff" },
-        { value: "In progress", label: "Demo & repo", note: "linked once confirmed public" },
+        { value: "2", label: "Deployed surfaces", note: "admin dashboard · customer chat" },
+        { value: "4", label: "Public links", note: "repo · video · admin · customer" },
       ],
     },
-    // 无 deck/材料区块 — 黑客松项目进行中
+    // 无幻灯片区 — 以演示视频 + 部署环境作为 proof
   },
 
   // =========================================================

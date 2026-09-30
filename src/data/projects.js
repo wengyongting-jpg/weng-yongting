@@ -116,8 +116,20 @@ export const projects = [
     status: "In Progress",
     event: "NUS-ISS Show Me Your Agents Hackathon · September 2026",
     tech: ["Agent Logic", "RAG Requirements", "Human-in-the-Loop", "AWS", "GitHub"],
-    // 暂无已确认可公开的 demo/GitHub 链接 — 故意不设置 url/links。
+    // 已确认公开：仓库 / 演示视频 / 部署环境（管理端 + 顾客端）
     url: "",
+    links: [
+      { label: "GITHUB REPOSITORY", url: "https://github.com/wengyongting-jpg/SalesPilot-main" },
+      { label: "DEMO VIDEO", url: "https://youtu.be/f2Oylb9kTA8" },
+      { label: "ADMIN DASHBOARD", url: "http://47.128.144.8/admin/index.html#/inbox" },
+      { label: "CUSTOMER CHAT", url: "http://47.128.144.8/customer/index.html" },
+    ],
+    video: {
+      type: "youtube",
+      id: "f2Oylb9kTA8",
+      title: "SalesPilot — NUS-ISS hackathon agent demo",
+      caption: "Agent demo: WhatsApp customer conversation → opportunity scoring → human handoff.",
+    },
     summary:
       "An agentic WhatsApp assistant that reads conversation history to identify a customer's sales stage, detect signals, maintain an Opportunity Profile, compute a 0–100 Opportunity Value Score, and choose the next best action — automating routine enquiries while escalating high-value situations to a human.",
   },
