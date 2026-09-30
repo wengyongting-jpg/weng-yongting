@@ -20,7 +20,7 @@ export const projects = [
   {
     slug: "zhiyi",
     number: "02",
-    name: "智一数科",
+    name: "Zhiyi Digital",
     subtitle: "Digital Marketing & Big-Data Cloud Platform",
     year: "2024",
     domain: "Competition · Challenge Cup",
@@ -31,7 +31,7 @@ export const projects = [
   {
     slug: "rebecca",
     number: "03",
-    name: "瑞贝卡 Rebecca",
+    name: "Rebecca",
     subtitle: "National Collegiate Business Elite Challenge",
     year: "2024",
     domain: "Competition · Business Elite",
@@ -42,7 +42,7 @@ export const projects = [
   {
     slug: "commercial-launch",
     number: "04",
-    name: "商业发射 Commercial Launch",
+    name: "Commercial Launch",
     subtitle: "Industry Research & Investment Framework",
     year: "2024",
     domain: "Case Study · Industry Research",
@@ -53,7 +53,7 @@ export const projects = [
   {
     slug: "angu",
     number: "05",
-    name: "昂钰精工 Angyu Precision",
+    name: "Angyu Precision",
     subtitle: "Challenge Cup · Small Track",
     year: "2024",
     domain: "Competition · Challenge Cup",
@@ -64,7 +64,7 @@ export const projects = [
   {
     slug: "icbc-etongyou",
     number: "06",
-    name: "e同游",
+    name: "eTongYou",
     subtitle: "ICBC Cup · Fujian Provincial Excellence Award",
     year: "2024",
     domain: "Competition · ICBC Cup",
@@ -73,9 +73,9 @@ export const projects = [
       "An outbound-tourism financial-service concept recognised with the Fujian Provincial Excellence Award — designed for cross-border payment and travel-finance scenarios.",
   },
   {
-    slug: "yuexi",
+    slug: "period",
     number: "07",
-    name: "Yuexi",
+    name: "Period",
     subtitle: "AI-Assisted Personalized Health Application",
     year: "2026",
     domain: "AI · Product",

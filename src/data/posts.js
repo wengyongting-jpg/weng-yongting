@@ -15,7 +15,7 @@ export const posts = [
     body:
       "The pull toward LLMs is strong because they feel general-purpose. But a deterministic rule is faster, cheaper, and auditable — and for bounded decisions it is usually the right answer. The LLM should be reserved for the part of the problem that is genuinely language-shaped.",
     detail:
-      "Before reaching for a model, ask: is this decision bounded by rules? Is the input structured? Does it need explanation or empathy? If the answer is yes, yes, no — a rule will outperform an LLM at a fraction of the cost. Yuexi follows exactly this split: cycle logic stays deterministic, the LLM handles communication.",
+      "Before reaching for a model, ask: is this decision bounded by rules? Is the input structured? Does it need explanation or empathy? If the answer is yes, yes, no — a rule will outperform an LLM at a fraction of the cost. Period follows exactly this split: cycle logic stays deterministic, the LLM handles communication.",
   },
   {
     slug: "ai-transformation-is-not-only-a-model-problem",
@@ -42,7 +42,7 @@ export const posts = [
     body:
       "Technology-first products solve for the tool. User-first products solve for the person. The strongest designs start from a concrete user scenario and a real pain point, then choose the technology last.",
     detail:
-      "Yuexi began from user scenarios and pain points before any model choice. The scenario defined the safety boundary; the boundary defined the architecture; the architecture chose the technology. Reverse that order and you build something impressive that nobody uses.",
+      "Period began from user scenarios and pain points before any model choice. The scenario defined the safety boundary; the boundary defined the architecture; the architecture chose the technology. Reverse that order and you build something impressive that nobody uses.",
   },
   {
     slug: "analysis-is-only-as-reliable-as-the-data-behind-it",

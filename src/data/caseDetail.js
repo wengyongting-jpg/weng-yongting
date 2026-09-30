@@ -97,9 +97,9 @@ export const caseDetailProjects = [
   {
     slug: "zhiyi",
     number: "02",
-    title: "智一数科",
+    title: "Zhiyi Digital",
     titleEn: "Digital Marketing & Big-Data Cloud Platform",
-    shortName: "智一数科",
+    shortName: "Zhiyi Digital",
     eyebrow: ["CHALLENGE CUP", "COMPETITION", "2024"],
     subtitle:
       "A bilingual RAG co-pilot built for a regional data-services provider — an AI+SaaS layer combining personalised marketing-content generation, big-data analytics, and short-video ad delivery.",
@@ -113,7 +113,7 @@ export const caseDetailProjects = [
       heading:
         "Backing a regional data-services provider with a bilingual proposal co-pilot",
       body:
-        "智一数科 (Zhiyi Digital) provides one-stop digital marketing and big-data cloud services for the beauty and fast-moving consumer goods sectors. The Challenge Cup entry proposed an AI+SaaS layer combining personalised marketing-content generation, big-data analytics, and short-video ad delivery, with ByteDance as the upstream platform partner.",
+        "Zhiyi Digital provides one-stop digital marketing and big-data cloud services for the beauty and fast-moving consumer goods sectors. The Challenge Cup entry proposed an AI+SaaS layer combining personalised marketing-content generation, big-data analytics, and short-video ad delivery, with ByteDance as the upstream platform partner.",
       role: "Tech Lead · 5-person team · responsible for AI module + RAG pipeline", // [confirm] user's actual role — not named in deck
       stack: "React · FastAPI · pgvector · LangChain · Gemini 2.5 Flash", // [confirm] actual stack — placeholder
     },
@@ -167,22 +167,22 @@ export const caseDetailProjects = [
   {
     slug: "rebecca",
     number: "03",
-    title: "瑞贝卡 Rebecca",
+    title: "Rebecca",
     titleEn: "National Collegiate Business Elite Challenge",
-    shortName: "瑞贝卡",
+    shortName: "Rebecca",
     eyebrow: ["BUSINESS ELITE CHALLENGE", "COMPETITION", "2024"],
     subtitle:
-      "Strategic advisory work for Rebecca (假发品牌) — re-architecting the export go-to-market for a beauty accessories brand facing channel saturation.", // [confirm] user's role per materials = 翁永婷 = 战略总监
+      "Strategic advisory work for Rebecca — re-architecting the export go-to-market for a beauty accessories brand facing channel saturation.", // [confirm] user's role per materials = 翁永婷 = Strategy Director
     badges: [
       { type: "award", text: "◆ National Finalist" }, // [confirm] award level — materials only say 全国总决赛
-      { type: "role", text: "► 战略总监" }, // [confirm] per materials
+      { type: "role", text: "► Strategy Director" }, // [confirm] per materials
       { type: "neutral", text: "Cross-disciplinary team" },
     ],
     context: {
       heading: "Strategic re-positioning for an export-driven hair brand",
       body:
-        "瑞贝卡 is a Chinese manufacturer of synthetic and human-hair wigs and extensions, historically reliant on B2B export. The case asked for a refreshed market entry strategy covering channel mix, brand localisation for overseas consumers, and a financial model for the proposed re-positioning.",
-      role: "战略总监 · responsible for overseas market strategy + brand localisation",
+        "Rebecca is a Chinese manufacturer of synthetic and human-hair wigs and extensions, historically reliant on B2B export. The case asked for a refreshed market entry strategy covering channel mix, brand localisation for overseas consumers, and a financial model for the proposed re-positioning.",
+      role: "Strategy Director · responsible for overseas market strategy + brand localisation",
       stack: "Market research · Financial modelling · Brand strategy · Go-to-market",
     },
     problem: {
@@ -214,7 +214,7 @@ export const caseDetailProjects = [
       metrics: [
         { value: " Finals", label: "National round", note: "[confirm] level: 1/2/3?" },
         { value: "2", label: "Priority pilot markets", note: "phased D2C entry" },
-        { value: "36", label: "Slide deck", note: "全国总决赛" },
+        { value: "36", label: "Slide deck", note: "national finals round" },
       ],
     },
     materials: {
@@ -233,9 +233,9 @@ export const caseDetailProjects = [
   {
     slug: "commercial-launch",
     number: "04",
-    title: "商业发射 Commercial Launch",
+    title: "Commercial Launch",
     titleEn: "Industry research & launch strategy",
-    shortName: "商业发射",
+    shortName: "Commercial Launch",
     eyebrow: ["INDUSTRY RESEARCH", "CASE STUDY", "2024"],
     subtitle:
       "Research on the commercial space-launch industry — market sizing, value chain mapping, competitive dynamics, and a launch-provider investment-return framework.", // [confirm] user's role not stated in materials
@@ -297,10 +297,10 @@ export const caseDetailProjects = [
   {
     slug: "angu",
     number: "05",
-    title: "昂钰精工 Angyu Precision",
+    title: "Angyu Precision",
     titleEn: "Challenge Cup · Small Track",
-    shortName: "昂钰",
-    eyebrow: ["CHALLENGE CUP · 小挑", "COMPETITION", "2024"],
+    shortName: "Angyu Precision",
+    eyebrow: ["CHALLENGE CUP · SMALL TRACK", "COMPETITION", "2024"],
     subtitle:
       "Export-oriented go-to-market strategy and brand localisation for a precision-manufacturing SME serving overseas industrial customers.", // [confirm] user not named in PPT team list
     badges: [
@@ -311,7 +311,7 @@ export const caseDetailProjects = [
     context: {
       heading: "Taking a Chinese precision manufacturer to overseas industrial buyers",
       body:
-        "昂钰精工 is a precision-manufacturing SME producing industrial components. The project asked for an export-oriented go-to-market and brand-localisation approach for overseas industrial customers, anchored on the company's existing manufacturing capability and patent portfolio.",
+        "Angyu Precision is a precision-manufacturing SME producing industrial components. The project asked for an export-oriented go-to-market and brand-localisation approach for overseas industrial customers, anchored on the company's existing manufacturing capability and patent portfolio.",
       role: "Project Lead · market research, export GTM, brand localisation, product visuals",
       stack: "Market research · Go-to-market · Brand localisation · Negotiation",
     },
@@ -362,9 +362,9 @@ export const caseDetailProjects = [
   {
     slug: "icbc-etongyou",
     number: "06",
-    title: "e同游",
+    title: "eTongYou",
     titleEn: "ICBC Cup · Fujian Provincial Excellence Award",
-    shortName: "e同游",
+    shortName: "eTongYou",
     eyebrow: ["ICBC CUP", "COMPETITION", "2024"],
     subtitle:
       "An outbound-tourism financial-service concept recognised with the Fujian Provincial Excellence Award — designed for cross-border payment and travel-finance scenarios.", // [confirm] user's role — cover only shows 2 names 陈昕+翁永婷
@@ -376,7 +376,7 @@ export const caseDetailProjects = [
     context: {
       heading: "A travel-finance concept for the outbound-tourism wave",
       body:
-        "e同游 (\"e-travel-together\") is a concept for an outbound-tourism financial service — covering cross-border payment, multi-currency accounts, and travel-finance products — aimed at the growing wave of Chinese outbound travellers. The ICBC Cup entry framed it as a bank-led service design rather than a standalone fintech app.",
+        "eTongYou is a concept for an outbound-tourism financial service — covering cross-border payment, multi-currency accounts, and travel-finance products — aimed at the growing wave of Chinese outbound travellers. The ICBC Cup entry framed it as a bank-led service design rather than a standalone fintech app.",
       role: "Co-author · service design + financial-product framing", // [confirm] user's role — cover shows 陈昕 + 翁永婷 only
       stack: "Service design · Cross-border payment · Travel finance · Bank-led model",
     },
@@ -407,7 +407,7 @@ export const caseDetailProjects = [
       body: "",
       metrics: [
         { value: "◆", label: "Provincial Excellence", note: "Fujian province" },
-        { value: "2", label: "Team members", note: "陈昕 · 翁永婷" },
+        { value: "2", label: "Team members", note: "Chen Xin · Weng Yongting" },
         { value: "33", label: "Slide deck", note: "concept deck" },
       ],
     },
@@ -422,14 +422,14 @@ export const caseDetailProjects = [
   },
 
   // =========================================================
-  // 07 — Yuexi (existing project, migrated to V5)
+  // 07 — Period (existing project, migrated to V5)
   // =========================================================
   {
-    slug: "yuexi",
+    slug: "period",
     number: "07",
-    title: "Yuexi",
+    title: "Period",
     titleEn: "AI-Assisted Personalized Health Application",
-    shortName: "Yuexi",
+    shortName: "Period",
     eyebrow: ["AI PRODUCT", "PERSONAL PROJECT", "2026"],
     subtitle:
       "An AI-assisted personalized health application for women's daily physical and emotional health management — recording cycle, symptoms, mood, and medication, then providing personalized insights and conversational support with explicit safety boundaries.",
@@ -477,7 +477,7 @@ export const caseDetailProjects = [
         { value: "Live", label: "Demo", note: "period-ai.vercel.app" },
       ],
     },
-    // No PPT/PDF deck for Yuexi — omit materials block
+    // No PPT/PDF deck for Period — omit materials block
   },
 
   // =========================================================
