@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import RadialLiquid from "../components/RadialLiquid.jsx";
 import ChromeObject from "../components/ChromeObject.jsx";
-import PositioningMatrix from "../components/PositioningMatrix.jsx";
-import NarrativeStepper from "../components/NarrativeStepper.jsx";
+import PortfolioOS from "../components/PortfolioOS.jsx";
 import HighlightCards from "../components/HighlightCards.jsx";
 import { profile } from "../data/index.js";
 
@@ -13,8 +12,9 @@ function Home() {
         <div className="hero-copy reveal">
           <p className="eyebrow">{profile.pillars.join(" × ")}</p>
           <h1>BUILDING<br />PRACTICAL<br /><span>AI-POWERED</span><br />SOLUTIONS.</h1>
+          <p className="hero-lede">From business problems to practical AI, data and automation systems.</p>
           <p className="intro">
-            Enterprise AI master's student at {profile.education.short} with a {profile.education.background} background, focusing on AI product design, data analytics, automation, and digital transformation.
+            Enterprise AI master's student. AI product design, data, automation, digital transformation.
           </p>
           <div className="hero-actions">
             <Link to="/work" className="button button-primary">VIEW WORK <b>↘</b></Link>
@@ -29,8 +29,7 @@ function Home() {
         <p className="scroll-note">SCROLL TO EXPLORE <span>↓</span></p>
       </section>
 
-      <PositioningMatrix />
-      <NarrativeStepper />
+      <PortfolioOS />
       <HighlightCards />
 
       <section id="contact" className="contact section-wrap">

@@ -8,7 +8,7 @@ import NotFound from "./NotFound.jsx";
 //   → 04 RESULTS → 05 MATERIALS (Behance 风格瀑布流) → 底部 prev/next 导航
 //
 // 数据来源：src/data/caseDetail.js
-// 旧的 src/pages/CaseStudy.jsx 渲染 8-section 结构，已被此版本替换。
+// 合并自远程版本的功能：event 行、YouTube 演示视频嵌入、已确认公开外链按钮。
 function CaseStudy() {
   const { slug } = useParams();
   const project = getCaseDetailProject(slug);
@@ -59,6 +59,45 @@ function CaseStudy() {
             </span>
           ))}
         </div>
+
+        {/* 赛事/项目背景行（合并自远程版本） */}
+        {project.event && <p className="case-event">{project.event}</p>}
+
+        {/* 已确认的公开外链按钮（合并自远程版本） */}
+        {project.links && project.links.length > 0 && (
+          <div className="case-detail-links">
+            {project.links.map((lnk, i) => (
+              <a
+                key={lnk.url}
+                className={`case-detail-btn ${i === 0 ? "case-detail-btn--primary" : ""}`}
+                href={lnk.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {lnk.label} <b aria-hidden="true">↗</b>
+              </a>
+            ))}
+          </div>
+        )}
+
+        {/* YouTube 演示视频嵌入（合并自远程版本） */}
+        {project.video && project.video.type === "youtube" && (
+          <figure className="case-video">
+            <div className="case-video-frame">
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${project.video.id}`}
+                title={project.video.title || `${project.title} — demo video`}
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            </div>
+            {project.video.caption && (
+              <figcaption className="case-video-caption">{project.video.caption}</figcaption>
+            )}
+          </figure>
+        )}
       </header>
 
       {/* 01 CONTEXT */}

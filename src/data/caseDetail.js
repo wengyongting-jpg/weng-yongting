@@ -102,7 +102,7 @@ export const caseDetailProjects = [
     shortName: "智一数科",
     eyebrow: ["CHALLENGE CUP", "COMPETITION", "2024"],
     subtitle:
-      "A bilingual RAG co-pilot built for a regional data-services provider, lifting proposal-generation accuracy from 62.5% to 90% across three eval rounds.", // [confirm] metrics are placeholders
+      "A bilingual RAG co-pilot built for a regional data-services provider — an AI+SaaS layer combining personalised marketing-content generation, big-data analytics, and short-video ad delivery.",
     badges: [
       { type: "award", text: "◆ National Silver" },
       { type: "role", text: "► Tech Lead" }, // [confirm] user not named in deck
@@ -497,6 +497,16 @@ export const caseDetailProjects = [
       { type: "neutral", text: "UiPath · Document Understanding" },
       { type: "neutral", text: "Workflow design" },
     ],
+    // 已确认的公开链接 + 演示视频（合并自远程版本）
+    links: [
+      { label: "DEMO VIDEO", url: "https://youtu.be/nJchLlhX-So" },
+    ],
+    video: {
+      type: "youtube",
+      id: "nJchLlhX-So",
+      title: "Refund Processing Automation — UiPath demo walkthrough",
+      caption: "Recorded demo walkthrough of the UiPath refund processing workflow.",
+    },
     context: {
       heading: "Automation should stop at the confidence boundary",
       body:
@@ -537,6 +547,273 @@ export const caseDetailProjects = [
       ],
     },
     // No PPT/PDF deck — omit materials block
+  },
+
+  // =========================================================
+  // 09 — SalesPilot (Hackathon · NUS-ISS Show Me Your Agents)
+  // 内容迁移自远程 projects.js 的 8-section 数据；遵循其诚实标注：
+  // 进行中的黑客松项目，无已确认的公开 demo/GitHub 链接。
+  // =========================================================
+  {
+    slug: "salespilot",
+    number: "09",
+    title: "SalesPilot",
+    titleEn: "Agentic WhatsApp Sales Opportunity Assistant",
+    shortName: "SalesPilot",
+    eyebrow: ["AGENTIC AI", "NUS-ISS HACKATHON", "2026"],
+    subtitle:
+      "Turning customer conversations into dynamic sales opportunities — an agentic WhatsApp assistant that scores each conversation 0–100 and escalates high-value cases to a human seller.",
+    badges: [
+      { type: "neutral", text: "In Progress" },
+      { type: "role", text: "► Product Concept & Early Build" },
+      { type: "neutral", text: "Hackathon team project" },
+    ],
+    event: "NUS-ISS Show Me Your Agents Hackathon · September 2026",
+    context: {
+      heading: "A stateful sales-opportunity agent, not a reply-generation chatbot",
+      body:
+        "Sales representatives receive a high volume of enquiries through WhatsApp every day and have limited capacity. SalesPilot is positioned as opportunity intelligence: it continuously interprets conversation history, updates the customer's sales stage, and recommends the correct next action. The system must automate routine enquiries but preserve human judgement for high-value, sensitive, uncertain, or negotiation-stage situations.",
+      role:
+        "Led initial concept and early build · product design, agent logic, RAG requirements, human-in-the-loop design, integration direction. Contributions beyond these areas are shared team work.",
+      stack: "Agent Logic · RAG Requirements · Human-in-the-Loop · AWS · GitHub",
+    },
+    problem: {
+      heading: "Valuable signals stay buried in fragmented WhatsApp conversations",
+      body:
+        "Sales teams lose time answering high-volume recurring enquiries — product availability, pricing, delivery charges, operating hours — while the signals that actually matter remain hidden: purchase intent, hesitation, competitor comparison, expansion opportunity, and risk. A team cannot treat every message equally, yet it is hard to see who is approaching purchase, who is hesitating, and who needs human attention.",
+      bullets: [
+        "<b>Purchase intent</b> signals scattered across long chat histories.",
+        "<b>Hesitation and competitor comparison</b> invisible without manual review.",
+        "<b>Uniform treatment</b> of every message wastes scarce sales capacity.",
+        "<b>No escalation path</b> for high-value or negotiation-stage situations.",
+      ],
+    },
+    approach: {
+      heading: "A stateful loop from message to next best action",
+      body:
+        "After every customer message, SalesPilot recalls conversation memory, detects the customer's current state, extracts sales signals, updates the Opportunity Profile, recomputes the Opportunity Value Score, and picks the next best action — an automated AI response or a deliberate handoff to a human seller — while keeping the dashboard in sync.",
+      steps: [
+        "State Detection",
+        "Signal Extraction",
+        "Opportunity Scoring",
+        "Next Best Action",
+      ],
+      tags: ["Agent Logic", "RAG Requirements", "Human-in-the-Loop", "AWS", "Opportunity scoring"],
+    },
+    results: {
+      heading: "In progress — prepared for hackathon demonstration",
+      body:
+        "SalesPilot is being prepared for hackathon demonstration and submission. The current focus is validating a complete customer journey and finalising the demo, report, and deployment materials. No adoption or business metrics are claimed.",
+      metrics: [
+        { value: "0–100", label: "Opportunity Value Score", note: "signal-driven" },
+        { value: "2", label: "Response modes", note: "AI reply · human handoff" },
+        { value: "In progress", label: "Demo & repo", note: "linked once confirmed public" },
+      ],
+    },
+    // 无 deck/材料区块 — 黑客松项目进行中
+  },
+
+  // =========================================================
+  // 10 — Grounded Enterprise Policy & Procedure Assistant (Individual · Prototype)
+  // 内容迁移自远程 projects.js 的 8-section 数据；无生产部署/指标声明。
+  // =========================================================
+  {
+    slug: "grounded-enterprise-policy-assistant",
+    number: "10",
+    title: "Grounded Enterprise Policy & Procedure Assistant",
+    titleEn: "Evidence-Based Internal Knowledge Assistant",
+    shortName: "Policy Assistant",
+    eyebrow: ["ENTERPRISE AI · RAG", "INDIVIDUAL PROJECT", "2026"],
+    subtitle:
+      "Retrieval-first by design: it checks whether retrieved evidence is sufficient before answering — and refuses when it is not.",
+    badges: [
+      { type: "neutral", text: "Prototype" },
+      { type: "role", text: "► End-to-End Builder" },
+      { type: "neutral", text: "Individual project" },
+    ],
+    event: "Individual Project · September 2026",
+    context: {
+      heading: "Internal policy answers must be grounded, traceable, and careful",
+      body:
+        "Internal policy questions require more than helpful language. The answer must be based on authorised documents, traceable to a source, and careful when evidence is missing or uncertain. A generic LLM makes it worse: it may hallucinate, fail to cite a source, or rely on incomplete or outdated policy information.",
+      role:
+        "Individual project / end-to-end builder · problem definition, information architecture, RAG workflow, retrieval logic, answer constraints, citation and evidence mechanisms, refusal/escalation logic, product design",
+      stack: "RAG · TF-IDF Vectorisation · Cosine Similarity · Python · Streamlit",
+    },
+    problem: {
+      heading: "Traditional document search is slow, fragmented, and easy to misread",
+      body:
+        "Employees need fast answers about internal policies and procedures, but documents can be misunderstood and generic LLMs answer anyway — without evidence, without sources, and without knowing when they should not answer.",
+      bullets: [
+        "<b>Hallucination risk</b> — free-form LLM answers without document evidence.",
+        "<b>No traceability</b> — answers cannot be checked against an authorised source.",
+        "<b>Over-answering</b> — LLMs answer questions they should decline.",
+        "<b>Stale information</b> — model priors lag behind updated policy documents.",
+      ],
+    },
+    approach: {
+      heading: "Retrieve first, assess sufficiency, then answer with citation — or refuse",
+      body:
+        "Documents are processed and chunked, indexed as TF-IDF vectors, and matched to each question by cosine similarity. At query time, retrieved evidence passes an evidence-threshold check before the foundation model composes a response — which either cites its sources or refuses. Underspecified questions trigger clarification instead of a guess.",
+      steps: [
+        "Retrieve Evidence",
+        "Assess Sufficiency",
+        "Cited Answer",
+        "Refuse / Escalate",
+      ],
+      tags: ["RAG", "Chunking", "Evidence threshold", "Citations", "Refusal logic", "Streamlit"],
+    },
+    results: {
+      heading: "An MVP prototype for grounded enterprise retrieval",
+      body:
+        "The prototype validates enterprise document retrieval, evidence citation, and refusal / escalation under uncertainty. It is presented as an Enterprise AI and AI Product prototype — no production deployment, user adoption, award, or formal business metric is claimed.",
+      metrics: [
+        { value: "Evidence-first", label: "Answer design", note: "retrieve before generate" },
+        { value: "Citations", label: "Traceability", note: "source shown per answer" },
+        { value: "Refusal", label: "Insufficient evidence", note: "no fabricated confidence" },
+      ],
+    },
+    // 无 deck/材料区块；无公开链接 — 均未确认
+  },
+
+  // =========================================================
+  // 11 — Health Insurance Claim Decision Agent (PE6201 A2 · 团队项目)
+  // 内容迁移自远程 projects.js；严格保留贡献边界标注：
+  // 用户负责 evaluation harness + 安全测试，不是核心 agent 架构。
+  // =========================================================
+  {
+    slug: "health-insurance-claim-decision-agent",
+    number: "11",
+    title: "Health Insurance Claim Decision Agent",
+    titleEn: "Evaluation Harness & Escalation Safety Testing",
+    shortName: "Claim Agent",
+    eyebrow: ["AI AGENT · EVALUATION", "PE6201 A2 TEAM PROJECT", "2026"],
+    subtitle:
+      "A team-built insurance claim decision agent, evaluated through scripted and live-model test workflows with safety guardrails and reproducible result analysis.",
+    badges: [
+      { type: "role", text: "► Evaluation Harness & Safety Testing" },
+      { type: "neutral", text: "Six-member team" },
+      { type: "neutral", text: "Repository v3.0" },
+    ],
+    event: "PE6201 A2 · Academic Team Project · Six-member team · Repository Version 3.0",
+    links: [
+      { label: "GITHUB REPOSITORY", url: "https://github.com/symbioticshark/A2_HealthInsurance" },
+      { label: "DEMO VIDEO", url: "https://youtu.be/f-cxrW4esAA" },
+    ],
+    video: {
+      type: "youtube",
+      id: "f-cxrW4esAA",
+      title: "Health Insurance Claim Decision Agent — team project demo",
+      caption: "Team project demonstration (Version 3.0 build).",
+    },
+    context: {
+      heading: "A six-member academic team build with layered architecture and reproducible testing",
+      body:
+        "The system combines deterministic scripted evaluation, live LLM evaluation, safety guardrails, cost tracking, and reproducible result analysis. Repository release Version 3.0 uses a layered architecture, session-based history and comparison, safer configuration, transactional result writing, guardrails, and reproducible failure testing.",
+      role:
+        "Co-owned the evaluation-harness and scripted-evaluation work (D4 and D5(a)) with one teammate; designed hostile-input and escalation safety cases; contributed to shared evaluation, live-model testing, report preparation, and demo assembly. The core agent loop, insurance tools, guardrails, cost model, and decision ledger were team work, not built solely by me.",
+      stack: "Evaluation Harness · Scripted Evaluation · Live-Model Evaluation · Safety Guardrails",
+    },
+    problem: {
+      heading: "Claim decisions are safety-sensitive — testing is part of safety design",
+      body:
+        "An AI system must handle incomplete, adversarial, ambiguous, and escalation-triggering inputs without generating unsafe or unsupported decisions. The evaluation suite deliberately includes hostile-input and escalation scenarios to test whether the system can refuse, route, or safely handle risky cases instead of producing unsupported claim decisions.",
+      bullets: [
+        "<b>Adversarial inputs</b> must not produce unsupported claim decisions.",
+        "<b>Ambiguous cases</b> need safe escalation, not confident guessing.",
+        "<b>Behaviour changes</b> across versions must be comparable and reproducible.",
+        "<b>Unsafe behaviour</b> should surface in failure analysis, not production.",
+      ],
+    },
+    approach: {
+      heading: "A repeatable pipeline: scripted case → guardrail gate → expected-outcome comparison",
+      body:
+        "Each claim scenario runs through a repeatable, comparable pipeline: a scripted case drives the agent, a guardrail check gates the behaviour, the result is compared against the expected outcome and recorded, and anything unsafe or uncertain branches to failure analysis or safe escalation. Six hostile-input and escalation cases (CLM-8941, CLM-8952, CLM-9023, CLM-9024, CLM-9025, CLM-9026) were designed within the shared 40-case suite.",
+      steps: [
+        "Scripted Case",
+        "Agent Decision",
+        "Guardrail Check",
+        "Outcome Comparison",
+      ],
+      tags: ["Hostile-input testing", "Escalation safety", "Reproducible analysis", "Guardrails"],
+    },
+    results: {
+      heading: "A reproducible evaluation workflow with documented team contributions",
+      body:
+        "The project established a reproducible evaluation workflow with scripted cases, live-model evaluation, safety guardrails, and documented team contributions. Repository (Version 3.0) and demo video are publicly available.",
+      metrics: [
+        { value: "6", label: "Safety cases designed", note: "of shared 40-case suite" },
+        { value: "40", label: "Evaluation cases", note: "shared team suite" },
+        { value: "v3.0", label: "Repository release", note: "public on GitHub" },
+      ],
+    },
+    // 无 deck/材料区块 — 有 GitHub + demo video 外链
+  },
+
+  // =========================================================
+  // 12 — Singapore Rental Intelligence Copilot (NTU Generative AI · 团队项目)
+  // 内容迁移自远程 projects.js；保留贡献边界：报告整合 + Stage 5 原型 + Stage 6 评测。
+  // =========================================================
+  {
+    slug: "singapore-rental-intelligence-copilot",
+    number: "12",
+    title: "Singapore Rental Intelligence Copilot",
+    titleEn: "Evidence-Grounded Rental Decision Support for International Students",
+    shortName: "Rental Copilot",
+    eyebrow: ["GENERATIVE AI", "NTU GROUP ASSIGNMENT", "2026"],
+    subtitle:
+      "A generative AI assistant that extracts facts from unstructured rental posts, checks risks against rental rules, and generates evidence-grounded landlord clarification questions.",
+    badges: [
+      { type: "role", text: "► Prototype · Evaluation · Report" },
+      { type: "neutral", text: "Five-member team" },
+      { type: "neutral", text: "Gemini 2.5 Flash" },
+    ],
+    event: "NTU Generative AI group assignment · Group 3 · Five members",
+    links: [
+      { label: "OPEN DEMO", url: "https://gemini.google.com/share/c16fc3fe290f?skid=3525612e-9c27-4dd4-ad04-d655841b497f" },
+    ],
+    context: {
+      heading: "Support rental decisions without making them",
+      body:
+        "Two AI modules built on Gemini 2.5 Flash: a Listing Extractor that preserves evidence and uncertainty, and a Match/Risk/Rank module that assesses preference fit and identifies evidence-grounded concerns. A lightweight rule-based RAG retrieves relevant rental rules from an 18-entry knowledge base. The prototype was developed using Gemini Canvas. My contribution: PDF report consolidation, Stage 5 (Prototype), and Stage 6 (Evaluation & controlled comparison) — Stages 2, 3, 4, and 7 were completed by teammates.",
+      role:
+        "PDF report consolidation · Stage 5 prototype (Gemini Canvas, three optimisation rounds) · Stage 6 evaluation: A/B/C experiment design and scoring across 20 test cases",
+      stack: "Gemini 2.5 Flash · Rule-based RAG · Structured JSON · Gemini Canvas",
+    },
+    problem: {
+      heading: "First-time international student renters face four core difficulties",
+      body:
+        "A generic chatbot cannot solve this — it would need to extract facts without fabricating, ground risk assessments in listing evidence, and know what it does not know.",
+      bullets: [
+        "<b>Unstructured posts</b> — rent, lease, utilities, deposit scattered across long text.",
+        "<b>Unknown local rules</b> — students may not know rental risks and regulations.",
+        "<b>Tedious comparison</b> — evaluating multiple listings manually is slow.",
+        "<b>Language barrier</b> — asking landlords the right questions is hard.",
+      ],
+    },
+    approach: {
+      heading: "Two-module pipeline with a rule-based retrieval layer in between",
+      body:
+        "A raw listing enters as input; Module A extracts structured facts while preserving qualifiers and uncertainty ('Not mentioned' / 'Needs verification'); the rule-based RAG retrieves up to three relevant entries from the 18-entry knowledge base; Module B combines facts, evidence, preferences, and retrieved rules to produce matching, risk, and action outputs — each risk finding requires two-part grounding: listing evidence plus a knowledge entry.",
+      steps: [
+        "Listing Input",
+        "Module A Extract",
+        "Rule-based RAG",
+        "Module B Match / Risk / Rank",
+      ],
+      tags: ["Gemini 2.5 Flash", "Rule-based RAG", "Structured JSON", "Prompt constraints", "18-entry KB"],
+    },
+    results: {
+      heading: "Controlled A/B/C comparison measured real improvement",
+      body:
+        "20 fixed test cases were evaluated across three system versions, producing 60 outputs scored on four dimensions (Extraction Correctness, Missing-Information Handling, Risk Grounding, Rental-Rule Accuracy; 80 points max per version). Adding retrieval improved risk grounding from 14/20 to 19/20 while slightly reducing extraction correctness — retrieval improves reasoning support but does not automatically improve every aspect.",
+      metrics: [
+        { value: "62.5→90%", label: "A/B/C improvement", note: "baseline → prompt+retrieval" },
+        { value: "20", label: "Test cases", note: "60 outputs · 4 dimensions" },
+        { value: "19/20", label: "Risk grounding (C)", note: "up from 14/20 in B" },
+      ],
+    },
+    // 无 deck/材料区块 — 有 Open Demo 外链
   },
 ];
 
