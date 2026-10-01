@@ -34,6 +34,36 @@
 .hero-art { display:none; }
 .scroll-note { display:none; }
 
+/* ===== Dark hero — homepage only (black bg + orange glow) ===== */
+.hero.hero-dark { display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; background:radial-gradient(ellipse 75% 65% at 88% 108%, rgba(255,94,20,.42), transparent 62%), radial-gradient(ellipse 60% 55% at 4% 112%, rgba(255,77,0,.30), transparent 60%), radial-gradient(ellipse 45% 38% at 106% 4%, rgba(255,106,47,.16), transparent 62%), #080402; border-bottom:1px solid #1a0f06; }
+.hero-dark .hero-copy { display:flex; flex-direction:column; align-items:center; }
+.hero-pill { display:inline-flex; align-items:center; gap:8px; margin:0 0 34px; padding:9px 16px; border:1px solid rgba(255,255,255,.22); border-radius:999px; background:rgba(255,255,255,.05); color:rgba(255,255,255,.85); font-family:var(--font-technical); font-size:10px; letter-spacing:.18em; font-weight:600; }
+.hero-pill span { color:#ff8a4d; font-size:12px; }
+.hero-dark h1 { color:#fff; }
+.hero-dark h1 span { color:#ff7a3d; }
+.hero-dark .hero-lede { color:rgba(255,255,255,.72); }
+.hero-dark .intro { color:rgba(255,255,255,.48); }
+.hero-dark .hero-actions { justify-content:center; }
+.hero-dark .button-primary { background:#ff5a2e; border-color:#ff5a2e; }
+.hero-dark .button-primary:hover { background:#ff6d40; border-color:#ff6d40; }
+.hero-dark .button-quiet { color:#fff; border-color:rgba(255,255,255,.3); }
+.hero-dark .button-quiet:hover { border-color:#fff; }
+.hero-dark-strip { margin:clamp(64px,10vh,110px) 0 0; color:rgba(255,255,255,.34); font-family:var(--font-technical); font-size:10px; letter-spacing:.34em; }
+.hero-dark .scroll-note { display:block; position:absolute; bottom:28px; left:50%; transform:translateX(-50%); color:rgba(255,255,255,.4); font-size:9px; letter-spacing:.2em; }
+
+/* Header over dark hero (homepage top, before scroll) */
+.site-header.on-dark:not(.is-scrolled) { border-color:transparent; }
+.site-header.on-dark .wordmark { color:#fff; }
+.site-header.on-dark .nav-links a { color:rgba(255,255,255,.62); }
+.site-header.on-dark .nav-links a:hover { color:#fff; }
+.site-header.on-dark .nav-links a.active { color:#ff8a4d; }
+.site-header.on-dark .availability { color:rgba(255,255,255,.55); }
+.site-header.on-dark .menu-toggle span { background:#fff; }
+.site-header.on-dark .nav-links.is-open { background:rgba(246,244,239,.97); }
+.site-header.on-dark .nav-links.is-open a { color:var(--muted); }
+.site-header.on-dark .nav-links.is-open a:hover { color:var(--ink); }
+.site-header.on-dark .nav-links.is-open a.active { color:var(--accent); }
+
 /* ===== Shared section ===== */
 .section-wrap { padding:clamp(90px,13vw,190px) clamp(20px,7vw,112px); border-bottom:1px solid var(--line); }
 .about-layout { display:grid; grid-template-columns:1.05fr .7fr; gap:8vw; }
@@ -267,6 +297,7 @@
 .thinking-pub-meta { color:var(--muted); font-size:11px; letter-spacing:.1em; }
 
 /* ===== Resume / Now / About ===== */
+.date-line { margin:0 0 6px; color:var(--muted); font-size:10px; letter-spacing:.14em; font-family:var(--font-technical); }
 .resume-print-row { margin:0 0 8px; }
 .resume-subhead { font-family:var(--font-technical); font-size:clamp(1.1rem,1.8vw,1.5rem); font-weight:800; letter-spacing:.06em; margin:70px 0 8px; color:var(--ink); text-transform:uppercase; }
 .resume .metadata { margin-top:18px; }

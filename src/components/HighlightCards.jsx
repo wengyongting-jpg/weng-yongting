@@ -21,7 +21,7 @@ function HighlightCards() {
           <p>{project.subtitle}</p>
           <span className="text-link">VIEW CASE STUDY <b>↗</b></span>
         </Link>
-        <Link to={`/thinking/${paper.slug}`} className="highlight-card">
+        <Link to={`/experiments/${paper.slug}`} className="highlight-card">
           <small>RESEARCH / {paper.year}</small>
           <h3>IMMS {paper.year}</h3>
           <p>{paper.excerpt}</p>

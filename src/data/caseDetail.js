@@ -412,7 +412,9 @@ export const caseDetailProjects = [
     badges: [
       { type: "role", text: "► Designer" },
       { type: "neutral", text: "LLM + Rule logic" },
-      { type: "neutral", text: "Live demo" },
+    ],
+    links: [
+      { label: "LIVE DEMO", url: "https://period-ai.vercel.app/" },
     ],
     context: {
       heading: "Personalized health support sits in a grey zone between lifestyle and medical reasoning",

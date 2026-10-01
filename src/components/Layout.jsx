@@ -25,9 +25,11 @@ function Layout() {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, [location.pathname]);
 
+  const isHome = location.pathname === "/";
+
   return (
     <>
-      <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
+      <header className={`site-header ${scrolled ? "is-scrolled" : ""} ${isHome ? "on-dark" : ""}`}>
         <Link className="wordmark" to="/">{profile.wordmark}</Link>
         <button
           className="menu-toggle"

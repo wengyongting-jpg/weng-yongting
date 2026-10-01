@@ -4,91 +4,66 @@ import UpcomingProjectCard from "../components/UpcomingProjectCard.jsx";
 import InsightCard from "../components/InsightCard.jsx";
 import { experiments, upcomingProjects, posts, research } from "../data/index.js";
 
-// EXPERIMENTS — merged from Lab + Thinking + Now.
-//
-// One page that covers: what I'm building now, what I'm exploring in AI,
-// what principles guide my work, and what I've published.
+// LAB & THINKING — one page, two stacked blocks: AI LAB on top, THINKING below.
 function Experiments() {
   return (
-    <section className="section-wrap experiments">
-      <div className="section-heading">
-        <p className="eyebrow">03 / EXPERIMENTS</p>
-        <h2>EXPER<br /><span>IMENTS.</span></h2>
-      </div>
-
-      <p className="lab-intro">
-        What I'm building, what I'm exploring, and the principles I apply.
-        Not a showcase of finished results — a working surface showing how I think about Enterprise AI.
-      </p>
-
-      {/* NOW BUILDING — from the old Now page */}
-      <div className="now-building">
-        <Link className="now-building-item" to="/work/salespilot">
-          <span className="now-building-label">NOW BUILDING</span>
-          <h3>SalesPilot — Agentic WhatsApp Sales Opportunity Assistant</h3>
-          <p>
-            Preparing a complete agent demo journey from customer conversation to opportunity
-            scoring, next-best action, human handoff and dashboard visibility.
-          </p>
-          <span className="text-link">VIEW CASE STUDY <b>↗</b></span>
-        </Link>
-        <Link className="now-building-item" to="/work/grounded-enterprise-policy-assistant">
-          <span className="now-building-label">PROTOTYPE</span>
-          <h3>Grounded Enterprise Policy &amp; Procedure Assistant</h3>
-          <p>
-            Exploring how RAG, citations, evidence thresholds and refusal behaviour can make
-            internal knowledge assistants more trustworthy.
-          </p>
-          <span className="text-link">VIEW CASE STUDY <b>↗</b></span>
-        </Link>
-      </div>
-
+    <>
       {/* AI LAB — experiment directions */}
-      <div className="lab-upcoming">
-        <p className="eyebrow" style={{ marginTop: "clamp(60px,8vw,100px)" }}>AI LAB</p>
+      <section className="section-wrap lab" id="lab">
+        <div className="section-heading">
+          <p className="eyebrow">03 / AI LAB</p>
+          <h2>AI<br /><span>LAB.</span></h2>
+        </div>
+
         <p className="lab-intro">
-          Each entry is an experiment direction I am working through, labelled honestly with
-          status chips — Exploring, Prototype, Coming Soon — rather than validated results.
+          A public learning surface — not a showcase of finished results. Each entry is an
+          experiment direction I am working through, labelled honestly with status chips —
+          Exploring, Prototype, Coming Soon — rather than validated results.
         </p>
+
         <div className="experiment-grid">
           {experiments.map((e) => (
             <ExperimentCard key={e.id} experiment={e} />
           ))}
         </div>
-      </div>
 
-      {/* Upcoming project slots */}
-      {upcomingProjects.length > 0 && (
-        <div className="lab-upcoming">
-          <div className="section-heading">
-            <p className="eyebrow">IN THE WORKSHOP</p>
-            <h2>NEXT<br /><span>CASES.</span></h2>
+        {upcomingProjects.length > 0 && (
+          <div className="lab-upcoming">
+            <div className="section-heading">
+              <p className="eyebrow">IN THE WORKSHOP</p>
+              <h2>NEXT<br /><span>CASES.</span></h2>
+            </div>
+            <p className="lab-intro">
+              Reserved slots for projects being prepared for the portfolio.
+            </p>
+            <div className="experiment-grid">
+              {upcomingProjects.map((p) => (
+                <UpcomingProjectCard key={p.key} project={p} />
+              ))}
+            </div>
           </div>
-          <p className="lab-intro">
-            Reserved slots for projects being prepared for the portfolio.
-          </p>
-          <div className="experiment-grid">
-            {upcomingProjects.map((p) => (
-              <UpcomingProjectCard key={p.key} project={p} />
-            ))}
-          </div>
+        )}
+      </section>
+
+      {/* THINKING — insights & publications */}
+      <section className="section-wrap thinking" id="thinking">
+        <div className="section-heading">
+          <p className="eyebrow">04 / THINKING</p>
+          <h2>THINKING &amp;<br /><span>NOTES.</span></h2>
         </div>
-      )}
 
-      {/* INSIGHTS — from the old Thinking page */}
-      <div className="thinking-publications" style={{ marginTop: "clamp(70px,9vw,120px)" }}>
-        <p className="eyebrow">INSIGHTS &amp; NOTES</p>
         <p className="thinking-intro">
-          Short professional positions on AI, automation, product, and data — a working journal
-          of the principles I apply when designing AI products.
+          Short professional positions on AI, automation, product, and data. Not a blog —
+          a working journal of the principles I apply when designing AI products.
         </p>
+
         <div className="insight-grid">
           {posts.map((p) => (
             <InsightCard key={p.slug} post={p} />
           ))}
         </div>
 
-        <div className="thinking-publications" style={{ marginTop: "64px" }}>
+        <div className="thinking-publications">
           <p className="eyebrow">PUBLICATIONS</p>
           <ul>
             {research.map((r) => (
@@ -101,8 +76,8 @@ function Experiments() {
             ))}
           </ul>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 

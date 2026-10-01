@@ -82,7 +82,7 @@ export const portfolioOS = [
     key: "data-observatory",
     title: "DATA OBSERVATORY",
     blurb: "Research, analytics, market intelligence, and decision support.",
-    to: "/work/huafu-market-intelligence",
+    to: "/work/commercial-launch",
     cta: "VIEW CASE",
   },
   {

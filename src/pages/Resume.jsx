@@ -1,4 +1,4 @@
-import { profile, experiences, leadership, skillGroups, selectedProjects } from "../data/index.js";
+import { profile, experiences, leadership, skillGroups } from "../data/index.js";
 
 function Resume() {
   return (
@@ -20,29 +20,6 @@ function Resume() {
               <h4>{e.role}</h4>
               <ul className="achievements">{e.achievements.map((a, j) => <li key={j}>{a}</li>)}</ul>
               {e.tags && <ul>{e.tags.map((t) => <li key={t}>{t}</li>)}</ul>}
-            </div>
-          </article>
-        ))}
-      </div>
-
-      <h3 className="resume-subhead">SELECTED PROJECTS</h3>
-      <div className="timeline">
-        {selectedProjects.map((p, i) => (
-          <article className="timeline-item" key={`proj-${i}`}>
-            <div className="timeline-year">{p.year}</div>
-            <div className="timeline-content">
-              <p className="date-line">{p.meta}</p>
-              <h3>{p.name}</h3>
-              <ul className="achievements">{p.achievements.map((a, j) => <li key={j}>{a}</li>)}</ul>
-              {p.links && (
-                <p className="resume-links">
-                  {p.links.map((lnk) => (
-                    <a key={lnk.url} href={lnk.url} target="_blank" rel="noopener noreferrer" className="text-link">
-                      {lnk.label} <b>↗</b>
-                    </a>
-                  ))}
-                </p>
-              )}
             </div>
           </article>
         ))}
