@@ -62,19 +62,8 @@ export const projects = [
       "Export-oriented go-to-market strategy and brand localisation for a precision-manufacturing SME serving overseas industrial customers.",
   },
   {
-    slug: "icbc-etongyou",
-    number: "06",
-    name: "eTongYou",
-    subtitle: "ICBC Cup · Fujian Provincial Excellence Award",
-    year: "2024",
-    domain: "Competition · ICBC Cup",
-    tech: ["Service Design", "Cross-border Payment", "Travel Finance", "Bank-led Model"],
-    summary:
-      "An outbound-tourism financial-service concept recognised with the Fujian Provincial Excellence Award — designed for cross-border payment and travel-finance scenarios.",
-  },
-  {
     slug: "period",
-    number: "07",
+    number: "06",
     name: "Period",
     subtitle: "AI-Assisted Personalized Health Application",
     year: "2026",
@@ -86,7 +75,7 @@ export const projects = [
   },
   {
     slug: "refund-processing-automation",
-    number: "08",
+    number: "07",
     name: "Refund Processing Automation",
     subtitle: "Document-Driven Workflow with Human-in-the-Loop",
     year: "2025",
@@ -108,7 +97,7 @@ export const projects = [
   },
   {
     slug: "salespilot",
-    number: "09",
+    number: "08",
     name: "SalesPilot",
     subtitle: "Agentic WhatsApp Sales Opportunity Assistant",
     year: "2026",
@@ -135,7 +124,7 @@ export const projects = [
   },
   {
     slug: "grounded-enterprise-policy-assistant",
-    number: "10",
+    number: "09",
     name: "Grounded Enterprise Policy & Procedure Assistant",
     subtitle: "Evidence-Based Internal Knowledge Assistant",
     year: "2026",
@@ -160,7 +149,7 @@ export const projects = [
   },
   {
     slug: "health-insurance-claim-decision-agent",
-    number: "11",
+    number: "10",
     name: "Health Insurance Claim Decision Agent",
     subtitle: "Evaluation Harness & Escalation Safety Testing",
     year: "2026",
@@ -192,7 +181,7 @@ export const projects = [
   },
   {
     slug: "singapore-rental-intelligence-copilot",
-    number: "12",
+    number: "11",
     name: "Singapore Rental Intelligence Copilot",
     subtitle: "Evidence-Grounded Rental Decision Support for International Students",
     year: "2026",

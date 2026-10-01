@@ -336,73 +336,11 @@ export const caseDetailProjects = [
   },
 
   // =========================================================
-  // 06 — e同游 工行杯 (Competition · ICBC Cup)
-  // =========================================================
-  {
-    slug: "icbc-etongyou",
-    number: "06",
-    title: "eTongYou",
-    titleEn: "ICBC Cup · Fujian Provincial Excellence Award",
-    shortName: "eTongYou",
-    eyebrow: ["ICBC CUP", "COMPETITION", "2024"],
-    subtitle:
-      "An outbound-tourism financial-service concept recognised with the Fujian Provincial Excellence Award — designed for cross-border payment and travel-finance scenarios.", // [confirm] user's role — cover only shows 2 names 陈昕+翁永婷
-    badges: [
-      { type: "award", text: "◆ Provincial Excellence" },
-      { type: "role", text: "► Co-author" }, // [confirm] user's role — only 2 names on cover
-      { type: "neutral", text: "Outbound tourism" },
-    ],
-    context: {
-      heading: "A travel-finance concept for the outbound-tourism wave",
-      body:
-        "eTongYou is a concept for an outbound-tourism financial service — covering cross-border payment, multi-currency accounts, and travel-finance products — aimed at the growing wave of Chinese outbound travellers. The ICBC Cup entry framed it as a bank-led service design rather than a standalone fintech app.",
-      role: "Co-author · service design + financial-product framing", // [confirm] user's role — cover shows 陈昕 + 翁永婷 only
-      stack: "Service design · Cross-border payment · Travel finance · Bank-led model",
-    },
-    problem: {
-      heading: "Outbound travellers hit friction at every payment touchpoint",
-      body: "",
-      bullets: [
-        "<b>Multi-currency fragmentation</b> — travellers carry several single-currency instruments.",
-        "<b>High FX and withdrawal fees</b> at point-of-sale abroad.",
-        "<b>No unified travel-finance product</b> bundling insurance, credit, and FX.",
-        "<b>Bank-side data silos</b> prevent personalised travel-finance advice.",
-      ],
-    },
-    approach: {
-      heading: "A bank-led service design bundling payment, credit, and travel finance",
-      body:
-        "Designed an outbound-tourism financial service anchored on a multi-currency account, with a travel-finance product bundle (FX, insurance, credit) layered on top. The bank-led framing let the concept reuse ICBC's existing rails and compliance infrastructure.",
-      steps: [
-        "Traveller Research",
-        "Service Design",
-        "Product Bundle",
-        "Bank-led Compliance",
-      ],
-      tags: ["Service design", "Cross-border payment", "Travel finance", "Bank-led model"],
-    },
-    results: {
-      heading: "Fujian Provincial Excellence Award",
-      body: "",
-      metrics: [
-        { value: "◆", label: "Provincial Excellence", note: "Fujian province" },
-        { value: "2", label: "Team members", note: "Chen Xin · Weng Yongting" },
-        { value: "33", label: "Slide deck", note: "concept deck" },
-      ],
-    },
-    materials: {
-      heading: "Presentation slides (33)",
-      body: "The concept presentation shown as an image gallery.",
-      slides: makeSlides("icbc-etongyou", 33),
-    },
-  },
-
-  // =========================================================
-  // 07 — Period (existing project, migrated to V5)
+  // 06 — Period (existing project, migrated to V5)
   // =========================================================
   {
     slug: "period",
-    number: "07",
+    number: "06",
     title: "Period",
     titleEn: "AI-Assisted Personalized Health Application",
     shortName: "Period",
@@ -459,11 +397,11 @@ export const caseDetailProjects = [
   },
 
   // =========================================================
-  // 08 — Refund Processing Automation (existing, migrated to V5)
+  // 07 — Refund Processing Automation (existing, migrated to V5)
   // =========================================================
   {
     slug: "refund-processing-automation",
-    number: "08",
+    number: "07",
     title: "Refund Processing Automation",
     titleEn: "Document-Driven Workflow with Human-in-the-Loop",
     shortName: "Refund Automation",
@@ -528,13 +466,13 @@ export const caseDetailProjects = [
   },
 
   // =========================================================
-  // 09 — SalesPilot (Hackathon · NUS-ISS Show Me Your Agents)
+  // 08 — SalesPilot (Hackathon · NUS-ISS Show Me Your Agents)
   // 内容迁移自远程 projects.js 的 8-section 数据；遵循其诚实标注：
   // 进行中的黑客松项目，无已确认的公开 demo/GitHub 链接。
   // =========================================================
   {
     slug: "salespilot",
-    number: "09",
+    number: "08",
     title: "SalesPilot",
     titleEn: "Agentic WhatsApp Sales Opportunity Assistant",
     shortName: "SalesPilot",
@@ -605,12 +543,12 @@ export const caseDetailProjects = [
   },
 
   // =========================================================
-  // 10 — Grounded Enterprise Policy & Procedure Assistant (Individual · Prototype)
+  // 09 — Grounded Enterprise Policy & Procedure Assistant (Individual · Prototype)
   // 内容迁移自远程 projects.js 的 8-section 数据；无生产部署/指标声明。
   // =========================================================
   {
     slug: "grounded-enterprise-policy-assistant",
-    number: "10",
+    number: "09",
     title: "Grounded Enterprise Policy & Procedure Assistant",
     titleEn: "Evidence-Based Internal Knowledge Assistant",
     shortName: "Policy Assistant",
@@ -668,13 +606,13 @@ export const caseDetailProjects = [
   },
 
   // =========================================================
-  // 11 — Health Insurance Claim Decision Agent (PE6201 A2 · 团队项目)
+  // 10 — Health Insurance Claim Decision Agent (PE6201 A2 · 团队项目)
   // 内容迁移自远程 projects.js；严格保留贡献边界标注：
   // 用户负责 evaluation harness + 安全测试，不是核心 agent 架构。
   // =========================================================
   {
     slug: "health-insurance-claim-decision-agent",
-    number: "11",
+    number: "10",
     title: "Health Insurance Claim Decision Agent",
     titleEn: "Evaluation Harness & Escalation Safety Testing",
     shortName: "Claim Agent",
@@ -742,12 +680,12 @@ export const caseDetailProjects = [
   },
 
   // =========================================================
-  // 12 — Singapore Rental Intelligence Copilot (NTU Generative AI · 团队项目)
+  // 11 — Singapore Rental Intelligence Copilot (NTU Generative AI · 团队项目)
   // 内容迁移自远程 projects.js；保留贡献边界：报告整合 + Stage 5 原型 + Stage 6 评测。
   // =========================================================
   {
     slug: "singapore-rental-intelligence-copilot",
-    number: "12",
+    number: "11",
     title: "Singapore Rental Intelligence Copilot",
     titleEn: "Evidence-Grounded Rental Decision Support for International Students",
     shortName: "Rental Copilot",
