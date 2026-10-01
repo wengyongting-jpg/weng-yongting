@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>WENG YONGTING</title>
+    <script type="text/javascript">
+      // Single Page Apps for GitHub Pages (MIT)
+      // Redirects to index.html with the route encoded as a query string
+      // so index.html can restore the original URL for React Router.
+      var pathSegmentsToKeep = 1; // repo name: weng-yongting
+      var l = window.location;
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        (l.hash ? '~and~' + l.hash.slice(1).replace(/&/g, '~and~') : '')
+      );
+    </script>
+  </head>
+  <body>
+    <p>Redirecting…</p>
+  </body>
+</html>
