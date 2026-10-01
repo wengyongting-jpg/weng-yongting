@@ -28,7 +28,7 @@ const stages = [
   {
     stage: "AI",
     evidence: [
-      "Yuexi — hybrid AI architecture (cycle logic + health scoring + LLM)",
+      "Period — hybrid AI architecture (cycle logic + health scoring + LLM)",
       "LLM API, Prompt Engineering, AI-assisted Development",
       "IMMS 2025 — AI investment & market competitiveness research",
     ],
@@ -36,7 +36,7 @@ const stages = [
   {
     stage: "Product / Solution Design",
     evidence: [
-      "Yuexi — user scenarios, AI interactions, safety boundaries",
+      "Period — user scenarios, AI interactions, safety boundaries",
       "Challenge Cup — go-to-market strategy and brand localization",
       "AI Product Design",
     ],

@@ -1,148 +1,251 @@
 import { useParams, Link } from "react-router-dom";
-import { getProject, projects } from "../data/index.js";
-import FlowDiagram from "../components/FlowDiagram.jsx";
+import { caseDetailProjects, getCaseDetailProject } from "../data/caseDetail.js";
+import SlideDeck from "../components/SlideDeck.jsx";
 import NotFound from "./NotFound.jsx";
 
-// Reusable case-study page. Renders any project's 8-section structure.
-// Layout is editorial + asymmetric: section number/heading on the left,
-// body content on the right. Optional FlowDiagram renders inside section 06.
+// V5 项目详情页 — 7 区块结构：
+//   面包屑 → Hero 卡片 → 01 CONTEXT → 02 PROBLEM → 03 APPROACH
+//   → 04 RESULTS → 05 MATERIALS (Behance 风格瀑布流) → 底部 prev/next 导航
+//
+// 数据来源：src/data/caseDetail.js
+// 合并自远程版本的功能：event 行、YouTube 演示视频嵌入、已确认公开外链按钮。
 function CaseStudy() {
   const { slug } = useParams();
-  const project = getProject(slug);
+  const project = getCaseDetailProject(slug);
   if (!project) return <NotFound />;
 
-  // Next project for an editorial "next case" link at the bottom.
-  const idx = projects.findIndex((p) => p.slug === slug);
-  const next = projects[(idx + 1) % projects.length];
+  const total = caseDetailProjects.length;
+  const idx = caseDetailProjects.findIndex((p) => p.slug === slug);
+  const prev = caseDetailProjects[(idx - 1 + total) % total];
+  const next = caseDetailProjects[(idx + 1) % total];
 
-  // Demo / external links. Rendered prominently in the header and repeated
-  // at the bottom after the case study.
-  const demoLinks = (
-    <>
-      {project.url && (
-        <a className="button button-primary" href={project.url} target="_blank" rel="noopener noreferrer">
-          LIVE DEMO <b>↗</b>
-        </a>
-      )}
-      {/* Multiple confirmed public links (e.g. GitHub + demo video). First is primary. */}
-      {project.links && project.links.map((lnk, i) => (
-        <a
-          key={lnk.url}
-          className={`button ${i === 0 ? "button-primary" : "button-quiet"}`}
-          href={lnk.url}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {lnk.label} <b>↗</b>
-        </a>
-      ))}
-    </>
-  );
+  const pad = (n) => String(n).padStart(2, "0");
+  const totalStr = pad(total);
+  const crumbName = project.shortName || project.title;
 
   return (
-    <article className="section-wrap case-study">
-      <p className="eyebrow">02 / SELECTED WORK · {project.number}</p>
-
-      <header className="case-header">
-        <h2 className="case-title">{project.name}</h2>
-        <p className="case-subtitle">{project.subtitle}</p>
-        <p className="case-meta">
-          {project.year} · {project.domain}
-          {project.status && <span className="case-status">STATUS / {project.status.toUpperCase()}</span>}
-          {project.teamProject && <span className="case-status is-team">TEAM PROJECT</span>}
+    <article className="case-detail section-wrap">
+      {/* Breadcrumb */}
+      <div className="case-detail-breadcrumb">
+        <p className="case-detail-crumb">
+          PROJECTS
+          <span className="case-detail-crumb-sep">·</span>
+          <b>{pad(idx + 1)} / {totalStr}</b>
+          <span className="case-detail-crumb-sep">·</span>
+          {crumbName}
         </p>
+        <Link to="/work" className="case-detail-back">← Back to Projects</Link>
+      </div>
+
+      {/* Hero card */}
+      <header className="case-detail-hero">
+        <p className="case-detail-eyebrow">
+          {project.eyebrow.join(" • ")}
+        </p>
+        <h1 className="case-detail-title">
+          {project.title}
+          {project.titleEn && (
+            <span className="case-detail-title-en">{project.titleEn}</span>
+          )}
+        </h1>
+        <p className="case-detail-subtitle">{project.subtitle}</p>
+        <div className="case-detail-badges">
+          {project.badges.map((b, i) => (
+            <span
+              key={i}
+              className={`case-detail-badge case-detail-badge--${b.type}`}
+            >
+              {b.text}
+            </span>
+          ))}
+        </div>
+
+        {/* 赛事/项目背景行（合并自远程版本） */}
         {project.event && <p className="case-event">{project.event}</p>}
-        {(project.url || (project.links && project.links.length > 0)) && (
-          <div className="case-cta">{demoLinks}</div>
+
+        {/* 已确认的公开外链按钮（合并自远程版本） */}
+        {project.links && project.links.length > 0 && (
+          <div className="case-detail-links">
+            {project.links.map((lnk, i) => (
+              <a
+                key={lnk.url}
+                className={`case-detail-btn ${i === 0 ? "case-detail-btn--primary" : ""}`}
+                href={lnk.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {lnk.label} <b aria-hidden="true">↗</b>
+              </a>
+            ))}
+          </div>
         )}
-        <p className="case-overview">{project.summary}</p>
+
+        {/* YouTube 演示视频嵌入（合并自远程版本） */}
+        {project.video && project.video.type === "youtube" && (
+          <figure className="case-video">
+            <div className="case-video-frame">
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${project.video.id}`}
+                title={project.video.title || `${project.title} — demo video`}
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            </div>
+            {project.video.caption && (
+              <figcaption className="case-video-caption">{project.video.caption}</figcaption>
+            )}
+          </figure>
+        )}
       </header>
 
-      <div className="case-sections">
-        {project.caseStudy.map((block) => (
-          <section className="case-section" key={block.no}>
-            <div className="case-section-label">
-              <span className="case-section-no">{block.no}</span>
-              <span className="case-section-heading">{block.heading}</span>
+      {/* 01 CONTEXT */}
+      {project.context && (
+        <section className="case-detail-section">
+          <div className="case-detail-section-label">
+            <span className="case-detail-section-no">01</span>
+            <span className="case-detail-section-heading">Context</span>
+          </div>
+          <div className="case-detail-section-body">
+            <h2 className="case-detail-section-title">{project.context.heading}</h2>
+            {project.context.body && (
+              <p className="case-detail-section-text">{project.context.body}</p>
+            )}
+            <div className="case-detail-info-grid">
+              <div className="case-detail-info-card">
+                <small>Role</small>
+                <strong>{project.context.role}</strong>
+              </div>
+              <div className="case-detail-info-card">
+                <small>Stack</small>
+                <strong>{project.context.stack}</strong>
+              </div>
             </div>
-            <div className="case-section-body">
-              {block.body && <p className="case-section-text">{block.body}</p>}
-              {block.points && (
-                <ul className="case-section-points">
-                  {block.points.map((pt, i) => (
-                    <li key={i}>{pt}</li>
-                  ))}
-                </ul>
-              )}
-              {block.note && <p className="case-section-note">{block.note}</p>}
-              {block.flow && <FlowDiagram flow={block.flow} />}
-              {block.safety && (
-                <div className="safety-grid">
-                  {[block.safety.can, block.safety.cannot, block.safety.escalation]
-                    .filter(Boolean)
-                    .map((col, i) => (
-                      <div
-                        className={`safety-col ${
-                          ["is-can", "is-cannot", "is-escalation"][i]
-                        }`}
-                        key={col.label}
-                      >
-                        <p className="safety-col-label">{col.label}</p>
-                        <ul>
-                          {col.items.map((it) => (
-                            <li key={it}>{it}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
-                </div>
-              )}
-              {block.chips && (
-                <div className="chip-groups">
-                  {block.chips.map((group) => (
-                    <div className="chip-group" key={group.label}>
-                      <p className="chip-group-label">{group.label}</p>
-                      <ul className="chip-list">
-                        {group.items.map((it) => (
-                          <li key={it}>{it}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              )}
-              {block.blocks && (
-                <div className="case-blocks">
-                  {block.blocks.map((b) => (
-                    <div className="case-block-panel" key={b.title}>
-                      <p className="case-block-title">{b.title}</p>
-                      <p className="case-block-body">{b.body}</p>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </section>
-        ))}
-      </div>
-
-      <div className="tech-list">
-        {project.tech.map((t) => (
-          <span key={t}>{t}</span>
-        ))}
-      </div>
-
-      <p className="case-actions">
-        {demoLinks}
-        <Link className="text-link" to="/work">← BACK TO WORK</Link>
-      </p>
-
-      {next && next.slug !== project.slug && (
-        <Link className="case-next" to={`/work/${next.slug}`}>
-          <span className="case-next-label">NEXT CASE · {next.number}</span>
-          <span className="case-next-title">{next.name} <b>↘</b></span>
-        </Link>
+          </div>
+        </section>
       )}
+
+      {/* 02 PROBLEM */}
+      {project.problem && (
+        <section className="case-detail-section">
+          <div className="case-detail-section-label">
+            <span className="case-detail-section-no">02</span>
+            <span className="case-detail-section-heading">Problem</span>
+          </div>
+          <div className="case-detail-section-body">
+            <h2 className="case-detail-section-title">{project.problem.heading}</h2>
+            {project.problem.body && (
+              <p className="case-detail-section-text">{project.problem.body}</p>
+            )}
+            {project.problem.bullets && project.problem.bullets.length > 0 && (
+              <ul className="case-detail-bullets">
+                {project.problem.bullets.map((b, i) => (
+                  <li key={i}>{b}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* 03 APPROACH */}
+      {project.approach && (
+        <section className="case-detail-section">
+          <div className="case-detail-section-label">
+            <span className="case-detail-section-no">03</span>
+            <span className="case-detail-section-heading">Approach</span>
+          </div>
+          <div className="case-detail-section-body">
+            <h2 className="case-detail-section-title">{project.approach.heading}</h2>
+            {project.approach.body && (
+              <p className="case-detail-section-text">{project.approach.body}</p>
+            )}
+            {project.approach.steps && project.approach.steps.length > 0 && (
+              <div className="case-detail-flow">
+                {project.approach.steps.map((s, i) => (
+                  <div key={i} className="case-detail-flow-step">
+                    <span className="case-detail-flow-step-no">STEP {pad(i + 1)}</span>
+                    <span className="case-detail-flow-step-label">{s}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+            {project.approach.tags && project.approach.tags.length > 0 && (
+              <div className="case-detail-tags">
+                {project.approach.tags.map((t, i) => (
+                  <span key={i}>{t}</span>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* 04 RESULTS */}
+      {project.results && (
+        <section className="case-detail-section">
+          <div className="case-detail-section-label">
+            <span className="case-detail-section-no">04</span>
+            <span className="case-detail-section-heading">Results</span>
+          </div>
+          <div className="case-detail-section-body">
+            <h2 className="case-detail-section-title">{project.results.heading}</h2>
+            {project.results.body && (
+              <p className="case-detail-section-text">{project.results.body}</p>
+            )}
+            {project.results.metrics && project.results.metrics.length > 0 && (
+              <div className="case-detail-metrics">
+                {project.results.metrics.map((m, i) => (
+                  <div key={i} className="case-detail-metric">
+                    <span className="case-detail-metric-value">{m.value}</span>
+                    <span className="case-detail-metric-label">{m.label}</span>
+                    {m.note && <span className="case-detail-metric-note">{m.note}</span>}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* 05 MATERIALS — Behance-style slide deck */}
+      {project.materials && project.materials.slides && project.materials.slides.length > 0 && (
+        <section className="case-detail-section">
+          <div className="case-detail-section-label">
+            <span className="case-detail-section-no">05</span>
+            <span className="case-detail-section-heading">Materials</span>
+          </div>
+          <div className="case-detail-section-body">
+            <h2 className="case-detail-section-title">
+              {project.materials.heading || "Case study deck"}
+            </h2>
+            {project.materials.body && (
+              <p className="case-detail-section-text">{project.materials.body}</p>
+            )}
+            <SlideDeck slides={project.materials.slides} />
+          </div>
+        </section>
+      )}
+
+      {/* Footer prev / next / back */}
+      <nav className="case-detail-footer">
+        <Link
+          to={`/work/${prev.slug}`}
+          className="case-detail-nav-link case-detail-nav-link--prev"
+        >
+          <small>← Previous · {prev.number}</small>
+          <strong>{prev.shortName || prev.title}</strong>
+        </Link>
+        <Link to="/work" className="case-detail-back-to-list">Back to Projects</Link>
+        <Link
+          to={`/work/${next.slug}`}
+          className="case-detail-nav-link case-detail-nav-link--next"
+        >
+          <small>Next · {next.number} →</small>
+          <strong>{next.shortName || next.title}</strong>
+        </Link>
+      </nav>
     </article>
   );
 }

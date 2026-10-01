@@ -21,23 +21,20 @@ function Work() {
                   {p.domain} · {p.year}
                   {p.status && <span className="work-status">STATUS / {p.status.toUpperCase()}</span>}
                   {p.teamProject && <span className="work-status is-team">TEAM PROJECT</span>}
+                  {p.video && <span className="work-status is-demo">▶ VIDEO DEMO</span>}
+                  {!p.video && p.links && p.links.length > 0 && <span className="work-status is-demo">◆ DEMO</span>}
                 </p>
                 <h3>{p.name}</h3>
                 <p className="work-subtitle">{p.subtitle}</p>
-                {/* Prefer the concise value proposition on cards; fall back to the full summary. */}
-                <p className="work-summary">{p.valueProp || p.summary}</p>
-                {p.proofPoint && <p className="work-proof">{p.proofPoint}</p>}
+                <ul className="tech-list work-tech-compact">
+                  {p.tech.slice(0, 4).map((t) => (
+                    <li key={t}>{t}</li>
+                  ))}
+                </ul>
                 <span className="text-link">VIEW CASE STUDY <b>↗</b></span>
               </div>
-            </Link>
-            <div className="work-side">
-              {p.url && (
-                <a className="button button-primary" href={p.url} target="_blank" rel="noopener noreferrer">
-                  LIVE DEMO <b>↗</b>
-                </a>
-              )}
               <span className="work-arrow" aria-hidden="true">→</span>
-            </div>
+            </Link>
           </li>
         ))}
       </ol>

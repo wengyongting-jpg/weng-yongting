@@ -3,12 +3,9 @@ import { Outlet, Link, NavLink, useLocation } from "react-router-dom";
 import { profile } from "../data/index.js";
 
 const NAV = [
-  { to: "/work", label: "WORK" },
-  { to: "/lab", label: "LAB" },
-  { to: "/thinking", label: "THINKING" },
-  { to: "/now", label: "NOW" },
   { to: "/about", label: "ABOUT" },
-  { to: "/resume", label: "RESUME" },
+  { to: "/work", label: "PROJECTS" },
+  { to: "/resume", label: "WORK EXPERIENCE" },
 ];
 
 function Layout() {
@@ -55,7 +52,10 @@ function Layout() {
       <footer>
         <span>© {new Date().getFullYear()} {profile.wordmark}</span>
         <span>{profile.focus}</span>
-        <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="footer-link">LINKEDIN <b>↗</b></a>
+        <span className="footer-links">
+          <a href={profile.github} target="_blank" rel="noopener noreferrer" className="footer-link">GITHUB <b>↗</b></a>
+          <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="footer-link">LINKEDIN <b>↗</b></a>
+        </span>
       </footer>
     </>
   );

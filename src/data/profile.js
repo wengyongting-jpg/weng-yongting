@@ -53,6 +53,7 @@ export const profile = {
   interests: ["AI Products", "Intelligent Automation", "Digital Transformation"],
   // Verified contact links.
   linkedin: "https://www.linkedin.com/in/yongting-c",
+  github: "https://github.com/wengyongting-jpg",
 };
 
 // "Portfolio OS" — the five directional entry points on the homepage.
@@ -65,7 +66,7 @@ export const portfolioOS = [
     key: "ai-lab",
     title: "AI LAB",
     blurb: "AI products, LLM applications, and safety-aware AI design.",
-    to: "/lab",
+    to: "/experiments",
     cta: "ENTER LAB",
   },
   {
@@ -97,7 +98,7 @@ export const portfolioOS = [
     key: "thinking-room",
     title: "THINKING ROOM",
     blurb: "Decision memos and reflections on enterprise AI.",
-    to: "/thinking",
+    to: "/experiments",
     cta: "READ MEMOS",
   },
 ];
