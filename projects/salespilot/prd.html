@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SalesPilot — Product Requirements Document</title>
+<style>
+  :root { --bg:#f6f4ef; --panel:#fffdf8; --text:#0b1c2c; --muted:#5d6875; --line:#e2ddd2; --accent:#ff5a36; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: "Inter", system-ui, sans-serif; line-height: 1.65; }
+  .page { max-width: 860px; margin: 0 auto; padding: 64px 32px 96px; }
+  header { border-bottom: 2px solid var(--text); padding-bottom: 32px; margin-bottom: 48px; }
+  .eyebrow { color: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: .18em; margin-bottom: 12px; }
+  h1 { font-size: 40px; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; }
+  .meta { margin-top: 16px; color: var(--muted); font-size: 13px; }
+  section { margin-bottom: 44px; }
+  h2 { font-size: 13px; font-weight: 800; letter-spacing: .16em; color: var(--accent); margin-bottom: 14px; }
+  h3 { font-size: 19px; font-weight: 800; letter-spacing: -.02em; margin-bottom: 12px; }
+  p { font-size: 14px; color: #3d4a58; margin-bottom: 10px; }
+  ul { padding-left: 20px; }
+  li { font-size: 14px; color: #3d4a58; margin-bottom: 8px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 20px 24px; margin-bottom: 12px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); font-size: 13px; vertical-align: top; }
+  th { font-size: 10px; letter-spacing: .12em; color: var(--muted); font-weight: 800; }
+  .decision { background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 8px; padding: 16px 20px; margin-bottom: 12px; }
+  .decision small { display: block; font-size: 9px; font-weight: 800; letter-spacing: .14em; color: var(--muted); margin-bottom: 6px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <p class="eyebrow">PRODUCT REQUIREMENTS DOCUMENT · NUS-ISS HACKATHON · SEP 2026</p>
+    <h1>SalesPilot — Agentic WhatsApp Sales Opportunity Assistant</h1>
+    <p class="meta">Role: Product Concept &amp; Early Build &nbsp;·&nbsp; Status: Hackathon demo build (repo + video + 2 deployed surfaces public) &nbsp;·&nbsp; Version 1.0</p>
+  </header>
+
+  <section>
+    <h2>01 · PROBLEM</h2>
+    <h3>Valuable signals stay buried in fragmented WhatsApp conversations</h3>
+    <p>Sales reps receive high enquiry volume through WhatsApp with limited capacity. Routine questions (availability, pricing, delivery, hours) consume the time that should go to the signals that matter: purchase intent, hesitation, competitor comparison, expansion opportunity, risk.</p>
+    <ul>
+      <li><b>Purchase intent</b> signals scattered across long chat histories.</li>
+      <li><b>Hesitation and competitor comparison</b> invisible without manual review.</li>
+      <li><b>Uniform treatment</b> of every message wastes scarce sales capacity.</li>
+      <li><b>No escalation path</b> for high-value or negotiation-stage situations.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>02 · PRODUCT POSITIONING</h2>
+    <div class="card">
+      <p><b>Not a reply-generation chatbot — an opportunity-intelligence agent.</b></p>
+      <p>After every customer message, SalesPilot recalls conversation memory, detects the customer's current state, extracts sales signals, updates the Opportunity Profile, recomputes the 0–100 Opportunity Value Score, and picks the next best action — an automated AI response or a deliberate handoff to a human seller — while keeping the dashboard in sync.</p>
+      <p><b>North Star:</b> rep time spent on high-value conversations as a share of total rep time.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>03 · KEY PRODUCT DECISIONS</h2>
+    <div class="decision">
+      <small>DECISION 01</small>
+      <p><b>Full automation, or human-in-the-loop for high-value conversations?</b></p>
+      <p><b>Compared:</b> A · Fully automated replies for all enquiries. B · AI handles routine; humans take high-value / uncertain / negotiation cases.</p>
+      <p><b>Chosen:</b> B — trust and deal size outweigh speed. The system recommends, the human decides, for anything high-stakes.</p>
+      <p><b>Validate via:</b> pilot with 1–2 sales reps; log acceptance / override rate of AI next-best-actions.</p>
+    </div>
+    <div class="decision">
+      <small>DECISION 02</small>
+      <p><b>Continuous 0–100 score, or 3-tier hot / warm / cold buckets?</b></p>
+      <p><b>Chosen:</b> continuous score — reps' real question is "who do I call first", which needs ranking, not labels.</p>
+      <p><b>Validate via:</b> in the rep pilot, measure whether reps work the inbox top-down in score order or re-sort it.</p>
+    </div>
+    <div class="decision">
+      <small>DECISION 03</small>
+      <p><b>Stateful opportunity profile, or stateless per-message replies?</b></p>
+      <p><b>Chosen:</b> stateful — purchase intent and hesitation only make sense across a conversation, not in a single message.</p>
+      <p><b>Validate via:</b> score stability across a conversation — no wild swings on courtesy messages.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>04 · AGENT WORKFLOW</h2>
+    <table>
+      <tr><th>NODE</th><th>INPUT → OUTPUT</th><th>EDGE CASE / FALLBACK</th></tr>
+      <tr><td>1 · Customer Message</td><td>WhatsApp text → normalised message on thread</td><td>Unsupported media → polite request to describe the need in text</td></tr>
+      <tr><td>2 · State Detection</td><td>Conversation memory → current sales stage</td><td>Idle &gt; 7 days → reset to re-qualification, don't assume continuity</td></tr>
+      <tr><td>3 · Signal Extraction</td><td>Message + stage → structured signals (intent, hesitation, competitor, expansion, risk)</td><td>Conflicting signals → cap score, flag for human review</td></tr>
+      <tr><td>4 · Opportunity Scoring</td><td>Signals + profile → 0–100 Opportunity Value Score</td><td>Low-confidence extraction → provisional score, no auto-decisions</td></tr>
+      <tr><td>5 · Next Best Action</td><td>Score + stage + signals → AI reply or human handoff</td><td>Uncertain → AI drafts a reply but holds for approval</td></tr>
+      <tr><td>6 · Dashboard Sync</td><td>Score, stage, signals, action → ranked rep inbox</td><td>Missing evidence → recommendation shown greyed out</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>05 · VALIDATION STATUS &amp; PLAN</h2>
+    <div class="card">
+      <p><b>Current:</b> hackathon demonstration build — scripted WhatsApp scenarios + judge walkthroughs. Public artefacts: GitHub repository, demo video, admin dashboard, customer chat. <b>No production adoption or business metrics are claimed.</b></p>
+      <p><b>Known failure modes found in testing:</b> auto-reply fired on a negotiation-stage message (fixed with a hard handoff rule); score inflated by polite small-talk (fixed by dampening courtesy signals).</p>
+      <p><b>Next:</b> rep pilot on real inbound conversations → feed rep overrides back into signal weights → controlled conversion comparison before claiming any uplift.</p>
+    </div>
+  </section>
+</div>
+</body>
+</html>

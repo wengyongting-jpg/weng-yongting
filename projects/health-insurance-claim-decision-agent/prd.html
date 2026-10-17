@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Health Insurance Claim Decision Agent — Evaluation Design Document</title>
+<style>
+  :root { --bg:#f6f4ef; --panel:#fffdf8; --text:#0b1c2c; --muted:#5d6875; --line:#e2ddd2; --accent:#ff5a36; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: "Inter", system-ui, sans-serif; line-height: 1.65; }
+  .page { max-width: 860px; margin: 0 auto; padding: 64px 32px 96px; }
+  header { border-bottom: 2px solid var(--text); padding-bottom: 32px; margin-bottom: 48px; }
+  .eyebrow { color: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: .18em; margin-bottom: 12px; }
+  h1 { font-size: 40px; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; }
+  .meta { margin-top: 16px; color: var(--muted); font-size: 13px; }
+  section { margin-bottom: 44px; }
+  h2 { font-size: 13px; font-weight: 800; letter-spacing: .16em; color: var(--accent); margin-bottom: 14px; }
+  h3 { font-size: 19px; font-weight: 800; letter-spacing: -.02em; margin-bottom: 12px; }
+  p { font-size: 14px; color: #3d4a58; margin-bottom: 10px; }
+  ul { padding-left: 20px; }
+  li { font-size: 14px; color: #3d4a58; margin-bottom: 8px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 20px 24px; margin-bottom: 12px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); font-size: 13px; vertical-align: top; }
+  th { font-size: 10px; letter-spacing: .12em; color: var(--muted); font-weight: 800; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <p class="eyebrow">EVALUATION DESIGN DOCUMENT · PE6201 A2 TEAM PROJECT · 2026</p>
+    <h1>Health Insurance Claim Decision Agent</h1>
+    <p class="meta">Role: Evaluation Harness &amp; Safety Testing (co-owned with one teammate) &nbsp;·&nbsp; Six-member team &nbsp;·&nbsp; Repository v3.0 public on GitHub</p>
+  </header>
+
+  <section>
+    <h2>01 · WHY EVALUATION IS THE PRODUCT HERE</h2>
+    <h3>Claim decisions are safety-sensitive — testing is part of safety design</h3>
+    <p>An AI claim-decision system must handle incomplete, adversarial, ambiguous, and escalation-triggering inputs without producing unsafe or unsupported decisions. The evaluation suite is not an afterthought — it is the mechanism that makes the system safe to operate.</p>
+    <ul>
+      <li><b>Adversarial inputs</b> must not produce unsupported claim decisions.</li>
+      <li><b>Ambiguous cases</b> need safe escalation, not confident guessing.</li>
+      <li><b>Behaviour changes</b> across versions must be comparable and reproducible.</li>
+      <li><b>Unsafe behaviour</b> should surface in failure analysis, not production.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>02 · EVALUATION PIPELINE</h2>
+    <h3>A repeatable pipeline: scripted case → guardrail gate → expected-outcome comparison</h3>
+    <table>
+      <tr><th>STAGE</th><th>WHAT HAPPENS</th></tr>
+      <tr><td>1 · Scripted Case</td><td>A fixed claim scenario (with known expected outcome) drives the agent.</td></tr>
+      <tr><td>2 · Agent Decision</td><td>The agent processes the case end-to-end and produces a decision.</td></tr>
+      <tr><td>3 · Guardrail Check</td><td>Safety guardrails gate the behaviour before it is accepted.</td></tr>
+      <tr><td>4 · Outcome Comparison</td><td>Result is compared against the expected outcome and recorded.</td></tr>
+      <tr><td>5 · Branch</td><td>Unsafe or uncertain → failure analysis or safe escalation.</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>03 · SAFETY CASE DESIGN (MY CONTRIBUTION)</h2>
+    <p>Six hostile-input and escalation cases were designed within the shared 40-case suite:</p>
+    <div class="card">
+      <table>
+        <tr><th>CASE</th><th>TYPE</th></tr>
+        <tr><td>CLM-8941</td><td>Hostile input</td></tr>
+        <tr><td>CLM-8952</td><td>Hostile input</td></tr>
+        <tr><td>CLM-9023</td><td>Escalation trigger</td></tr>
+        <tr><td>CLM-9024</td><td>Escalation trigger</td></tr>
+        <tr><td>CLM-9025</td><td>Escalation trigger</td></tr>
+        <tr><td>CLM-9026</td><td>Escalation trigger</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color:#5d6875;">The core agent loop, insurance tools, guardrails, cost model, and decision ledger were shared team work — my co-owned scope was the evaluation harness and scripted evaluation (D4 and D5(a)), plus hostile-input / escalation safety case design.</p>
+  </section>
+
+  <section>
+    <h2>04 · REPRODUCIBILITY &amp; VERSION COMPARISON</h2>
+    <ul>
+      <li><b>Session-based history</b> — every run is recorded with its configuration, so results are comparable across versions.</li>
+      <li><b>Transactional result writing</b> — results are written atomically; partial runs can't corrupt the record.</li>
+      <li><b>Reproducible failure testing</b> — any failure case can be re-run deterministically to confirm a fix.</li>
+      <li><b>Live-model evaluation</b> — scripted cases can also run against the live LLM to catch drift between deterministic and live behaviour.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>05 · OUTCOMES</h2>
+    <div class="card">
+      <p><b>40-case</b> shared evaluation suite &nbsp;·&nbsp; <b>6</b> safety cases designed by me &nbsp;·&nbsp; <b>v3.0</b> repository release, public on GitHub with a recorded demo.</p>
+      <p>The project established a reproducible evaluation workflow with scripted cases, live-model evaluation, safety guardrails, and documented per-member contributions.</p>
+    </div>
+  </section>
+</div>
+</body>
+</html>
