@@ -1183,6 +1183,20 @@ footer { display:flex; justify-content:space-between; align-items:center; paddin
 .proto-questions { margin: 0; padding-left: 18px; }
 .proto-questions li { margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--charcoal); }
 
+/* ===== Competitive landscape (case detail) ===== */
+.comp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 22px; }
+.comp-card { padding: 18px 20px; background: var(--v5-surface); border: 1px solid var(--v5-border); border-radius: 8px; display: flex; flex-direction: column; gap: 10px; }
+.comp-card-name { font-family: var(--font-technical); font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--v5-text); padding-bottom: 10px; border-bottom: 1px solid var(--v5-border); }
+.comp-card-approach { margin: 0; color: var(--v5-muted); font-size: 12px; line-height: 1.6; }
+.comp-card-diff { margin: auto 0 0; color: var(--v5-text); font-size: 12px; line-height: 1.6; }
+.comp-card-diff b { color: var(--v5-brand-text); font-weight: 700; }
+@media (max-width: 900px) { .comp-grid { grid-template-columns: 1fr; } }
+
+/* ===== Postmortem (honest scale-down note, inside Iteration) ===== */
+.postmortem { margin-top: 26px; padding: 22px 24px; border: 1px dashed var(--v5-border-strong); border-radius: 10px; }
+.postmortem-label { margin: 0 0 12px; font-family: var(--font-technical); font-size: 10px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--v5-brand-text); }
+.postmortem p { margin: 0; max-width: 720px; color: var(--v5-text); opacity: .82; font-size: 14px; line-height: 1.7; }
+
 /* ===== Dark-theme interaction polish — iOS-restrained motion ===== */
 .highlight-card, .experiment-card, .insight-card, .now-building-item, .upcoming-card, .case-block-panel, .wf-node { transition: transform .2s ease, border-color .25s ease, background .25s ease; }
 .highlight-card:hover, .experiment-card:hover, .insight-card:hover, .now-building-item:hover, .upcoming-card:hover, .case-block-panel:hover, .wf-node:hover { transform: translateY(-2px); }

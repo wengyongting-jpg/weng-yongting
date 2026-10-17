@@ -40,6 +40,7 @@ function CaseStudy() {
   const sections = [];
   if (project.context) sections.push({ key: "context", label: "Context" });
   if (project.problem) sections.push({ key: "problem", label: "Problem" });
+  if (project.competition) sections.push({ key: "landscape", label: "Landscape" });
   if (project.decisions) sections.push({ key: "decisions", label: "Decisions" });
   if (project.workflow || project.prototype)
     sections.push({ key: "experience", label: "Experience" });
@@ -180,6 +181,24 @@ function CaseStudy() {
               </>
             )}
 
+            {sec.key === "landscape" && (
+              <>
+                <h2 className="case-detail-section-title">{project.competition.heading}</h2>
+                {project.competition.body && (
+                  <p className="case-detail-section-text">{project.competition.body}</p>
+                )}
+                <div className="comp-grid">
+                  {project.competition.rows.map((c, i) => (
+                    <div key={i} className="comp-card">
+                      <span className="comp-card-name">{c.name}</span>
+                      <p className="comp-card-approach">{c.approach}</p>
+                      <p className="comp-card-diff"><b>Different —</b> {c.difference}</p>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+
             {sec.key === "decisions" && (
               <>
                 <h2 className="case-detail-section-title">
@@ -277,6 +296,12 @@ function CaseStudy() {
                   <p className="case-detail-section-text">{project.iteration.body}</p>
                 )}
                 <Roadmap iteration={project.iteration} />
+                {project.iteration.postmortem && (
+                  <div className="postmortem">
+                    <p className="postmortem-label">{project.iteration.postmortem.heading}</p>
+                    <p>{project.iteration.postmortem.body}</p>
+                  </div>
+                )}
               </>
             )}
 

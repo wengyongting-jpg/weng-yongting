@@ -407,14 +407,117 @@ export const caseDetailProjects = [
       ],
       tags: ["LLM API", "Prompt Engineering", "Next.js", "TypeScript", "PostgreSQL", "Drizzle ORM"],
     },
-    results: {
-      heading: "Hybrid AI architecture with explicit safety boundaries",
+    competition: {
+      heading: "Existing options leave the personal-context gap unaddressed",
+      rows: [
+        {
+          name: "Clue / Flo",
+          approach: "Cycle tracking with a template content library — users in the same phase see the same articles.",
+          difference: "Every Period response is grounded in the user's own logged cycle, symptoms and mood via context injection.",
+        },
+        {
+          name: "Generic LLM chatbot",
+          approach: "Fluent conversation, but no data model of the user and no enforced safety boundary.",
+          difference: "Hybrid architecture: deterministic cycle math plus rule-enforced boundaries the model cannot cross.",
+        },
+        {
+          name: "Content communities",
+          approach: "Crowd-sourced advice in a feed; quality varies and the data model is built for engagement, not privacy.",
+          difference: "Structured personal records stay in a private schema — no feed, no ad targeting.",
+        },
+      ],
+    },
+    decisions: [
+      {
+        question: "Pure LLM conversation, or a hybrid architecture?",
+        options: "A · LLM end-to-end — fastest to build, but cycle math by a probabilistic model is not auditable. B · Deterministic engine for calculations, LLM only for communication.",
+        chosen: "B — accuracy-critical logic must be reproducible; the LLM only adds personalisation and tone.",
+        evidence: "Cycle phase math has exactly one right answer; a model that 'usually gets it right' is not acceptable in health.",
+        validation: "Scripted safety test cases; target zero out-of-boundary responses.",
+      },
+      {
+        question: "Free-text health journaling, or structured data models?",
+        options: "A · Free-form journal entries — flexible but not queryable. B · Structured schema for cycle, symptoms, mood, medication.",
+        chosen: "B — personalisation requires fields the system can compute over, and sensitive data needs an explicit schema.",
+        evidence: "Context injection can only anchor to what is actually recorded and retrievable.",
+        validation: "Check in testing whether insights reference the user's recorded fields, not generic knowledge.",
+      },
+      {
+        question: "Model-decided caution, or explicit rule boundaries?",
+        options: "A · Prompt instructions asking the model to be careful. B · Rule-enforced boundaries: no diagnosis, no medication advice.",
+        chosen: "B — boundaries enforced by rules, not by model discretion.",
+        evidence: "A confident wrong answer in a health-adjacent product is a safety risk, not a UX bug.",
+        validation: "Safety suite runs before any prompt change ships.",
+      },
+    ],
+    workflow: {
+      heading: "From a daily log to a personalised, bounded insight",
+      nodes: [
+        {
+          label: "Daily Log",
+          tagline: "Structured input",
+          input: "Cycle, symptoms, mood, medication recorded with structured fields.",
+          output: "Queryable personal health record.",
+          rules: "Structured schema only — no free-text health data.",
+          exception: "Skipped days are kept explicit; missing data is never inferred.",
+        },
+        {
+          label: "Deterministic Engine",
+          tagline: "Cycle math",
+          input: "Recorded cycle history.",
+          output: "Current phase, day of cycle, rule-based scores.",
+          rules: "Reproducible calculations — same input, same result, every time.",
+          exception: "Irregular cycle history → output marked low-confidence, never smoothed over.",
+        },
+        {
+          label: "Context Injection",
+          tagline: "Anchor to the person",
+          input: "Computed phase + recent logs + user question.",
+          output: "Grounded prompt context for the LLM.",
+          rules: "Only recorded data enters the context — no generic assumptions.",
+          exception: "Thin record → the response says what is missing instead of guessing.",
+        },
+        {
+          label: "LLM Insight Layer",
+          tagline: "Personalised wording",
+          input: "Grounded context.",
+          output: "Personalised insight in conversational language.",
+          rules: "LLM handles personalisation and tone, never the calculation.",
+          exception: "Response touching diagnosis / medication → blocked before display.",
+        },
+        {
+          label: "Safety Boundary Check",
+          tagline: "Rule-enforced",
+          input: "Draft LLM response.",
+          output: "Released insight, or a safe redirect.",
+          rules: "Explicit rules: no diagnosis, no medication advice.",
+          exception: "Boundary hit → respond with scope statement and suggest professional care.",
+        },
+      ],
+    },
+    evaluation: {
+      heading: "Live demo shipped — measurement is the next milestone",
       body:
-        "The key design decision: the architecture — not the prompt — is what makes an LLM safe to ship in health-adjacent products. Where to use deterministic logic versus where to use the LLM is the deciding question.",
+        "The key design decision: the architecture — not the prompt — is what makes an LLM safe to ship in health-adjacent products. The demo is live, but no analytics are instrumented yet, so the figures below are explicit targets with a collection plan — not observed results.",
+      disclaimer: "Live demo at period-ai.vercel.app — no usage analytics instrumented yet. Metrics below are design targets, not measured results.",
       metrics: [
-        { value: "Hybrid", label: "Architecture", note: "deterministic + LLM" },
-        { value: "Explicit", label: "Safety boundaries", note: "rule-based, not discretion" },
-        { value: "Live", label: "Demo", note: "period-ai.vercel.app" },
+        { value: "Daily logging rate", label: "North Star (target)", note: "collected via funnel instrumentation — next step" },
+        { value: "0", label: "Out-of-boundary responses (target)", note: "in the scripted safety test suite" },
+        { value: "5–8", label: "User interviews (planned)", note: "pain-point validation before further build" },
+      ],
+    },
+    iteration: {
+      heading: "Validate the pain before building further",
+      now: [
+        "Run 5–8 user interviews to validate the pain-point assumptions behind the feature set.",
+        "Instrument the logging funnel (open → record → insight viewed) on the live demo.",
+      ],
+      next: [
+        "Read the funnel drop-off to decide what to fix first.",
+        "Expand the scripted safety suite; add regression checks before any prompt change.",
+      ],
+      later: [
+        "Trend view across cycles (P1) once consistent logging is evidenced.",
       ],
     },
     // No PPT/PDF deck for Period — omit materials block
@@ -477,14 +580,127 @@ export const caseDetailProjects = [
       ],
       tags: ["UiPath", "Document Understanding", "Confidence routing", "Human-in-the-loop"],
     },
-    results: {
-      heading: "A workflow design with explicit automation boundary",
+    competition: {
+      heading: "Existing approaches split into slow-but-safe or fast-but-brittle",
+      rows: [
+        {
+          name: "Manual processing",
+          approach: "Staff read each receipt and key in fields — consistent judgement, but slow and repetitive.",
+          difference: "Extraction and validation are automated; humans only see cases where judgement is actually needed.",
+        },
+        {
+          name: "Traditional RPA",
+          approach: "Rule-based bots process every document the same way; exceptions break the run or pass through silently.",
+          difference: "A confidence threshold makes uncertainty explicit and routes borderline cases to review instead of failing.",
+        },
+        {
+          name: "Helpdesk macros",
+          approach: "Template replies speed up responses, but humans still extract and check document data by hand.",
+          difference: "Document Understanding structures the data first — automation works on fields, not raw text.",
+        },
+      ],
+    },
+    decisions: [
+      {
+        question: "Automate everything, or stop at a confidence boundary?",
+        options: "A · Full automation — fastest, but exceptions get wrong outcomes silently. B · A confidence threshold routes uncertain cases to humans.",
+        chosen: "B — the automation boundary is the product. Where it sits matters more than how much is automated.",
+        evidence: "Rule violations and low-confidence extractions genuinely need judgement; a wrong refund is a direct loss.",
+        validation: "Demo walkthrough routes scripted low-confidence cases to the review queue.",
+      },
+      {
+        question: "Extract every field on the receipt, or a minimum viable set?",
+        options: "A · Capture everything — complete but more failure surface. B · Six fields that drive the refund decision.",
+        chosen: "B — Receipt ID, Merchant, Date, Total Amount, Refund Reason, Confidence. Nothing more until reviewers ask for it.",
+        evidence: "These are the fields the validation rules actually consume; extra fields add extraction errors without decisions.",
+        validation: "If reviewers repeatedly request a missing field, add it — driven by review behaviour, not speculation.",
+      },
+      {
+        question: "Post-hoc sampling review, or in-line human-in-the-loop?",
+        options: "A · Automate all cases, sample-check afterwards. B · Uncertain cases route to humans in-line, before processing.",
+        chosen: "B — a wrong refund found after payout is already a loss; review must happen before the decision executes.",
+        evidence: "Refund decisions are irreversible once money moves.",
+        validation: "Compare reviewer correction rates by route — auto vs. escalated.",
+      },
+    ],
+    workflow: {
+      heading: "From raw document to routed decision",
+      nodes: [
+        {
+          label: "Document Intake",
+          tagline: "Receipts & forms",
+          input: "Refund documents — PDFs, scans, photos.",
+          output: "Document queued for extraction.",
+          rules: "Standard formats accepted; file integrity checked first.",
+          exception: "Unreadable file → flagged for manual entry, never guessed.",
+        },
+        {
+          label: "Data Extraction",
+          tagline: "Document Understanding",
+          input: "Queued document.",
+          output: "Six structured fields + confidence score.",
+          rules: "UiPath Document Understanding extracts the defined field set.",
+          exception: "Missing required field → completeness flag, forced review regardless of score.",
+        },
+        {
+          label: "Rule Validation",
+          tagline: "Business rules",
+          input: "Structured fields.",
+          output: "Pass / violation verdict per rule.",
+          rules: "Each refund policy rule evaluated against the extracted fields.",
+          exception: "Any rule violation → human review, no matter how high the confidence.",
+        },
+        {
+          label: "Confidence Check",
+          tagline: "The automation boundary",
+          input: "Confidence score + validation verdict.",
+          output: "Route decision: auto-process or human review.",
+          rules: "Strict comparison — at-or-below the threshold always routes to review.",
+          exception: "Borderline cases default to human, never to automation.",
+        },
+        {
+          label: "Auto Process / Human Review",
+          tagline: "Two exits",
+          input: "Route decision.",
+          output: "Refund processed automatically, or review queue with fields pre-filled.",
+          rules: "Reviewers see the extracted fields and the reason the case was escalated.",
+          exception: "Reviewer corrections logged as candidates for rule refinement.",
+        },
+      ],
+    },
+    evaluation: {
+      heading: "Design-stage validation — demo walkthrough, not production metrics",
       body:
-        "This is a workflow design, not a claimed production deployment. No quantified accuracy improvement, processing-time reduction, or business outcomes are stated, as none have been verified.",
+        "This is a workflow design with a recorded demo walkthrough, not a claimed production deployment. No quantified accuracy improvement, processing-time reduction, or business outcomes are stated, as none have been verified.",
+      disclaimer: "Workflow design + recorded UiPath demo. Scripted demo scenarios only — no production deployment or measured business outcomes.",
       metrics: [
-        { value: "Hybrid", label: "Routing", note: "auto + human review" },
-        { value: "6", label: "Structured fields", note: "incl. confidence" },
-        { value: "1", label: "Confidence threshold", note: "design decision" },
+        { value: "6", label: "Structured fields", note: "incl. confidence score" },
+        { value: "1", label: "Confidence threshold", note: "the automation boundary" },
+        { value: "2", label: "Routes", note: "auto-process · human review" },
+      ],
+      failures: [
+        {
+          title: "Borderline cases defaulted to automation in early drafts",
+          issue: "A case sitting exactly at the confidence threshold would have been auto-processed — the riskiest possible placement.",
+          lesson: "Comparison made strict: at-or-below the boundary always routes to human review.",
+        },
+        {
+          title: "A missing merchant field passed validation silently",
+          issue: "A receipt with an unreadable merchant name still produced a complete-looking record.",
+          lesson: "Required-field completeness is checked before confidence scoring — missing data forces review.",
+        },
+      ],
+    },
+    iteration: {
+      heading: "From demo workflow to defensible automation",
+      now: [
+        "Expand the scripted demo set across more receipt formats and edge cases.",
+      ],
+      next: [
+        "Measure per-field extraction accuracy on the demo set — tune the threshold with data instead of intuition.",
+      ],
+      later: [
+        "Feed reviewer corrections back into extraction prompts and validation rules.",
       ],
     },
     // No PPT/PDF deck — omit materials block
@@ -563,6 +779,26 @@ export const caseDetailProjects = [
         { value: "0–100", label: "Opportunity Value Score", note: "signal-driven" },
         { value: "2", label: "Deployed surfaces", note: "admin dashboard · customer chat" },
         { value: "4", label: "Public links", note: "repo · video · admin · customer" },
+      ],
+    },
+    competition: {
+      heading: "Existing tools answer messages or analyse calls — neither ranks the inbox",
+      rows: [
+        {
+          name: "CRM reply bots",
+          approach: "Answer FAQs from templates; every message is treated independently and every customer equally.",
+          difference: "SalesPilot keeps a stateful Opportunity Profile per conversation and ranks the inbox by a 0–100 score.",
+        },
+        {
+          name: "Conversation intelligence (e.g. Gong)",
+          approach: "Post-call analytics on recorded sales calls — insight arrives after the conversation has ended.",
+          difference: "Scoring runs live per WhatsApp message, driving the next best action while the deal is still warm.",
+        },
+        {
+          name: "Manual inbox triage",
+          approach: "Reps scan threads and rely on memory; intent and hesitation signals stay buried in long chats.",
+          difference: "Signal extraction surfaces intent, hesitation and competitor mentions with evidence attached.",
+        },
       ],
     },
     decisionsHeading: "Product decisions behind the agent design",
@@ -744,6 +980,26 @@ export const caseDetailProjects = [
         { value: "Refusal", label: "Insufficient evidence", note: "no fabricated confidence" },
       ],
     },
+    competition: {
+      heading: "Existing options either return documents, or answer without a safety gate",
+      rows: [
+        {
+          name: "Keyword search (SharePoint)",
+          approach: "Returns documents, not answers — employees still read and interpret policy text themselves.",
+          difference: "Answers are composed from retrieved passages, with every claim cited to its source section.",
+        },
+        {
+          name: "Enterprise AI search (e.g. Glean)",
+          approach: "Semantic answers at company scale, but the answering behaviour is opaque — no explicit evidence gate or refusal path.",
+          difference: "Evidence sufficiency is checked before generation; insufficient evidence triggers an explicit refusal, not a best guess.",
+        },
+        {
+          name: "Ask HR / Slack channels",
+          approach: "Accurate but slow, and the same recurring questions consume expert time.",
+          difference: "Routine questions self-serve; refusals route to the right human contact instead of dead-ending.",
+        },
+      ],
+    },
     prototype: {
       inputLabel: "EMPLOYEE QUESTION",
       disclaimer: "Interactive design demo — simulated answers on sample policy snippets, showing the three output states (cited answer / clarification / refusal). Not a live system.",
@@ -894,6 +1150,11 @@ export const caseDetailProjects = [
         "Multi-document synthesis for questions spanning several policies.",
         "Coverage-gap report: topics employees ask about that no policy document answers.",
       ],
+      postmortem: {
+        heading: "An honest scale-down note",
+        body:
+          "The grounding corpus here is self-written policy text, not a real company's document set — a deliberate scoping decision that kept the prototype buildable, but it caps what the project can claim. Retrieval quality depends entirely on corpus coverage, and in a real enterprise the corpus is a moving target: policies update, ownership is distributed across departments, and a confidently cited wrong answer carries compliance consequences. Maintaining that responsibly requires a content-ops function and a legal review loop that an individual project cannot sustain. The project therefore stops at a validated prototype by design: it demonstrates the retrieval-first architecture and its evaluation method, while the honest next step — pressure-testing on real, anonymised policy documents — stays on the roadmap rather than being claimed as done.",
+      },
     },
     // 无 deck；有 PRD 文档 PDF 链接
   },
@@ -970,6 +1231,107 @@ export const caseDetailProjects = [
         { value: "v3.0", label: "Repository release", note: "public on GitHub" },
       ],
     },
+    competition: {
+      heading: "Existing approaches trade speed for safety — the design goal is both",
+      rows: [
+        {
+          name: "Manual claim review",
+          approach: "Human adjusters bring judgement but are slow, and quality varies with experience.",
+          difference: "The agent handles structured first-pass decisions; ambiguous or adversarial cases escalate by design.",
+        },
+        {
+          name: "Pure rules engine",
+          approach: "Deterministic and auditable, but brittle on unstructured claim narratives.",
+          difference: "LLM reasoning handles narrative input while guardrails keep decisions inside policy rules.",
+        },
+        {
+          name: "LLM agent without guardrails",
+          approach: "Flexible, but can produce unsupported or unsafe decisions on hostile inputs.",
+          difference: "A 40-case scripted suite with hostile-input scenarios makes unsafe behaviour visible before it ships.",
+        },
+      ],
+    },
+    decisionsHeading: "Decisions inside the evaluation work I co-owned",
+    decisions: [
+      {
+        question: "Live-model testing only, or scripted + live dual-layer evaluation?",
+        options: "A · Live-model runs only — realistic, but results drift and cannot be compared across versions. B · A scripted case layer plus live-model evaluation.",
+        chosen: "B — scripted cases make behaviour reproducible; live runs show how the model actually behaves.",
+        evidence: "Version-to-version comparison requires fixed cases with expected outcomes.",
+        validation: "40-case shared suite, each case carrying an expected outcome.",
+      },
+      {
+        question: "Happy-path test cases, or hostile inputs by design?",
+        options: "A · Test the flows users are supposed to follow. B · Include adversarial, ambiguous and escalation-triggering inputs as first-class cases.",
+        chosen: "B — for claim decisions, unsafe behaviour must surface in testing, not production.",
+        evidence: "Adversarial inputs must not produce unsupported claim decisions; ambiguous cases must escalate safely.",
+        validation: "Six hostile-input and escalation cases (CLM-8941 … CLM-9026) designed within the shared suite.",
+      },
+      {
+        question: "Narrative test notes, or transactional result records?",
+        options: "A · Written notes after each test round. B · Transactional result writing with session-based history.",
+        chosen: "B — reproducible records are what make behaviour comparable across releases.",
+        evidence: "The v3.0 repository supports session-based history and comparison.",
+        validation: "Any case whose outcome changed between versions is directly visible.",
+      },
+    ],
+    workflow: {
+      heading: "A repeatable evaluation pipeline",
+      nodes: [
+        {
+          label: "Scripted Case",
+          tagline: "From the 40-case suite",
+          input: "Claim scenario with a defined expected outcome.",
+          output: "Case driving the agent run.",
+          rules: "Hostile-input cases additionally carry a safety expectation.",
+          exception: "Case without expected outcome → not comparable, excluded from scoring.",
+        },
+        {
+          label: "Agent Decision",
+          tagline: "Team-built core loop",
+          input: "Claim scenario.",
+          output: "Proposed claim decision with reasoning.",
+          rules: "Core agent loop and insurance tools — shared team work.",
+          exception: "Incomplete claim data → agent should request or escalate, not assume.",
+        },
+        {
+          label: "Guardrail Check",
+          tagline: "Safety gate",
+          input: "Proposed decision.",
+          output: "Pass / blocked verdict.",
+          rules: "Guardrails constrain decisions to policy rules.",
+          exception: "Unsafe or unsupported decision → blocked and logged for analysis.",
+        },
+        {
+          label: "Outcome Comparison",
+          tagline: "Expected vs actual",
+          input: "Decision + expected outcome.",
+          output: "Comparison record written transactionally.",
+          rules: "Results comparable across versions and runs.",
+          exception: "Mismatch → routed to failure analysis.",
+        },
+        {
+          label: "Failure Analysis / Escalation",
+          tagline: "Failures are data",
+          input: "Mismatch or blocked case.",
+          output: "Documented failure with reproduction path.",
+          rules: "Ambiguous cases must escalate safely, never guess.",
+          exception: "Repeated failure pattern → guardrail or prompt change proposed.",
+        },
+      ],
+    },
+    iteration: {
+      heading: "Where the evaluation work goes next",
+      now: [
+        "Broaden the hostile-input suite beyond the initial six scenarios.",
+      ],
+      next: [
+        "Track behaviour drift across versions — flag any case whose outcome changed between releases.",
+      ],
+      later: [
+        "Package the evaluation harness as a reusable template for other agent projects.",
+      ],
+    },
     // 无 deck/材料区块 — 有 GitHub + demo video 外链
   },
 
@@ -1034,6 +1396,26 @@ export const caseDetailProjects = [
         { value: "62.5→90%", label: "A/B/C improvement", note: "baseline → prompt+retrieval" },
         { value: "20", label: "Test cases", note: "60 outputs · 4 dimensions" },
         { value: "19/20", label: "Risk grounding (C)", note: "up from 14/20 in B" },
+      ],
+    },
+    competition: {
+      heading: "Existing options optimise for listings, not for renter decisions",
+      rows: [
+        {
+          name: "PropertyGuru / 99.co",
+          approach: "Listing platforms optimise for search volume; risk interpretation is left entirely to the renter.",
+          difference: "The copilot reads one listing and returns evidence-grounded risk findings and landlord questions — not just filters.",
+        },
+        {
+          name: "Generic chatbot",
+          approach: "ChatGPT can discuss a listing, but fills gaps with plausible guesses and knows no local rental rules.",
+          difference: "Facts keep 'Not mentioned' uncertainty explicit; every risk cites listing evidence plus a rule from the 18-entry KB.",
+        },
+        {
+          name: "Seniors / forum advice",
+          approach: "Helpful heuristics, but anecdotal, unstructured, and hard to verify against a specific listing.",
+          difference: "Controlled A/B/C evaluation across 20 cases measured what the retrieval layer actually improves.",
+        },
       ],
     },
     prototype: {
