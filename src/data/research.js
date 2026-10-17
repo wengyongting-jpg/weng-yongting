@@ -12,7 +12,7 @@ export const research = [
       "The Impact of Human–Machine Interaction in AI Software on Organizational Growth: The Mediating Role of Managerial Efficiency",
     type: "Research",
     excerpt:
-      "Examining how human–machine interaction in AI software drives organizational growth, with managerial efficiency as the mediating mechanism.",
+      "Early research into how human–machine interaction in AI software drives organizational growth, with managerial efficiency as the mediating mechanism.",
     achievements: [
       "Co-authored the paper published in the IMMS 2025 proceedings (p. 138), contributing to empirical modelling, data analysis, and theoretical framework development.",
       "Investigated the mediation pathway through which AI software's human–machine interaction converts managerial efficiency gains into measurable organizational growth.",
@@ -28,7 +28,7 @@ export const research = [
       "AI Investment and Market Competitiveness: The Roles of Human–Machine Interaction and Production Efficiency",
     type: "Research",
     excerpt:
-      "Examining how AI investment, production efficiency, and human–machine collaboration affect firms' market competitiveness in manufacturing.",
+      "Early research into how AI investment, production efficiency, and human–machine collaboration affect firms' market competitiveness in manufacturing.",
     achievements: [
       "Co-authored the paper published in the IMMS 2025 proceedings (p. 308), contributing to empirical modelling, data analysis, and theoretical framework development.",
       "Presented research findings at IMMS 2025, examining how AI investment, production efficiency, and human–machine collaboration affect firms' market competitiveness in manufacturing.",

@@ -34,7 +34,7 @@ export const caseDetailProjects = [
     shortName: "IMMS Papers",
     eyebrow: ["IMMS 2025", "PUBLICATIONS", "OCT 2025"],
     subtitle:
-      "Two co-authored empirical papers in the IMMS 2025 proceedings (pp. 138 & 308) examining when AI software and AI investment actually translate into organizational growth and market competitiveness.",
+      "My earliest research on AI — two co-authored empirical papers in the IMMS 2025 proceedings (pp. 138 & 308) on when AI software and AI investment actually translate into organizational growth and market competitiveness. This is where my interest in AI began.",
     badges: [
       { type: "role", text: "► Co-author · Empirical Modelling & Data Analysis" },
       { type: "role", text: "► Presenter · IMMS 2025" },
@@ -58,16 +58,16 @@ export const caseDetailProjects = [
       },
     ],
     context: {
-      heading: "One research thread: when does AI actually convert into firm performance?",
+      heading: "Early AI research — where my interest in AI products started",
       body:
-        "The two papers attack the same question from complementary angles. Paper 1 asks whether human–machine interaction in AI software drives organizational growth, and models managerial efficiency as the mediating mechanism. Paper 2 asks whether AI capital expenditure translates into market competitiveness, decomposing the effect into human–machine interaction and production efficiency channels. Together they cover the management side (how AI changes managerial work) and the operations side (how AI changes production economics) of the same transformation.",
+        "Before building AI products, I studied them. These two papers were my first deep engagement with AI — asking a question that still drives my product work today: when does AI actually convert into real outcomes? Paper 1 asks whether human–machine interaction in AI software drives organizational growth, modelling managerial efficiency as the mediating mechanism. Paper 2 asks whether AI capital expenditure translates into market competitiveness, decomposing the effect into human–machine interaction and production efficiency channels. This research shaped how I think about AI products: not 'can we add AI', but 'what mechanism makes AI valuable'.",
       role: "Co-author · empirical modelling, data analysis, and theoretical framework construction on both papers; presented the research at IMMS 2025",
       stack: "Python · Stata · Panel regression · Mediation & moderation models · Theoretical framework design",
     },
     problem: {
-      heading: "Prior work treated AI's performance effect as a black box",
+      heading: "The question that started it all: is AI's value a black box?",
       body:
-        "Most studies stop at 'AI investment correlates with better outcomes' — without modelling the mechanism that carries the effect. Two gaps remained: on the management side, no mediation pathway linking AI software use to organizational growth through managerial efficiency; on the competitiveness side, no decomposition showing whether human–machine interaction or production efficiency carries the effect.",
+        "My entry point into AI was a frustration with how the topic was discussed — 'AI investment correlates with better outcomes', without anyone modelling the mechanism that carries the effect. Two gaps became my research questions: on the management side, no mediation pathway linking AI software use to organizational growth through managerial efficiency; on the competitiveness side, no decomposition showing whether human–machine interaction or production efficiency carries the effect.",
       bullets: [
         "AI investment does not mechanically translate into competitiveness — the literature is mixed.",
         "Managerial efficiency as a mediator between AI software and organizational growth was rarely quantified.",
@@ -88,9 +88,9 @@ export const caseDetailProjects = [
       tags: ["Panel regression", "Mediation analysis", "Moderation analysis", "Manufacturing data", "IMMS 2025"],
     },
     results: {
-      heading: "Two proceedings papers, two quantified mechanisms, one conference presentation",
+      heading: "Two proceedings papers — and a lasting research-driven view of AI",
       body:
-        "Both papers were accepted into the IMMS 2025 proceedings — Paper 1 on organizational growth (p. 138) and Paper 2 on market competitiveness (p. 308). The research was presented at the conference.",
+        "Both papers were accepted into the IMMS 2025 proceedings — Paper 1 on organizational growth (p. 138) and Paper 2 on market competitiveness (p. 308) — and the research was presented at the conference. More importantly, this early work set the direction for everything after: the mechanism-thinking behind these models is the same lens I now apply when designing AI products — always asking which mechanism carries the value, and how to measure it.",
       metrics: [
         { value: "2", label: "Proceedings papers", note: "IMMS 2025 · pp. 138 & 308" },
         { value: "2", label: "Mechanism models", note: "Mediation · Moderation" },
@@ -225,13 +225,13 @@ export const caseDetailProjects = [
       metrics: [
         { value: " Finals", label: "National round", note: "[confirm] level: 1/2/3?" },
         { value: "2", label: "Priority pilot markets", note: "phased D2C entry" },
-        { value: "36", label: "Slide deck", note: "national finals round" },
+        { value: "35", label: "Slide deck", note: "national finals round" },
       ],
     },
     materials: {
-      heading: "Presentation slides (36)",
+      heading: "Presentation slides (35)",
       body: "The national finals presentation shown as an image gallery.",
-      slides: makeSlides("rebecca", 36),
+      slides: makeSlides("rebecca", 35),
     },
   },
 
@@ -348,13 +348,13 @@ export const caseDetailProjects = [
       metrics: [
         { value: "6", label: "Negotiation cycles", note: "enterprise partners" },
         { value: "11", label: "Patents in portfolio", note: "[confirm] utility/invention split" },
-        { value: "20", label: "Slide deck", note: "small-track entry" },
+        { value: "19", label: "Slide deck", note: "small-track entry" },
       ],
     },
     materials: {
-      heading: "Presentation slides (20)",
+      heading: "Presentation slides (19)",
       body: "The small-track presentation shown as an image gallery.",
-      slides: makeSlides("angu", 20),
+      slides: makeSlides("angu", 19),
     },
   },
 
