@@ -5,6 +5,7 @@ import { profile } from "../data/index.js";
 const NAV = [
   { to: "/about", label: "ABOUT" },
   { to: "/work", label: "PROJECTS" },
+  { to: "/campus", label: "CAMPUS EXPERIENCE" },
   { to: "/resume", label: "WORK EXPERIENCE" },
 ];
 

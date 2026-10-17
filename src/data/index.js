@@ -1,6 +1,6 @@
 // Barrel export for the verified-content data layer.
 export { profile, portfolioOS } from "./profile.js";
-export { projects, getProject } from "./projects.js";
+export { projects, getProject, getProjectsBySection } from "./projects.js";
 export { experiences } from "./experiences.js";
 export { research } from "./research.js";
 export { competitions } from "./competitions.js";

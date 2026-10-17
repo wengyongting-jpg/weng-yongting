@@ -1,23 +1,31 @@
 import { useParams, Link } from "react-router-dom";
-import { caseDetailProjects, getCaseDetailProject } from "../data/caseDetail.js";
+import { caseDetailProjects, getCaseDetailProject, isCampusSlug } from "../data/caseDetail.js";
 import SlideDeck from "../components/SlideDeck.jsx";
 import NotFound from "./NotFound.jsx";
 
-// V5 项目详情页 — 7 区块结构：
-//   面包屑 → Hero 卡片 → 01 CONTEXT → 02 PROBLEM → 03 APPROACH
-//   → 04 RESULTS → 05 MATERIALS (Behance 风格瀑布流) → 底部 prev/next 导航
+// 项目详情页 — 7 区块结构：
+//   面包屑 → Hero 卡片（含论文列表块）→ 01 CONTEXT → 02 PROBLEM → 03 APPROACH
+//   → 04 RESULTS → 05 MATERIALS (幻灯片图片廊) → 底部 prev/next 导航
 //
-// 数据来源：src/data/caseDetail.js
-// 合并自远程版本的功能：event 行、YouTube 演示视频嵌入、已确认公开外链按钮。
+// 分区感知：校园经历条目（论文/竞赛）面包屑显示 CAMPUS EXPERIENCE、
+// 返回 /campus，prev/next 在分区内循环；个人项目同理走 /work。
 function CaseStudy() {
   const { slug } = useParams();
   const project = getCaseDetailProject(slug);
   if (!project) return <NotFound />;
 
-  const total = caseDetailProjects.length;
-  const idx = caseDetailProjects.findIndex((p) => p.slug === slug);
-  const prev = caseDetailProjects[(idx - 1 + total) % total];
-  const next = caseDetailProjects[(idx + 1) % total];
+  const isCampus = isCampusSlug(slug);
+  const sectionLabel = isCampus ? "CAMPUS EXPERIENCE" : "PROJECTS";
+  const backTo = isCampus ? "/campus" : "/work";
+  const backLabel = isCampus ? "← Back to Campus Experience" : "← Back to Projects";
+
+  const sectionItems = caseDetailProjects.filter(
+    (p) => isCampusSlug(p.slug) === isCampus
+  );
+  const total = sectionItems.length;
+  const idx = sectionItems.findIndex((p) => p.slug === slug);
+  const prev = sectionItems[(idx - 1 + total) % total];
+  const next = sectionItems[(idx + 1) % total];
 
   const pad = (n) => String(n).padStart(2, "0");
   const totalStr = pad(total);
@@ -28,13 +36,13 @@ function CaseStudy() {
       {/* Breadcrumb */}
       <div className="case-detail-breadcrumb">
         <p className="case-detail-crumb">
-          PROJECTS
+          {sectionLabel}
           <span className="case-detail-crumb-sep">·</span>
           <b>{pad(idx + 1)} / {totalStr}</b>
           <span className="case-detail-crumb-sep">·</span>
           {crumbName}
         </p>
-        <Link to="/work" className="case-detail-back">← Back to Projects</Link>
+        <Link to={backTo} className="case-detail-back">{backLabel}</Link>
       </div>
 
       {/* Hero card */}
@@ -59,6 +67,19 @@ function CaseStudy() {
             </span>
           ))}
         </div>
+
+        {/* 论文引用块 — 仅 IMMS 2025 Publications 条目使用 */}
+        {project.papers && project.papers.length > 0 && (
+          <div className="case-papers">
+            {project.papers.map((pp) => (
+              <div className="case-paper" key={pp.pages}>
+                <small>{pp.note}</small>
+                <strong>{pp.title}</strong>
+                <span>{pp.venue} · {pp.pages}</span>
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* 赛事/项目背景行（合并自远程版本） */}
         {project.event && <p className="case-event">{project.event}</p>}

@@ -1,69 +1,18 @@
 // 项目列表数据 — 仅列表层字段（slug, number, name, subtitle, year, domain, summary, tech）。
-// 详情页内容（V5 7 区块）在 src/data/caseDetail.js，由 CaseStudy.jsx 渲染。
+// 详情页内容（7 区块）在 src/data/caseDetail.js，由 CaseStudy.jsx 渲染。
 //
-// 顺序与编号与 caseDetail.js 保持一致，确保列表页和详情页面包屑显示同号。
-// 只放个人项目与论文；Fuyao / Huafu 是实习项目，已移到 Work Experience 页面。
-// tech 字段供 Work 列表页展示前 4 项技术标签。
+// section 分区：
+//   "projects" — 个人项目（AI 产品 / 自动化 / Agent），展示在 /work
+//   "campus"   — 校园经历（论文 + 商业竞赛），展示在 /campus
+// number 为各分区内的独立编号，与 caseDetail.js 的编号保持一致。
+// Fuyao / Huafu 是实习项目，在 Work Experience 页面，不放这里。
 
 export const projects = [
-  {
-    slug: "mm118-paper",
-    number: "01",
-    name: "AI Investment & Market Competitiveness",
-    subtitle: "MM118 · IMMS 2025 · Co-authored Paper",
-    year: "2025",
-    domain: "Paper · Research",
-    tech: ["Panel Regression", "Stata", "Python", "Empirical Research"],
-    summary:
-      "Co-authored paper examining how AI investment, production efficiency, and human–machine collaboration affect firms' market competitiveness in manufacturing — published in the IMMS 2025 proceedings.",
-  },
-  {
-    slug: "zhiyi",
-    number: "02",
-    name: "Zhiyi Digital",
-    subtitle: "Digital Marketing & Big-Data Cloud Platform",
-    year: "2024",
-    domain: "Competition · Challenge Cup",
-    tech: ["AI + SaaS", "Big-data Cloud", "Short-video Marketing", "RAG"],
-    summary:
-      "A bilingual RAG co-pilot built for a regional data-services provider — an AI+SaaS layer combining personalised marketing-content generation, big-data analytics, and short-video ad delivery. National Silver at the 2024 Challenge Cup.",
-  },
-  {
-    slug: "rebecca",
-    number: "03",
-    name: "Rebecca",
-    subtitle: "National Collegiate Business Elite Challenge",
-    year: "2024",
-    domain: "Competition · Business Elite",
-    tech: ["Go-to-market", "Brand Localisation", "Financial Modelling", "D2C"],
-    summary:
-      "Strategic advisory work for Rebecca (hair brand) — re-architecting the export go-to-market for a beauty accessories brand facing channel saturation. National finalist.",
-  },
-  {
-    slug: "commercial-launch",
-    number: "04",
-    name: "Commercial Launch",
-    subtitle: "Industry Research & Investment Framework",
-    year: "2024",
-    domain: "Case Study · Industry Research",
-    tech: ["Market Sizing", "Value Chain Analysis", "Investment Framework", "Policy Risk"],
-    summary:
-      "Research on the commercial space-launch industry — market sizing, value chain mapping, competitive dynamics, and a launch-provider investment-return framework.",
-  },
-  {
-    slug: "angu",
-    number: "05",
-    name: "Angyu Precision",
-    subtitle: "Challenge Cup · Small Track",
-    year: "2024",
-    domain: "Competition · Challenge Cup",
-    tech: ["Export GTM", "Brand Localisation", "Market Research", "Partnership Development"],
-    summary:
-      "Export-oriented go-to-market strategy and brand localisation for a precision-manufacturing SME serving overseas industrial customers.",
-  },
+  // ===== 个人项目（/work）=====
   {
     slug: "period",
-    number: "06",
+    section: "projects",
+    number: "01",
     name: "Period",
     subtitle: "AI-Assisted Personalized Health Application",
     year: "2026",
@@ -75,7 +24,8 @@ export const projects = [
   },
   {
     slug: "refund-processing-automation",
-    number: "07",
+    section: "projects",
+    number: "02",
     name: "Refund Processing Automation",
     subtitle: "Document-Driven Workflow with Human-in-the-Loop",
     year: "2025",
@@ -97,7 +47,8 @@ export const projects = [
   },
   {
     slug: "salespilot",
-    number: "08",
+    section: "projects",
+    number: "03",
     name: "SalesPilot",
     subtitle: "Agentic WhatsApp Sales Opportunity Assistant",
     year: "2026",
@@ -124,7 +75,8 @@ export const projects = [
   },
   {
     slug: "grounded-enterprise-policy-assistant",
-    number: "09",
+    section: "projects",
+    number: "04",
     name: "Grounded Enterprise Policy & Procedure Assistant",
     subtitle: "Evidence-Based Internal Knowledge Assistant",
     year: "2026",
@@ -149,7 +101,8 @@ export const projects = [
   },
   {
     slug: "health-insurance-claim-decision-agent",
-    number: "10",
+    section: "projects",
+    number: "05",
     name: "Health Insurance Claim Decision Agent",
     subtitle: "Evaluation Harness & Escalation Safety Testing",
     year: "2026",
@@ -181,7 +134,8 @@ export const projects = [
   },
   {
     slug: "singapore-rental-intelligence-copilot",
-    number: "11",
+    section: "projects",
+    number: "06",
     name: "Singapore Rental Intelligence Copilot",
     subtitle: "Evidence-Grounded Rental Decision Support for International Students",
     year: "2026",
@@ -202,9 +156,76 @@ export const projects = [
     summary:
       "A team-built generative AI assistant that helps international students in Singapore evaluate rental listings — extracting facts from unstructured posts, checking risks against rental rules, matching preferences, and generating landlord clarification questions.",
   },
+
+  // ===== 校园经历（/campus）：论文 + 商业竞赛 =====
+  {
+    slug: "mm118-paper",
+    section: "campus",
+    number: "01",
+    name: "IMMS 2025 Publications",
+    subtitle: "Two Co-authored Empirical Papers · pp. 138 & 308",
+    year: "2025",
+    domain: "Paper · Research",
+    tech: ["Panel Regression", "Stata", "Python", "Empirical Research"],
+    summary:
+      "Two co-authored papers in the IMMS 2025 proceedings examining how AI software, human–machine interaction, managerial efficiency, and production efficiency shape organisational growth and firms' market competitiveness — presented at the conference.",
+  },
+  {
+    slug: "zhiyi",
+    section: "campus",
+    number: "02",
+    name: "Zhiyi Digital",
+    subtitle: "Digital Marketing & Big-Data Cloud Platform",
+    year: "2024",
+    domain: "Competition · Challenge Cup",
+    tech: ["AI + SaaS", "Big-data Cloud", "Short-video Marketing", "RAG"],
+    summary:
+      "A bilingual RAG co-pilot built for a regional data-services provider — an AI+SaaS layer combining personalised marketing-content generation, big-data analytics, and short-video ad delivery. National Silver at the 2024 Challenge Cup.",
+  },
+  {
+    slug: "rebecca",
+    section: "campus",
+    number: "03",
+    name: "Rebecca",
+    subtitle: "National Collegiate Business Elite Challenge",
+    year: "2024",
+    domain: "Competition · Business Elite",
+    tech: ["Go-to-market", "Brand Localisation", "Financial Modelling", "D2C"],
+    summary:
+      "Strategic advisory work for Rebecca (hair brand) — re-architecting the export go-to-market for a beauty accessories brand facing channel saturation. National finalist.",
+  },
+  {
+    slug: "commercial-launch",
+    section: "campus",
+    number: "04",
+    name: "Commercial Launch",
+    subtitle: "Industry Research & Investment Framework",
+    year: "2024",
+    domain: "Case Study · Industry Research",
+    tech: ["Market Sizing", "Value Chain Analysis", "Investment Framework", "Policy Risk"],
+    summary:
+      "Research on the commercial space-launch industry — market sizing, value chain mapping, competitive dynamics, and a launch-provider investment-return framework.",
+  },
+  {
+    slug: "angu",
+    section: "campus",
+    number: "05",
+    name: "Angyu Precision",
+    subtitle: "Challenge Cup · Small Track",
+    year: "2024",
+    domain: "Competition · Challenge Cup",
+    tech: ["Export GTM", "Brand Localisation", "Market Research", "Partnership Development"],
+    summary:
+      "Export-oriented go-to-market strategy and brand localisation for a precision-manufacturing SME serving overseas industrial customers.",
+  },
 ];
 
 // 按 slug 查询单个项目的辅助函数（保持向后兼容 — 详情页改读 caseDetail.js）
 export function getProject(slug) {
   return projects.find((p) => p.slug === slug);
+}
+
+// 按分区取项目列表（Work 页 = projects；Campus 页 = campus）
+export function getProjectsBySection(section) {
+  return projects.filter((p) => p.section === section);
 }

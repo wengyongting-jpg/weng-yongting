@@ -22,62 +22,85 @@ function makeSlides(slug, count) {
 
 export const caseDetailProjects = [
   // =========================================================
-  // 01 — MM118 Paper (Research)
+  // 校园经历 01 — IMMS 2025 Publications（两篇论文）
+  // 用户确认：参与两篇论文的实证建模、数据分析、理论框架构建，
+  // 并在 IMMS 2025 展示研究成果。页码：论文一 p.138，论文二 p.308。
   // =========================================================
   {
     slug: "mm118-paper",
     number: "01",
-    title: "AI Investment & Market Competitiveness",
-    titleEn: "MM118 · IMMS 2025",
-    shortName: "MM118 Paper",
-    eyebrow: ["IMMS 2025", "PUBLICATION", "OCT 2025"],
+    title: "IMMS 2025 Publications",
+    titleEn: "AI & Firm Performance · Two Papers",
+    shortName: "IMMS Papers",
+    eyebrow: ["IMMS 2025", "PUBLICATIONS", "OCT 2025"],
     subtitle:
-      "Co-authored paper examining how AI investment, production efficiency, and human–machine collaboration affect firms' market competitiveness in manufacturing — published in the IMMS 2025 proceedings.",
+      "Two co-authored empirical papers in the IMMS 2025 proceedings (pp. 138 & 308) examining when AI software and AI investment actually translate into organizational growth and market competitiveness.",
     badges: [
-      { type: "role", text: "► Co-author & Presenter" }, // [confirm] 3rd author? co-first? corresponding?
-      { type: "neutral", text: "Manufacturing · Empirical" },
+      { type: "role", text: "► Co-author · Empirical Modelling & Data Analysis" },
+      { type: "role", text: "► Presenter · IMMS 2025" },
+      { type: "neutral", text: "2 proceedings papers" },
+    ],
+    // 结构化论文列表 — 详情页 hero 下方与 Campus 页引用块共用
+    papers: [
+      {
+        title:
+          "The Impact of Human–Machine Interaction in AI Software on Organizational Growth: The Mediating Role of Managerial Efficiency",
+        venue: "IMMS 2025 Proceedings",
+        pages: "p. 138",
+        note: "Paper 1 · Growth pathway: HMI in AI software → managerial efficiency → organizational growth (mediation model)",
+      },
+      {
+        title:
+          "AI Investment and Market Competitiveness: The Roles of Human–Machine Interaction and Production Efficiency",
+        venue: "IMMS 2025 Proceedings",
+        pages: "p. 308",
+        note: "Paper 2 · Competitiveness pathway: AI investment → market competitiveness, carried by human–machine interaction and production efficiency (moderation model)",
+      },
     ],
     context: {
-      heading: "An empirical study on AI investment and firm competitiveness",
+      heading: "One research thread: when does AI actually convert into firm performance?",
       body:
-        "The paper investigates whether AI capital expenditure translates into measurable market competitiveness, and how production efficiency plus human–machine interaction moderate that relationship. The analysis uses firm-level panel data from manufacturing and quantifies three transmission channels: direct ROI, efficiency spillover, and human–machine complementarity.",
-      role: "Co-author · empirical modelling, data analysis, theoretical framework", // [confirm] exact contribution split
-      stack: "Python · Stata · Panel regression · Theoretical framework design",
+        "The two papers attack the same question from complementary angles. Paper 1 asks whether human–machine interaction in AI software drives organizational growth, and models managerial efficiency as the mediating mechanism. Paper 2 asks whether AI capital expenditure translates into market competitiveness, decomposing the effect into human–machine interaction and production efficiency channels. Together they cover the management side (how AI changes managerial work) and the operations side (how AI changes production economics) of the same transformation.",
+      role: "Co-author · empirical modelling, data analysis, and theoretical framework construction on both papers; presented the research at IMMS 2025",
+      stack: "Python · Stata · Panel regression · Mediation & moderation models · Theoretical framework design",
     },
     problem: {
-      heading: "Existing research had not quantified the human–machine moderation channel",
+      heading: "Prior work treated AI's performance effect as a black box",
       body:
-        "Most prior work treats AI investment as a black box that improves performance. The gap: no decomposition of which intermediate mechanism — pure efficiency gain vs. human–machine collaboration — actually carries the competitiveness effect.",
+        "Most studies stop at 'AI investment correlates with better outcomes' — without modelling the mechanism that carries the effect. Two gaps remained: on the management side, no mediation pathway linking AI software use to organizational growth through managerial efficiency; on the competitiveness side, no decomposition showing whether human–machine interaction or production efficiency carries the effect.",
       bullets: [
         "AI investment does not mechanically translate into competitiveness — the literature is mixed.",
-        "Production efficiency alone cannot explain the variance in firm-level outcomes.",
-        "Human–machine interaction is rarely modelled as a measurable moderator rather than a narrative.",
+        "Managerial efficiency as a mediator between AI software and organizational growth was rarely quantified.",
+        "Human–machine interaction was usually narrative, not a measurable moderator or mediator.",
+        "Without mechanism decomposition, firms cannot tell which AI investment to prioritise.",
       ],
     },
     approach: {
-      heading: "Decompose AI investment into three transmission channels",
+      heading: "Two complementary empirical models on one research thread",
       body:
-        "Built a firm-level model isolating (1) direct ROI of AI capital, (2) efficiency spillover into production, and (3) human–machine interaction as a moderator. Used panel regression with industry fixed effects to estimate each channel's marginal contribution to market competitiveness.",
+        "Paper 1 estimates a mediation model: human–machine interaction in AI software → managerial efficiency → organizational growth, testing the indirect effect through the mediator. Paper 2 builds a firm-level moderation model isolating (1) the direct ROI of AI capital, (2) efficiency spillover into production, and (3) human–machine interaction as a moderator of market competitiveness. Both use panel regression with appropriate fixed effects.",
       steps: [
         "Literature Review",
         "Hypothesis Design",
-        "Panel Data Modelling",
-        "Empirical Analysis",
+        "Mediation & Moderation Modelling",
+        "Empirical Analysis & Presentation",
       ],
-      tags: ["Panel regression", "Moderation analysis", "Manufacturing data", "IMMS 2025"],
+      tags: ["Panel regression", "Mediation analysis", "Moderation analysis", "Manufacturing data", "IMMS 2025"],
     },
     results: {
-      heading: "Three transmission channels, each with a distinct effect size",
+      heading: "Two proceedings papers, two quantified mechanisms, one conference presentation",
+      body:
+        "Both papers were accepted into the IMMS 2025 proceedings — Paper 1 on organizational growth (p. 138) and Paper 2 on market competitiveness (p. 308). The research was presented at the conference.",
       metrics: [
-        { value: "3", label: "Transmission channels", note: "Direct · Efficiency · HMI" },
-        { value: "✓", label: "HMI moderator", note: "Statistically significant" }, // [confirm] exact coefficient
-        { value: "1", label: "Proceedings paper", note: "IMMS 2025, presented" },
+        { value: "2", label: "Proceedings papers", note: "IMMS 2025 · pp. 138 & 308" },
+        { value: "2", label: "Mechanism models", note: "Mediation · Moderation" },
+        { value: "1", label: "Conference presentation", note: "Delivered at IMMS 2025" },
       ],
     },
     materials: {
-      heading: "Author presentation (19 slides)",
+      heading: "Paper 2 · Author presentation (19 slides)",
       body:
-        "The author presentation slides shown as an image gallery.",
+        "The author presentation for the AI Investment & Market Competitiveness paper, shown as an image gallery.",
       slides: makeSlides("mm118-paper", 19),
     },
   },
@@ -340,7 +363,7 @@ export const caseDetailProjects = [
   // =========================================================
   {
     slug: "period",
-    number: "06",
+    number: "01",
     title: "Period",
     titleEn: "AI-Assisted Personalized Health Application",
     shortName: "Period",
@@ -401,7 +424,7 @@ export const caseDetailProjects = [
   // =========================================================
   {
     slug: "refund-processing-automation",
-    number: "07",
+    number: "02",
     title: "Refund Processing Automation",
     titleEn: "Document-Driven Workflow with Human-in-the-Loop",
     shortName: "Refund Automation",
@@ -472,7 +495,7 @@ export const caseDetailProjects = [
   // =========================================================
   {
     slug: "salespilot",
-    number: "08",
+    number: "03",
     title: "SalesPilot",
     titleEn: "Agentic WhatsApp Sales Opportunity Assistant",
     shortName: "SalesPilot",
@@ -548,7 +571,7 @@ export const caseDetailProjects = [
   // =========================================================
   {
     slug: "grounded-enterprise-policy-assistant",
-    number: "09",
+    number: "04",
     title: "Grounded Enterprise Policy & Procedure Assistant",
     titleEn: "Evidence-Based Internal Knowledge Assistant",
     shortName: "Policy Assistant",
@@ -612,7 +635,7 @@ export const caseDetailProjects = [
   // =========================================================
   {
     slug: "health-insurance-claim-decision-agent",
-    number: "10",
+    number: "05",
     title: "Health Insurance Claim Decision Agent",
     titleEn: "Evaluation Harness & Escalation Safety Testing",
     shortName: "Claim Agent",
@@ -685,7 +708,7 @@ export const caseDetailProjects = [
   // =========================================================
   {
     slug: "singapore-rental-intelligence-copilot",
-    number: "11",
+    number: "06",
     title: "Singapore Rental Intelligence Copilot",
     titleEn: "Evidence-Grounded Rental Decision Support for International Students",
     shortName: "Rental Copilot",
@@ -748,4 +771,19 @@ export const caseDetailProjects = [
 
 export function getCaseDetailProject(slug) {
   return caseDetailProjects.find((p) => p.slug === slug);
+}
+
+// 校园经历分区（论文 + 商业竞赛）— 详情页面包屑与返回链接据此分流。
+// mm118-paper / zhiyi / rebecca / commercial-launch / angu 归 Campus；
+// 其余为个人项目，归 Projects。
+const CAMPUS_SLUGS = new Set([
+  "mm118-paper",
+  "zhiyi",
+  "rebecca",
+  "commercial-launch",
+  "angu",
+]);
+
+export function isCampusSlug(slug) {
+  return CAMPUS_SLUGS.has(slug);
 }
