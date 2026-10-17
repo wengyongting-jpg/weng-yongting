@@ -376,6 +376,7 @@ export const caseDetailProjects = [
     ],
     links: [
       { label: "LIVE DEMO", url: "https://period-ai.vercel.app/" },
+      { label: "PRD DOCUMENT", url: `${import.meta.env.BASE_URL}projects/period/prd.html` },
     ],
     context: {
       heading: "Personalized health support sits in a grey zone between lifestyle and medical reasoning",
@@ -439,6 +440,7 @@ export const caseDetailProjects = [
     // 已确认的公开链接 + 演示视频（合并自远程版本）
     links: [
       { label: "DEMO VIDEO", url: "https://youtu.be/nJchLlhX-So" },
+      { label: "PRD DOCUMENT", url: `${import.meta.env.BASE_URL}projects/refund-processing-automation/prd.html` },
     ],
     video: {
       type: "youtube",
@@ -514,6 +516,7 @@ export const caseDetailProjects = [
       { label: "DEMO VIDEO", url: "https://youtu.be/f2Oylb9kTA8" },
       { label: "ADMIN DASHBOARD", url: "http://47.128.144.8/admin/index.html#/inbox" },
       { label: "CUSTOMER CHAT", url: "http://47.128.144.8/customer/index.html" },
+      { label: "PRD DOCUMENT", url: `${import.meta.env.BASE_URL}projects/salespilot/prd.html` },
     ],
     video: {
       type: "youtube",
@@ -918,6 +921,7 @@ export const caseDetailProjects = [
     links: [
       { label: "GITHUB REPOSITORY", url: "https://github.com/symbioticshark/A2_HealthInsurance" },
       { label: "DEMO VIDEO", url: "https://youtu.be/f-cxrW4esAA" },
+      { label: "EVALUATION DESIGN DOC", url: `${import.meta.env.BASE_URL}projects/health-insurance-claim-decision-agent/prd.html` },
     ],
     video: {
       type: "youtube",

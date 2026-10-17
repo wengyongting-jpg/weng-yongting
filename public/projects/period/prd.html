@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Period — Product Requirements Document</title>
+<style>
+  :root { --bg:#f6f4ef; --panel:#fffdf8; --text:#0b1c2c; --muted:#5d6875; --line:#e2ddd2; --accent:#ff5a36; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: "Inter", system-ui, sans-serif; line-height: 1.65; }
+  .page { max-width: 860px; margin: 0 auto; padding: 64px 32px 96px; }
+  header { border-bottom: 2px solid var(--text); padding-bottom: 32px; margin-bottom: 48px; }
+  .eyebrow { color: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: .18em; margin-bottom: 12px; }
+  h1 { font-size: 40px; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; }
+  .meta { margin-top: 16px; color: var(--muted); font-size: 13px; }
+  section { margin-bottom: 44px; }
+  h2 { font-size: 13px; font-weight: 800; letter-spacing: .16em; color: var(--accent); margin-bottom: 14px; }
+  h3 { font-size: 19px; font-weight: 800; letter-spacing: -.02em; margin-bottom: 12px; }
+  p { font-size: 14px; color: #3d4a58; margin-bottom: 10px; }
+  ul { padding-left: 20px; }
+  li { font-size: 14px; color: #3d4a58; margin-bottom: 8px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 20px 24px; margin-bottom: 12px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); font-size: 13px; }
+  th { font-size: 10px; letter-spacing: .12em; color: var(--muted); font-weight: 800; }
+  .tag { display: inline-block; padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; font-size: 11px; font-weight: 700; margin: 0 6px 6px 0; }
+  .warn { border-left: 3px solid var(--accent); }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <p class="eyebrow">PRODUCT REQUIREMENTS DOCUMENT · PERSONAL PROJECT · 2026</p>
+    <h1>Period — AI-Assisted Personalized Health Application</h1>
+    <p class="meta">Author: Yongting Weng (Designer) &nbsp;·&nbsp; Status: Live demo at period-ai.vercel.app &nbsp;·&nbsp; Version 1.0</p>
+  </header>
+
+  <section>
+    <h2>01 · PROBLEM</h2>
+    <h3>A generic chatbot cannot be trusted with health-adjacent reasoning</h3>
+    <ul>
+      <li><b>Fragmented health information</b> — cycle, symptoms, mood, and medication records live in different places, so no single view of the user's state exists.</li>
+      <li><b>Generic health info</b> — template answers do not reflect an individual's cycle phase or personal context.</li>
+      <li><b>AI overstating certainty</b> — in health-adjacent products, a confident wrong answer is a safety risk, not a UX bug.</li>
+      <li><b>Personal data sensitivity</b> — health records require structured data models and deliberate handling.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>02 · TARGET USERS &amp; SCENARIOS</h2>
+    <div class="card">
+      <p><b>Primary user:</b> women who track their menstrual cycle and want personalized, context-aware daily health support rather than generic articles.</p>
+      <p><b>Core scenario:</b> a user logs today's symptoms and mood, then asks "why do I feel exhausted today?" — the answer must reflect her recorded cycle phase and history, and must stay inside safe, non-diagnostic boundaries.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>03 · PRODUCT DESIGN — HYBRID AI ARCHITECTURE</h2>
+    <h3>Split reasoning: deterministic logic where accuracy matters, LLM where personalization matters</h3>
+    <p>The key design decision: the architecture — not the prompt — is what makes an LLM safe to ship in health-adjacent products.</p>
+    <table>
+      <tr><th>LAYER</th><th>RESPONSIBILITY</th><th>WHY</th></tr>
+      <tr><td>Deterministic health calculations</td><td>Cycle math, phase detection, rule-based scoring</td><td>Accuracy-critical; must be reproducible and auditable</td></tr>
+      <tr><td>Structured data models</td><td>User profile + health records (PostgreSQL / Drizzle ORM)</td><td>Sensitive data needs explicit schema, not free text</td></tr>
+      <tr><td>Prompt / Context Injection</td><td>Inject the user's current cycle context into LLM calls</td><td>Keeps responses anchored to the individual, not generic</td></tr>
+      <tr><td>LLM communication layer</td><td>Personalized insights, conversational support</td><td>Personalization and tone are where the LLM adds value</td></tr>
+      <tr><td>Safety boundaries</td><td>Explicit rule-based limits on AI responses</td><td>Boundaries are enforced by rules, not model discretion</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>04 · FUNCTIONAL REQUIREMENTS</h2>
+    <ul>
+      <li><b>P0</b> — Record cycle, symptoms, mood, and medication with structured fields.</li>
+      <li><b>P0</b> — Personalized daily insight grounded in the user's recorded cycle phase.</li>
+      <li><b>P0</b> — Conversational support with explicit safety boundaries (no diagnosis, no medication advice).</li>
+      <li><b>P1</b> — Trend view across cycles (symptom / mood patterns).</li>
+      <li><b>P1</b> — Context injection so every LLM response references the user's actual data.</li>
+    </ul>
+    <p style="margin-top:10px;"><span class="tag">LLM API</span><span class="tag">Prompt Engineering</span><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">PostgreSQL</span><span class="tag">Drizzle ORM</span></p>
+  </section>
+
+  <section>
+    <h2>05 · SUCCESS CRITERIA &amp; VALIDATION</h2>
+    <div class="card warn">
+      <p><b>North Star:</b> daily active logging rate — the product only works if users record consistently enough for personalization to be meaningful.</p>
+      <p><b>Safety metric:</b> zero out-of-boundary responses (diagnosis / medication advice) in scripted safety test cases.</p>
+      <p><b>Current status:</b> live demo at period-ai.vercel.app. User-interview evidence and measured funnel metrics are not yet collected — the next iteration starts there.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>06 · ITERATION PLAN</h2>
+    <ul>
+      <li><b>Now</b> — run 5–8 user interviews to validate the pain-point assumptions behind the feature set.</li>
+      <li><b>Next</b> — instrument logging funnel (open → record → insight viewed) to find the drop-off point.</li>
+      <li><b>Later</b> — expand the safety test suite and add regression checks before any prompt change ships.</li>
+    </ul>
+  </section>
+</div>
+</body>
+</html>

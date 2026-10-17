@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Refund Processing Automation — Product Requirements Document</title>
+<style>
+  :root { --bg:#f6f4ef; --panel:#fffdf8; --text:#0b1c2c; --muted:#5d6875; --line:#e2ddd2; --accent:#ff5a36; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: "Inter", system-ui, sans-serif; line-height: 1.65; }
+  .page { max-width: 860px; margin: 0 auto; padding: 64px 32px 96px; }
+  header { border-bottom: 2px solid var(--text); padding-bottom: 32px; margin-bottom: 48px; }
+  .eyebrow { color: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: .18em; margin-bottom: 12px; }
+  h1 { font-size: 40px; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; }
+  .meta { margin-top: 16px; color: var(--muted); font-size: 13px; }
+  section { margin-bottom: 44px; }
+  h2 { font-size: 13px; font-weight: 800; letter-spacing: .16em; color: var(--accent); margin-bottom: 14px; }
+  h3 { font-size: 19px; font-weight: 800; letter-spacing: -.02em; margin-bottom: 12px; }
+  p { font-size: 14px; color: #3d4a58; margin-bottom: 10px; }
+  ul { padding-left: 20px; }
+  li { font-size: 14px; color: #3d4a58; margin-bottom: 8px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 20px 24px; margin-bottom: 12px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); font-size: 13px; }
+  th { font-size: 10px; letter-spacing: .12em; color: var(--muted); font-weight: 800; }
+  .tag { display: inline-block; padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; font-size: 11px; font-weight: 700; margin: 0 6px 6px 0; }
+  .decision { background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 8px; padding: 16px 20px; margin-bottom: 12px; }
+  .decision small { display: block; font-size: 9px; font-weight: 800; letter-spacing: .14em; color: var(--muted); margin-bottom: 6px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <p class="eyebrow">PRODUCT REQUIREMENTS DOCUMENT · UIPATH DESIGN · 2025</p>
+    <h1>Refund Processing Automation</h1>
+    <p class="meta">Author: Yongting Weng (Workflow designer) &nbsp;·&nbsp; Status: Design &amp; demo &nbsp;·&nbsp; Version 1.0</p>
+  </header>
+
+  <section>
+    <h2>01 · PROBLEM</h2>
+    <h3>Manual handling is slow; full automation is unsafe</h3>
+    <ul>
+      <li><b>Receipt information</b> is stored in documents, not structured data — every case requires manual extraction.</li>
+      <li><b>Manual extraction</b> is repetitive and inconsistent across operators.</li>
+      <li><b>Some cases</b> should not be auto-processed — rule violations or low confidence demand human judgement.</li>
+      <li><b>Full automation</b> removes human judgement where it is genuinely needed.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>02 · DESIGN DECISION — CONFIDENCE THRESHOLD ROUTING</h2>
+    <div class="decision">
+      <small>DECISION 01</small>
+      <p><b>Full automation vs. confidence-based routing?</b></p>
+      <p><b>Compared:</b> A · End-to-end automation for all valid receipts. B · Confidence scoring with a human-review boundary.</p>
+      <p><b>Chosen:</b> B — a confidence threshold is the only defensible boundary between automation and risk.</p>
+      <p><b>Evidence:</b> Receipt quality varies wildly (scan quality, handwriting, partial data). A universal auto-pass rule will fail on edge cases.</p>
+      <p><b>Validate via:</b> Run the confidence model on a labelled test set and set the threshold at the point where precision meets the business SLA.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>03 · PRODUCT FLOW</h2>
+    <table>
+      <tr><th>STEP</th><th>ACTION</th><th>OUTPUT</th></tr>
+      <tr><td>Document intake</td><td>Receipt image / PDF uploaded</td><td>Raw document in queue</td></tr>
+      <tr><td>Data extraction (UiPath Document Understanding)</td><td>Extract structured fields</td><td>Receipt ID, Merchant, Date, Total Amount, Refund Reason</td></tr>
+      <tr><td>Confidence scoring</td><td>Model assigns confidence score to extracted data</td><td>Confidence value + field-level flags</td></tr>
+      <tr><td>Rule validation</td><td>Check against business rules</td><td>Pass / fail / flag status</td></tr>
+      <tr><td>Routing decision</td><td>Confidence + rule result decides path</td><td>Auto-process or human review</td></tr>
+      <tr><td>Auto-process</td><td>System completes refund workflow</td><td>Completed case, audit log</td></tr>
+      <tr><td>Human review</td><td>Operator validates flagged case</td><td>Approved / corrected / rejected</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>04 · STRUCTURED DATA MODEL</h2>
+    <p>The extraction layer returns these six fields:</p>
+    <div class="card">
+      <ul style="margin-bottom:0;">
+        <li>Receipt ID</li>
+        <li>Merchant</li>
+        <li>Date</li>
+        <li>Total Amount</li>
+        <li>Refund Reason</li>
+        <li>Confidence Score</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>05 · SUCCESS CRITERIA &amp; VALIDATION</h2>
+    <div class="card">
+      <p><b>North Star:</b> proportion of cases handled end-to-end without human touch (measured against total volume).</p>
+      <p><b>Safety metric:</b> zero auto-processed cases that fail rule validation.</p>
+      <p><b>Current status:</b> workflow design and demo. Production metrics (accuracy, processing time, auto-rate) are not claimed because the design has not been deployed.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>06 · ITERATION PLAN</h2>
+    <ul>
+      <li><b>Now</b> — run the confidence model on a labelled test set to set and justify the threshold.</li>
+      <li><b>Next</b> — pilot the workflow on 200 real refund cases, measuring auto-rate, error rate, and operator override rate.</li>
+      <li><b>Later</b> — tune the extraction model by feeding operator corrections back as training data.</li>
+    </ul>
+  </section>
+</div>
+</body>
+</html>
