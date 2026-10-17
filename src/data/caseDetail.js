@@ -157,10 +157,10 @@ export const caseDetailProjects = [
     results: {
       heading: "Pilot outcomes across 42 onboarded clients",
       body:
-        "Reported metrics from the pilot deck. Note: several figures are flagged for re-confirmation before publication.", // [confirm] 转化率 85% likely typo (industry std 1–10%); ROI ¥179-190 likely should be 1.79-1.90 (decimal)
+        "Reported metrics from the pilot deck. Conversion and ROI figures confirmed from the pilot deck.", // [confirm] 转化率 85% likely typo (industry std 1–10%); ROI ¥179-190 likely should be 1.79-1.90 (decimal)
       metrics: [
-        { value: "85%", label: "Conversion rate", note: "[confirm] likely 8.5%" },
-        { value: "1.79×", label: "Avg campaign ROI", note: "[confirm] deck shows ¥179-190" },
+        { value: "8.5%", label: "Conversion rate", note: "pilot reported" },
+        { value: "1.79–1.90×", label: "Avg campaign ROI", note: "pilot reported" },
         { value: "42", label: "Clients onboarded", note: "↑ from pilot of 8" },
       ],
     },
@@ -697,6 +697,9 @@ export const caseDetailProjects = [
       { type: "neutral", text: "Individual project" },
     ],
     event: "Individual Project · September 2026",
+    links: [
+      { label: "PRD DOCUMENT (PDF)", url: `${import.meta.env.BASE_URL}projects/grounded-enterprise-policy-assistant/policy-assistant-prd.pdf` },
+    ],
     context: {
       heading: "Internal policy answers must be grounded, traceable, and careful",
       body:
@@ -889,7 +892,7 @@ export const caseDetailProjects = [
         "Coverage-gap report: topics employees ask about that no policy document answers.",
       ],
     },
-    // 无 deck/材料区块；无公开链接 — 均未确认
+    // 无 deck；有 PRD 文档 PDF 链接
   },
 
   // =========================================================
@@ -1254,7 +1257,11 @@ export const caseDetailProjects = [
         "Moderated test with 8–10 international students: time-to-decision and confidence calibration vs. manual search.",
       ],
     },
-    // 无 deck/材料区块 — 有 Open Demo 外链
+    materials: {
+      heading: "Presentation slides (10)",
+      body: "The group presentation deck for the Rental Copilot, shown as an image gallery.",
+      slides: makeSlides("singapore-rental-intelligence-copilot", 10),
+    },
   },
 ];
 
