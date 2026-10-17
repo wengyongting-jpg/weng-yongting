@@ -1078,6 +1078,8 @@ footer { display:flex; justify-content:space-between; align-items:center; paddin
 .case-paper small { display: block; margin-bottom: 8px; color: var(--accent); font-size: 10px; font-weight: 700; letter-spacing: .08em; }
 .case-paper strong { display: block; margin-bottom: 8px; color: var(--ink); font-size: 14px; font-weight: 700; line-height: 1.45; }
 .case-paper span { color: var(--muted); font-family: var(--font-technical); font-size: 10px; letter-spacing: .1em; }
+.case-paper-insight { display: block; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); color: var(--charcoal); font-size: 12px; line-height: 1.55; font-style: normal; }
+.case-paper-insight b { color: var(--accent); font-weight: 700; }
 
 /* ===== AI Workflow Explorer（可点击决策流程图） ===== */
 .wf-explorer { margin-top: 34px; }

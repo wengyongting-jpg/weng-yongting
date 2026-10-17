@@ -48,6 +48,7 @@ export const caseDetailProjects = [
         venue: "IMMS 2025 Proceedings",
         pages: "p. 138",
         note: "Paper 1 · Growth pathway: HMI in AI software → managerial efficiency → organizational growth (mediation model)",
+        insight: "value travels through a mechanism, not the model itself — which is why I now design the mechanism (context injection, rule boundaries) instead of just the prompt.",
       },
       {
         title:
@@ -55,6 +56,7 @@ export const caseDetailProjects = [
         venue: "IMMS 2025 Proceedings",
         pages: "p. 308",
         note: "Paper 2 · Competitiveness pathway: AI investment → market competitiveness, carried by human–machine interaction and production efficiency (moderation model)",
+        insight: "AI spend only converts through the interaction and efficiency channels it flows through — which is why my evaluation sections measure the pathway, not just the outcome.",
       },
     ],
     context: {

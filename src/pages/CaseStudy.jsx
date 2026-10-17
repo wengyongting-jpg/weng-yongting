@@ -96,6 +96,9 @@ function CaseStudy() {
                 <small>{pp.note}</small>
                 <strong>{pp.title}</strong>
                 <span>{pp.venue} · {pp.pages}</span>
+                {pp.insight && (
+                  <em className="case-paper-insight"><b>Transfer to product work —</b> {pp.insight}</em>
+                )}
               </div>
             ))}
           </div>
