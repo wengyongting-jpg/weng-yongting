@@ -562,6 +562,119 @@ export const caseDetailProjects = [
         { value: "4", label: "Public links", note: "repo · video · admin · customer" },
       ],
     },
+    decisionsHeading: "Product decisions behind the agent design",
+    decisions: [
+      {
+        question: "Full automation, or human-in-the-loop for high-value conversations?",
+        options: "A · Fully automated replies for all enquiries — fastest, but negotiation-stage or sensitive messages risk losing deals. B · AI handles routine enquiries, humans take over high-value / uncertain / negotiation cases.",
+        chosen: "B — trust and deal size outweigh speed. The system recommends, the human decides, for anything high-stakes.",
+        evidence: "Sales conversations are multi-turn and stakes rise near purchase; a wrong automated reply at negotiation stage costs the whole deal.",
+        validation: "Pilot with 1–2 sales reps; log acceptance / override rate of AI next-best-actions.",
+      },
+      {
+        question: "Continuous 0–100 score, or 3-tier hot / warm / cold buckets?",
+        options: "A · Three buckets — simple but coarse. B · Continuous 0–100 Opportunity Value Score — gives reps a ranking, not just a label.",
+        chosen: "B — reps' real question is 'who do I call first', which needs ordering, not just categories.",
+        evidence: "In the demo walkthrough, the ranked inbox view was what judges and testers engaged with most.",
+        validation: "In the rep pilot, measure whether reps work the inbox top-down (score order) or re-sort.",
+      },
+      {
+        question: "Stateful opportunity profile, or stateless per-message replies?",
+        options: "A · Reply per message with no memory. B · Maintain a persistent Opportunity Profile updated after every message.",
+        chosen: "B — purchase intent and hesitation only make sense across a conversation, not in a single message.",
+        evidence: "Signals like competitor comparison and expansion opportunity span multiple messages.",
+        validation: "Check score stability across a conversation — no wild swings on courtesy messages.",
+      },
+    ],
+    workflow: {
+      heading: "From customer message to next best action",
+      nodes: [
+        {
+          label: "Customer Message",
+          tagline: "WhatsApp inbound",
+          input: "Customer text message arriving via WhatsApp.",
+          output: "Normalised message appended to the conversation thread.",
+          rules: "Pass-through capture; media messages get a lightweight description request.",
+          exception: "Unsupported media or empty message → polite reply asking the customer to describe their need in text.",
+        },
+        {
+          label: "State Detection",
+          tagline: "Where is this customer?",
+          input: "Full conversation history from memory.",
+          output: "Current sales stage (browsing / comparing / negotiating / ready).",
+          rules: "LLM reads the thread and classifies stage; long gaps trigger re-qualification.",
+          exception: "Conversation idle > 7 days → stage reset to re-qualification instead of assuming continuity.",
+        },
+        {
+          label: "Signal Extraction",
+          tagline: "What matters here?",
+          input: "Latest message + detected stage.",
+          output: "Structured signals: purchase intent, hesitation, competitor comparison, expansion opportunity, risk.",
+          rules: "Courtesy and small-talk are dampened so politeness does not inflate the score.",
+          exception: "Conflicting signals (strong intent + strong hesitation) → cap the score and flag for human review.",
+        },
+        {
+          label: "Opportunity Scoring",
+          tagline: "0–100 value score",
+          input: "Extracted signals + opportunity profile.",
+          output: "Updated Opportunity Value Score (0–100) driving inbox ranking.",
+          rules: "Weighted combination of signals; weights favour late-stage buying signals.",
+          exception: "Low-confidence extraction → score marked provisional, not used for auto-decisions.",
+        },
+        {
+          label: "Next Best Action",
+          tagline: "Auto-reply or hand off",
+          input: "Score + stage + signal mix.",
+          output: "Either an AI-drafted reply, or a human handoff with context summary.",
+          rules: "High-value, sensitive, or negotiation-stage conversations always route to a human.",
+          exception: "Uncertain cases → AI drafts a reply but holds it for human approval instead of sending.",
+        },
+        {
+          label: "Dashboard Sync",
+          tagline: "Rep inbox stays live",
+          input: "Score, stage, signals, recommended action.",
+          output: "Updated admin inbox: ranked opportunities with reasons and handoff flags.",
+          rules: "Every score change carries its evidence so reps can trust-check at a glance.",
+          exception: "Missing evidence → the recommendation is shown greyed out with an explanation request.",
+        },
+      ],
+    },
+    evaluation: {
+      heading: "Hackathon-stage validation — scripted scenarios, not production metrics",
+      body:
+        "Validation at this stage is demonstration-grade: scripted WhatsApp conversation scenarios, judge walkthroughs, and a live deployed demo. No production adoption or business metric is claimed — the numbers below describe the demo build, not real sales outcomes.",
+      disclaimer: "Demo-stage build (NUS-ISS hackathon). Scripted scenarios + judge walkthroughs only — no production users. Figures describe the demo, not business results.",
+      metrics: [
+        { value: "0–100", label: "Opportunity Value Score", note: "signal-driven ranking" },
+        { value: "2", label: "Deployed surfaces", note: "admin dashboard · customer chat" },
+        { value: "4", label: "Public links", note: "repo · video · admin · customer" },
+      ],
+      failures: [
+        {
+          title: "Auto-reply fired on a negotiation-stage message",
+          issue: "Early logic let the AI reply to a price-negotiation message — exactly where a wrong word loses the deal.",
+          lesson: "Added a hard rule: negotiation / sensitive stages always route to a human.",
+        },
+        {
+          title: "Score inflated by polite small-talk",
+          issue: "Friendly courtesy messages were read as engagement and pushed scores up.",
+          lesson: "Dampened courtesy signals so only substantive buying signals move the score.",
+        },
+      ],
+    },
+    iteration: {
+      heading: "If this continued past the hackathon",
+      now: [
+        "Pilot with 1–2 sales reps on real inbound conversations; log acceptance / override of each next-best-action.",
+      ],
+      next: [
+        "Feed rep overrides back into signal weights — the score should learn from what reps actually act on.",
+        "CRM integration to ground scores in historical deal outcomes.",
+      ],
+      later: [
+        "Controlled comparison: conversion on AI-assisted inbox vs. a control inbox, before claiming any uplift.",
+      ],
+    },
     // 无幻灯片区 — 以演示视频 + 部署环境作为 proof
   },
 
@@ -623,6 +736,157 @@ export const caseDetailProjects = [
         { value: "Evidence-first", label: "Answer design", note: "retrieve before generate" },
         { value: "Citations", label: "Traceability", note: "source shown per answer" },
         { value: "Refusal", label: "Insufficient evidence", note: "no fabricated confidence" },
+      ],
+    },
+    prototype: {
+      inputLabel: "EMPLOYEE QUESTION",
+      disclaimer: "Interactive design demo — simulated answers on sample policy snippets, showing the three output states (cited answer / clarification / refusal). Not a live system.",
+      samples: [
+        {
+          id: "answerable",
+          name: "Answerable question",
+          input: "How many days of annual leave am I entitled to?",
+          blocks: [
+            {
+              type: "answer",
+              status: "answered",
+              text: "Full-time employees are entitled to 14 days of paid annual leave per year, pro-rated in the first year of service. Leave is accrued monthly and must be applied for at least 3 working days in advance.",
+              citations: ["Leave Policy §4.2 — Annual Leave Entitlement", "Leave Policy §4.5 — Application Procedure"],
+            },
+          ],
+        },
+        {
+          id: "ambiguous",
+          name: "Ambiguous question",
+          input: "Can I take leave next month?",
+          blocks: [
+            {
+              type: "answer",
+              status: "clarify",
+              text: "I can help, but 'leave' could mean annual leave, medical leave, or unpaid leave — each follows a different policy. Which type of leave are you asking about?",
+              citations: [],
+            },
+          ],
+        },
+        {
+          id: "out-of-scope",
+          name: "Out-of-scope question",
+          input: "What is the market salary for a product manager in Singapore?",
+          blocks: [
+            {
+              type: "answer",
+              status: "refused",
+              text: "I can only answer questions covered by internal policy documents, and I found no authorised document addressing external salary benchmarks. For compensation questions, please contact HR directly.",
+              citations: [],
+            },
+          ],
+        },
+      ],
+    },
+    decisionsHeading: "Why the assistant is retrieval-first",
+    decisions: [
+      {
+        question: "Generate freely like a chatbot, or retrieve before answering?",
+        options: "A · Direct LLM answers — fluent but can hallucinate policy that doesn't exist. B · Retrieval-first: check evidence sufficiency before any generation.",
+        chosen: "B — for internal policy, a confident wrong answer is worse than no answer.",
+        evidence: "Generic LLMs answer anyway — without sources, and without knowing when to stop.",
+        validation: "Test set of answerable / ambiguous / out-of-scope questions; track refusal correctness.",
+      },
+      {
+        question: "TF-IDF retrieval, or dense embeddings from day one?",
+        options: "A · Embedding-based semantic search — better recall, more infra. B · TF-IDF + cosine similarity — explainable, auditable, zero infra.",
+        chosen: "B for the prototype — on a small controlled corpus, explainable similarity beats marginal recall gains.",
+        evidence: "Internal policy language is formulaic; keyword overlap is a strong signal, and every match can be shown to a compliance reviewer.",
+        validation: "Revisit with dense retrieval once the question log shows vocabulary mismatch cases.",
+      },
+      {
+        question: "Answer ambiguous questions with the best guess, or ask back?",
+        options: "A · Best-guess answer — fewer turns, more risk. B · Clarification question — one extra turn, much safer.",
+        chosen: "B — ambiguity in policy questions is usually about which policy applies, and guessing picks the wrong one.",
+        evidence: "'Can I take leave?' spans at least three different policies with different rules.",
+        validation: "Log clarification rate; if most clarifications resolve in one turn, the trade is worth it.",
+      },
+    ],
+    workflow: {
+      heading: "From question to cited answer — or a careful refusal",
+      nodes: [
+        {
+          label: "User Question",
+          tagline: "Natural language",
+          input: "Employee question in free text.",
+          output: "Parsed query ready for retrieval.",
+          rules: "Pass-through; no rewriting at this stage.",
+          exception: "Empty or non-question input → prompt for a concrete policy question.",
+        },
+        {
+          label: "Retrieve Evidence",
+          tagline: "TF-IDF · cosine",
+          input: "Parsed query.",
+          output: "Ranked policy-document chunks with similarity scores.",
+          rules: "Documents are chunked and indexed as TF-IDF vectors; cosine similarity ranks chunks.",
+          exception: "Max similarity below threshold → skip generation entirely, go to refusal path.",
+        },
+        {
+          label: "Assess Sufficiency",
+          tagline: "Is evidence enough?",
+          input: "Retrieved chunks + scores.",
+          output: "Sufficient / ambiguous / insufficient verdict.",
+          rules: "Evidence threshold on score and coverage; ambiguity detection on overlapping policies.",
+          exception: "Multiple policies match equally → treat as ambiguous, trigger clarification.",
+        },
+        {
+          label: "Cited Answer",
+          tagline: "Grounded generation",
+          input: "Verified evidence chunks.",
+          output: "Answer constrained to retrieved text, with per-claim citations.",
+          rules: "Foundation model composes only from retrieved passages; every claim carries its source section.",
+          exception: "Chunks conflict with each other → surface both versions, refuse to arbitrate.",
+        },
+        {
+          label: "Refuse / Escalate",
+          tagline: "No fabricated confidence",
+          input: "Insufficient-evidence verdict.",
+          output: "Explicit refusal with the reason, plus the right human contact.",
+          rules: "Refusal states what was searched and why evidence was insufficient.",
+          exception: "Repeated refusals on a topic → flag a policy-coverage gap to the content owner.",
+        },
+      ],
+    },
+    evaluation: {
+      heading: "Evaluation design — targets first, numbers when the test set runs",
+      body:
+        "The prototype ships with an evaluation design rather than invented metrics: a self-built question set across three categories (in-scope answerable, ambiguous, out-of-scope), scored on citation coverage, refusal correctness, and clarification quality. Targets are stated below; they become real numbers once the logged question set runs.",
+      disclaimer: "Prototype stage — evaluation design with explicit targets, not measured production metrics. No user-adoption or accuracy figures are claimed.",
+      metrics: [
+        { value: "3", label: "Question categories", note: "answerable · ambiguous · out-of-scope" },
+        { value: "≥90%", label: "Citation coverage target", note: "claims with a source section" },
+        { value: "100%", label: "Refusal correctness target", note: "no out-of-scope answers" },
+      ],
+      failures: [
+        {
+          title: "Baseline LLM answered an out-of-scope question confidently",
+          issue: "Without the evidence gate, the model produced a plausible-sounding policy that does not exist.",
+          lesson: "Retrieval sufficiency check moved before generation, not after.",
+        },
+        {
+          title: "Ambiguous leave question picked the wrong policy",
+          issue: "'Can I take leave?' matched annual leave but the user meant unpaid leave.",
+          lesson: "Overlap detection added — ambiguity triggers clarification instead of a guess.",
+        },
+      ],
+    },
+    iteration: {
+      heading: "From prototype to trustworthy internal tool",
+      now: [
+        "Log real employee Q&A pairs and build a 30-question regression set from actual usage.",
+      ],
+      next: [
+        "Move from TF-IDF to dense retrieval once the log shows keyword-mismatch failures.",
+        "Add answer-helpfulness feedback to catch wrong-but-cited answers.",
+      ],
+      later: [
+        "Multi-document synthesis for questions spanning several policies.",
+        "Coverage-gap report: topics employees ask about that no policy document answers.",
       ],
     },
     // 无 deck/材料区块；无公开链接 — 均未确认
@@ -763,6 +1027,231 @@ export const caseDetailProjects = [
         { value: "62.5→90%", label: "A/B/C improvement", note: "baseline → prompt+retrieval" },
         { value: "20", label: "Test cases", note: "60 outputs · 4 dimensions" },
         { value: "19/20", label: "Risk grounding (C)", note: "up from 14/20 in B" },
+      ],
+    },
+    prototype: {
+      inputLabel: "RAW LISTING POST",
+      disclaimer: "Interactive design demo — simplified simulation of the two-module pipeline on sample listings. Illustrates the output shape (facts with uncertainty, evidence-grounded risks, landlord questions), not the live Gemini build.",
+      samples: [
+        {
+          id: "listing-a",
+          name: "Listing A · near NTU",
+          input: "Common room near NTU, $950/month, utilities not included, 6-month lease, no agent fee, available immediately. Text me after 7pm.",
+          blocks: [
+            {
+              type: "facts",
+              items: [
+                { label: "Rent", value: "$950 / month" },
+                { label: "Lease", value: "6 months" },
+                { label: "Utilities", value: "Not included" },
+                { label: "Agent fee", value: "None" },
+                { label: "Deposit", value: "Not mentioned", flag: true },
+                { label: "House rules", value: "Not mentioned", flag: true },
+              ],
+            },
+            {
+              type: "risks",
+              items: [
+                {
+                  title: "Deposit terms unstated",
+                  evidence: "Listing mentions rent and lease but no deposit amount or refund terms.",
+                  rule: "KB-07 · Deposit norms: 1 month per 6-month lease is typical; always confirm in writing.",
+                },
+                {
+                  title: "Utilities excluded — real cost unclear",
+                  evidence: "'Utilities not included' with no estimate of monthly range.",
+                  rule: "KB-12 · Utilities typically add $50–100/month for a common room.",
+                },
+              ],
+            },
+            {
+              type: "questions",
+              items: [
+                "Is a deposit required? How many months, and what are the refund conditions?",
+                "What is the typical monthly utilities cost for this room?",
+                "Are there house rules on cooking, guests, or air-con usage?",
+              ],
+            },
+          ],
+        },
+        {
+          id: "listing-b",
+          name: "Listing B · master room",
+          input: "Master room, $1,400/month including wifi. Minimum 1-year lease, 2 months deposit. No cooking allowed. Prefer single female tenant.",
+          blocks: [
+            {
+              type: "facts",
+              items: [
+                { label: "Rent", value: "$1,400 / month (wifi incl.)" },
+                { label: "Lease", value: "12 months minimum" },
+                { label: "Deposit", value: "2 months" },
+                { label: "Cooking", value: "Not allowed" },
+                { label: "Tenant preference", value: "Single female" },
+                { label: "Utilities", value: "Needs verification", flag: true },
+              ],
+            },
+            {
+              type: "risks",
+              items: [
+                {
+                  title: "No-cooking rule may conflict with tenant needs",
+                  evidence: "Listing states 'no cooking allowed' — a hard constraint for most students.",
+                  rule: "KB-03 · House rules: confirm whether light cooking (microwave / kettle) is permitted.",
+                },
+                {
+                  title: "2-month deposit on 12-month lease",
+                  evidence: "Deposit is at the upper norm for the lease length.",
+                  rule: "KB-07 · Deposit norms: 1 month per 6-month lease; 2 months on 12 is standard but confirm refund terms.",
+                },
+              ],
+            },
+            {
+              type: "questions",
+              items: [
+                "Are utilities (water, electricity) included in the $1,400, or only wifi?",
+                "Is light cooking such as microwave or kettle use allowed?",
+                "Under what conditions is the 2-month deposit fully refunded?",
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    decisionsHeading: "Design decisions behind the two-module pipeline",
+    decisions: [
+      {
+        question: "One end-to-end prompt, or separate extraction and reasoning modules?",
+        options: "A · Single prompt doing extraction + risk + ranking. B · Module A extracts facts only; Module B reasons over facts + rules.",
+        chosen: "B — mixing fact extraction with judgement in one prompt let the model blur 'what the listing says' with 'what it assumes'.",
+        evidence: "In the A/B/C comparison, separating concerns was a precondition for the risk-grounding gains (14 → 19/20).",
+        validation: "Dimension-level scoring across versions, not just total score.",
+      },
+      {
+        question: "Vector-embedding RAG, or rule-based retrieval over a small KB?",
+        options: "A · Embedding retrieval — scales, but opaque and overkill here. B · Rule-based retrieval over an 18-entry knowledge base.",
+        chosen: "B — 18 entries are categorical, not a corpus; deterministic matching is auditable and can't drift.",
+        evidence: "Every retrieved rule can be shown next to the risk it grounds — the two-part grounding requirement.",
+        validation: "Move to embeddings only when the KB grows past what rule matching covers cleanly.",
+      },
+      {
+        question: "Best-guess missing fields, or 'Not mentioned' as a first-class value?",
+        options: "A · Fill gaps with plausible defaults. B · Explicitly surface 'Not mentioned' / 'Needs verification'.",
+        chosen: "B — students silently act on wrong assumptions; an explicit unknown is actionable, a silent guess is not.",
+        evidence: "Missing-information handling was scored as its own dimension across all 20 test cases.",
+        validation: "Track how often flagged-unknown fields turn out to matter in real enquiries.",
+      },
+    ],
+    workflow: {
+      heading: "From raw listing to evidence-grounded advice",
+      nodes: [
+        {
+          label: "Listing Input",
+          tagline: "Unstructured post",
+          input: "Raw rental post text + the student's preferences.",
+          output: "Normalised request for the extraction module.",
+          rules: "Pass-through capture; preferences kept separate from listing text.",
+          exception: "Non-listing text → ask the user to paste an actual listing.",
+        },
+        {
+          label: "Module A · Extract",
+          tagline: "Facts only",
+          input: "Raw listing text.",
+          output: "Structured facts with qualifiers: 'Not mentioned' / 'Needs verification'.",
+          rules: "Never fabricate; preserve uncertainty explicitly.",
+          exception: "Conflicting statements in the post → keep both, flag the conflict.",
+        },
+        {
+          label: "Rule-based RAG",
+          tagline: "18-entry KB",
+          input: "Extracted facts.",
+          output: "Up to 3 relevant rental-rule entries.",
+          rules: "Deterministic rule matching over the knowledge base.",
+          exception: "No rule match → Module B runs in evidence-only mode, no rule citations.",
+        },
+        {
+          label: "Module B · Match / Risk / Rank",
+          tagline: "Grounded reasoning",
+          input: "Facts + preferences + retrieved rules.",
+          output: "Fit assessment, risk findings, ranked actions.",
+          rules: "Every risk requires two-part grounding: listing evidence + a knowledge entry.",
+          exception: "Grounding incomplete → mark 'needs verification' instead of raising a risk.",
+        },
+        {
+          label: "Evidence Check & Output",
+          tagline: "Human decides",
+          input: "Module B output.",
+          output: "Decision-support cards + landlord clarification questions.",
+          rules: "The system supports the decision; it never makes it.",
+          exception: "Final judgement always stays with the student — agent/landlord verification is prompted.",
+        },
+      ],
+    },
+    evaluation: {
+      heading: "Controlled A/B/C comparison across 20 fixed test cases",
+      body:
+        "Three versions were compared on 20 fixed test cases (60 outputs total), scored on four dimensions — Extraction Correctness, Missing-Information Handling, Risk Grounding, Rental-Rule Accuracy — 80 points maximum per version. Adding retrieval lifted risk grounding from 14/20 to 19/20 while slightly costing extraction correctness: retrieval strengthens reasoning support, but does not improve everything for free.",
+      disclaimer: "Test-set evaluation (20 fixed cases × 3 versions = 60 outputs), not live-user metrics. Documented results: total 62.5% → 90%, risk grounding 14 → 19/20. Other dimension splits are reconstructed for display — replace with the original scoring sheet.",
+      metrics: [
+        { value: "62.5→90%", label: "Total score, A → C", note: "50/80 → 72/80" },
+        { value: "20", label: "Test cases", note: "60 outputs · 4 dimensions" },
+        { value: "19/20", label: "Risk grounding (C)", note: "up from 14/20 in B" },
+      ],
+      versions: [
+        {
+          name: "A · Baseline prompt",
+          summary: "Single prompt, no structure constraints. 50/80 (62.5%)",
+          scores: [
+            { label: "Extraction correctness", value: 16, max: 20 },
+            { label: "Missing-info handling", value: 12, max: 20 },
+            { label: "Risk grounding", value: 13, max: 20 },
+            { label: "Rental-rule accuracy", value: 9, max: 20 },
+          ],
+        },
+        {
+          name: "B · Prompt-optimised",
+          summary: "Structured output + uncertainty qualifiers. ~57/80",
+          scores: [
+            { label: "Extraction correctness", value: 18, max: 20 },
+            { label: "Missing-info handling", value: 13, max: 20 },
+            { label: "Risk grounding", value: 14, max: 20 },
+            { label: "Rental-rule accuracy", value: 12, max: 20 },
+          ],
+        },
+        {
+          name: "C · Prompt + retrieval",
+          summary: "Rule-based RAG added. 72/80 (90%)",
+          scores: [
+            { label: "Extraction correctness", value: 17, max: 20 },
+            { label: "Missing-info handling", value: 17, max: 20 },
+            { label: "Risk grounding", value: 19, max: 20 },
+            { label: "Rental-rule accuracy", value: 19, max: 20 },
+          ],
+        },
+      ],
+      failures: [
+        {
+          title: "Retrieval slightly hurt extraction correctness (18 → 17)",
+          issue: "Injected rules occasionally distracted Module B from the listing's literal facts.",
+          lesson: "Retrieval augments reasoning, it does not come free — plan targeted fixes, not blind celebration.",
+        },
+        {
+          title: "Version B fabricated rule citations when the KB had no match",
+          issue: "Without an explicit no-match path, the model invented plausible-sounding rules.",
+          lesson: "Added the evidence-only mode: no retrieval match means no rule citations.",
+        },
+      ],
+    },
+    iteration: {
+      heading: "Next iteration priorities, driven by the evaluation",
+      now: [
+        "Fix the extraction-correctness regression under retrieval context (18 → 17).",
+        "Unify the qualifier taxonomy ('Not mentioned' vs 'Needs verification') so scoring is consistent.",
+      ],
+      next: [
+        "Grow the knowledge base beyond 18 entries; add embedding retrieval as a fallback when rules miss.",
+      ],
+      later: [
+        "Moderated test with 8–10 international students: time-to-decision and confidence calibration vs. manual search.",
       ],
     },
     // 无 deck/材料区块 — 有 Open Demo 外链
