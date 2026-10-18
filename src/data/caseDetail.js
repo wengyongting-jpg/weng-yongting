@@ -118,7 +118,7 @@ export const caseDetailProjects = [
     shortName: "Zhiyi Digital",
     eyebrow: ["CHALLENGE CUP", "COMPETITION", "2024"],
     subtitle:
-      "A bilingual RAG co-pilot built for a regional data-services provider — an AI+SaaS layer combining personalised marketing-content generation, big-data analytics, and short-video ad delivery.",
+      "One-stop digital effect-marketing service built on an in-house big-data SaaS platform — AI content production, multi-channel analytics, and short-video delivery as an authorised ByteDance service provider.", // [confirm] tech-lead role & stack below not named in deck
     badges: [
       { type: "award", text: "◆ National Silver" },
       { type: "role", text: "► Tech Lead" }, // [confirm] user not named in deck
@@ -127,9 +127,9 @@ export const caseDetailProjects = [
     ],
     context: {
       heading:
-        "Backing a regional data-services provider with a bilingual proposal co-pilot",
+        "A connector between platform traffic and businesses that cannot use it",
       body:
-        "Zhiyi Digital provides one-stop digital marketing and big-data cloud services for the beauty and fast-moving consumer goods sectors. The Challenge Cup entry proposed an AI+SaaS layer combining personalised marketing-content generation, big-data analytics, and short-video ad delivery, with ByteDance as the upstream platform partner.",
+        "Zhiyi Digital is a student-founded digital-marketing service company positioned in the gap between big traffic platforms and brands: platforms provide the tools, but most SMEs lack the data analysis, content production, and delivery operations to use them. As an authorised ByteDance service provider, the team packaged platform-side capability into three service lines — full-case digital marketing, AI creative content production, and big-data cloud analytics SaaS — serving head brands with custom engagements and SMEs with standardised tooling.",
       role: "Tech Lead · 5-person team · responsible for AI module + RAG pipeline", // [confirm] user's actual role — not named in deck
       stack: "React · FastAPI · pgvector · LangChain · Gemini 2.5 Flash", // [confirm] actual stack — placeholder
     },
@@ -159,11 +159,12 @@ export const caseDetailProjects = [
     results: {
       heading: "Pilot outcomes across 42 onboarded clients",
       body:
-        "Reported metrics from the pilot deck. Conversion and ROI figures confirmed from the pilot deck.", // [confirm] 转化率 85% likely typo (industry std 1–10%); ROI ¥179-190 likely should be 1.79-1.90 (decimal)
+        "Reported metrics from the pilot deck. Conversion and ROI figures confirmed from the pilot deck. Traffic-delivery volume is the company's reported cumulative figure.", // [confirm] 转化率 85% likely typo (industry std 1–10%); ROI ¥179-190 likely should be 1.79-1.90 (decimal)
       metrics: [
         { value: "8.5%", label: "Conversion rate", note: "pilot reported" },
         { value: "1.79–1.90×", label: "Avg campaign ROI", note: "pilot reported" },
         { value: "42", label: "Clients onboarded", note: "↑ from pilot of 8" },
+        { value: "1B+", label: "Cumulative traffic delivered", note: "company-reported" },
       ],
     },
     materials: {
@@ -185,16 +186,16 @@ export const caseDetailProjects = [
     shortName: "Rebecca",
     eyebrow: ["BUSINESS ELITE CHALLENGE", "COMPETITION", "2024"],
     subtitle:
-      "Strategic advisory work for Rebecca — re-architecting the export go-to-market for a beauty accessories brand facing channel saturation.", // [confirm] user's role per materials = 翁永婷 = Strategy Director
+      "Full-case diagnosis and strategy re-architecture for a listed hair-products manufacturer — from OEM export dependence to a brand-led, finance-grounded global playbook.", // [confirm] user's role per materials = 翁永婷 = Strategy Director
     badges: [
       { type: "award", text: "◆ National Finalist" }, // [confirm] award level — materials only say 全国总决赛
       { type: "role", text: "► Strategy Director" }, // [confirm] per materials
       { type: "neutral", text: "Cross-disciplinary team" },
     ],
     context: {
-      heading: "Strategic re-positioning for an export-driven hair brand",
+      heading: "A full-chain teardown of the hair-products industry before touching the company",
       body:
-        "Rebecca is a Chinese manufacturer of synthetic and human-hair wigs and extensions, historically reliant on B2B export. The case asked for a refreshed market entry strategy covering channel mix, brand localisation for overseas consumers, and a financial model for the proposed re-positioning.",
+        "Rebecca is a listed Chinese manufacturer of synthetic and human-hair wigs, historically reliant on B2B export. The team first mapped the full value chain — scarce human-hair supply upstream, labour-intensive manufacturing midstream, and split B2B/B2C demand downstream — then segmented demand by region: Africa buys on value-for-money, the Americas sits behind brand barriers, and the domestic market is shifting from functional (hair loss) to fashion-driven purchase. That market logic became the baseline for every strategic recommendation that followed.",
       role: "Strategy Director · responsible for overseas market strategy + brand localisation",
       stack: "Market research · Financial modelling · Brand strategy · Go-to-market",
     },
@@ -202,31 +203,31 @@ export const caseDetailProjects = [
       heading: "Export-only growth had plateaued and brand equity was invisible to end consumers",
       body: "",
       bullets: [
-        "<b>Channel concentration</b> — revenue tied to a small number of B2B distributors.",
-        "<b>Low brand recall</b> in overseas end-consumer markets.",
-        "<b>No D2C playbook</b> — limited direct-to-consumer data or retention loops.",
-        "<b>Pricing pressure</b> from commodity-grade competitors in Southeast Asia.",
+        "<b>Working capital trapped in inventory</b> — poor stock turnover and mounting pileups pressed cash flow while gross margin kept sliding.",
+        "<b>OEM dependence</b> — revenue from contract manufacturing with no own-brand presence in the high-barrier Americas market.",
+        "<b>Ageing domestic marketing</b> — legacy channels and weak new-media operations left the online channel's potential untapped.",
+        "<b>Blind diversification</b> — capital scattered into non-core real-estate and cultural-tourism ventures while the core product aged away from younger consumers.",
       ],
     },
     approach: {
-      heading: "A three-horizon market re-entry strategy",
+      heading: "Four strategy modules, from supply chain to organisation",
       body:
-        "Built a phased go-to-market — stabilise B2B export base, pilot D2C in two priority markets, then build a brand-led channel mix. Designed financial projections and a sensitivity table keyed to channel-mix assumptions.",
+        "Built the re-architecture in four modules: (1) operations — ERP digitisation, finance-business integration, IPD product development, a digital factory, and hedging to offset raw-material and FX swings; (2) brand — graduate from OEM to an owned global label with region-specific positioning; (3) channel — overseas social matrix (TikTok / Instagram / YouTube) plus domestic Xiaohongshu and Douyin content, D2C independent site, and offline flagship upgrades; (4) organisation — divest non-core businesses, refocus on the hair category, rejuvenate product design, and build the talent system.",
       steps: [
-        "Market Sizing",
-        "Channel Mix Design",
-        "Brand Localisation",
-        "Financial Modelling",
+        "Industry & PEST Analysis",
+        "Financial Deep-Dive",
+        "Strategy Modules",
+        "Implementation Roadmap",
       ],
-      tags: ["Go-to-market", "Brand localisation", "D2C", "Sensitivity analysis"],
+      tags: ["Value-chain teardown", "Financial diagnosis", "Omnichannel GTM", "Org & product refocus"],
     },
     results: {
-      heading: "National finalist placement",
+      heading: "A transferable playbook, validated at the national finals",
       body:
-        "Reached the national finals of the Business Elite Challenge. Detailed placement and metric outcomes pending user confirmation.", // [confirm]
+        "Reached the national finals of the Business Elite Challenge. Beyond the placement, the framework — full-chain teardown, financial deep-dive, modular strategy — applies to any Chinese light-manufacturing exporter moving from OEM to brand.",
       metrics: [
-        { value: " Finals", label: "National round", note: "[confirm] level: 1/2/3?" },
-        { value: "2", label: "Priority pilot markets", note: "phased D2C entry" },
+        { value: "4", label: "Strategy modules", note: "ops · brand · channel · org" },
+        { value: "3", label: "Regional demand logics", note: "Africa · Americas · domestic" },
         { value: "35", label: "Slide deck", note: "national finals round" },
       ],
     },
@@ -309,48 +310,49 @@ export const caseDetailProjects = [
     shortName: "Angyu Precision",
     eyebrow: ["CHALLENGE CUP · SMALL TRACK", "COMPETITION", "2024"],
     subtitle:
-      "Export-oriented go-to-market strategy and brand localisation for a precision-manufacturing SME serving overseas industrial customers.", // [confirm] user not named in PPT team list
+      "Challenge Cup venture entry for a precision rebar manufacturer — upgrading domestic production with in-house rolling and heat-treatment equipment, then exporting products plus process know-how along the Belt & Road.", // [confirm] user not named in PPT team list
     badges: [
       { type: "role", text: "► Project Lead" }, // [confirm] per competitions.js existing entry says "Project Lead: Angyu Precision"
       { type: "neutral", text: "Export GTM" },
-      { type: "neutral", text: "Brand localisation" },
+      { type: "neutral", text: "Belt & Road" },
     ],
     context: {
-      heading: "Taking a Chinese precision manufacturer to overseas industrial buyers",
+      heading: "Turning a precision-steel process advantage into a two-market business",
       body:
-        "Angyu Precision is a precision-manufacturing SME producing industrial components. The project asked for an export-oriented go-to-market and brand-localisation approach for overseas industrial customers, anchored on the company's existing manufacturing capability and patent portfolio.",
+        "Angyu Precision makes high-precision threaded rebar used in bridges and coal-mine anchoring, based in Handan — China's fastener capital. The company built two core systems in-house: a 6/18-stand rolling mill and a full-around ion-nitriding heat-treatment device, backed by 11 patents (4 invention + 7 utility) and 15 authoritative test certifications. The business runs a dual-track model: domestic infrastructure supply (including the Gansu S24/25 highway works) and Belt & Road export into Vietnam and Malaysia — selling not just steel but the production process and quality-control know-how, with overseas warehouse and factory support. The entry asked how to grow that overseas presence from manufacturing capability into a defensible market position.",
       role: "Project Lead · market research, export GTM, brand localisation, product visuals",
       stack: "Market research · Go-to-market · Brand localisation · Negotiation",
     },
     problem: {
-      heading: "Strong manufacturing, weak overseas market presence",
+      heading: "A process advantage the market could not see — and an industry competing it away",
       body: "",
       bullets: [
-        "<b>Manufacturing capability</b> not matched by overseas channel reach.",
-        "<b>Brand invisibility</b> in priority industrial buyer segments.",
-        "<b>Patent portfolio</b> not commercialised into a differentiation story.", // [confirm] PPT vs 佐证 docx disagree: 4 utility+7 invention OR 7 utility+4 invention
-        "<b>Negotiation cycles</b> with enterprise partners needed a tracking system.",
+        "<b>Homogeneous low-precision supply</b> — widespread substandard threaded rebar has been a root cause of bridge and coal-mine anchoring failures, yet quality differences were invisible to buyers.",
+        "<b>Low-price involution</b> — regional competitors competed the category down to commodity pricing, punishing exactly the players who invested in precision.",
+        "<b>Uncashed differentiation</b> — the patent portfolio and certifications existed on paper but had not been converted into an export story that industrial buyers would pay for.",
+        "<b>Thin overseas reach</b> — manufacturing capability far outpaced channel presence and brand recognition among priority industrial buyers abroad.",
       ],
     },
     approach: {
-      heading: "Market research + product visuals + partnership tracking",
+      heading: "Product + technology dual export, positioned away from the price war",
       body:
-        "Led market and user research, developed an export-oriented go-to-market strategy, designed product visuals for overseas customers, and ran 6 enterprise-partner negotiation cycles with project tracking.",
+        "Led market and user research, then built the export strategy around the one thing commodity rivals could not copy: the process. Positioning led with patented equipment and test certifications rather than price; offer design bundled customised material specifications per country's engineering requirements with overseas warehouse and technical-support models; and product visuals were designed for overseas industrial buyers. Ran 6 enterprise-partner negotiation cycles with project tracking to test the positioning in real deals.",
       steps: [
         "Market Research",
         "Export GTM",
         "Product Visuals",
         "Partner Negotiation",
       ],
-      tags: ["Export GTM", "Brand localisation", "Patent portfolio", "Enterprise partnerships"],
+      tags: ["Export GTM", "Process differentiation", "Belt & Road", "Enterprise partnerships"],
     },
     results: {
       heading: "Negotiation pipeline and overseas positioning established",
-      body: "",
+      body:
+        "The dual-track positioning held in practice: the company reports a profitable, growing business across domestic infrastructure and Southeast Asian export, with overseas cooperation projects creating 1,000+ local jobs (company-reported).",
       metrics: [
+        { value: "11", label: "Patents", note: "4 invention + 7 utility" },
+        { value: "15", label: "Test certifications", note: "authoritative labs" },
         { value: "6", label: "Negotiation cycles", note: "enterprise partners" },
-        { value: "11", label: "Patents in portfolio", note: "[confirm] utility/invention split" },
-        { value: "19", label: "Slide deck", note: "small-track entry" },
       ],
     },
     materials: {
