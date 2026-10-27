@@ -941,16 +941,15 @@ export const caseDetailProjects = [
     ],
     event: "Individual Project · Policy module Sept 2026 · SQL module 2026",
     links: [
-      { label: "GITHUB — POLICY ASSISTANT", url: "https://github.com/wengyongting-jpg/individual" },
-      { label: "GITHUB — TABLE-JOIN TOOL", url: "https://github.com/wengyongting-jpg/sql-table-join" },
+      { label: "GITHUB — ENTERPRISE AI SUITE", url: "https://github.com/wengyongting-jpg/individual" },
       { label: "PRD DOCUMENT — POLICY MODULE (PDF)", url: `${import.meta.env.BASE_URL}projects/grounded-enterprise-policy-assistant/policy-assistant-prd.pdf` },
     ],
     context: {
       heading: "Two questions every enterprise keeps asking — answered with the same discipline",
       body:
-        "Enterprise staff ask two kinds of questions: \"what does the policy say\" and \"what does the data show\". Both fail the same way with a generic LLM — fluent, unsourced, and wrong exactly when it matters. This suite applies one rule to both: deterministic gates run before any probabilistic generation. Module 1 is a policy RAG over a 16-document procurement corpus with a frozen-threshold decision layer (answer / clarify / abstain). Module 2 is a Text-to-SQL agent whose multi-table JOIN paths are computed by graph traversal instead of model guesswork — the join-resolution algorithm is open-sourced as sql-table-join and came out of a live enterprise reporting workflow, where weekly analytical reports were assembled from a relational database through this exact split: deterministic joins from the algorithm, conditions composed by the LLM.",
+        "Enterprise staff ask two kinds of questions: \"what does the policy say\" and \"what does the data show\". Both fail the same way with a generic LLM — fluent, unsourced, and wrong exactly when it matters. This suite applies one rule to both: deterministic gates run before any probabilistic generation. Module 1 is a policy RAG over a 16-document procurement corpus with a frozen-threshold decision layer (answer / clarify / abstain). Module 2 is a Text-to-SQL agent whose multi-table JOIN paths are computed by graph traversal instead of model guesswork — the join-resolution algorithm ships in the same repository (sql-table-join/) and came out of a live enterprise reporting workflow, where weekly analytical reports were assembled from a relational database through this exact split: deterministic joins from the algorithm, conditions composed by the LLM.",
       role:
-        "Individual project / end-to-end builder · product definition, RAG workflow, deterministic decision layer, evaluation design; Text-to-SQL architecture, join-resolution algorithm (open-sourced), SQL evaluation design",
+        "Individual project / end-to-end builder · product definition, RAG workflow, deterministic decision layer, evaluation design; Text-to-SQL architecture, join-resolution algorithm, SQL evaluation design",
       stack: "RAG · TF-IDF · Cosine Similarity · Deterministic Decision Layer · Python · Streamlit · Text-to-SQL · Graph Traversal (BFS) · sqlglot",
     },
     problem: {
@@ -1010,7 +1009,7 @@ export const caseDetailProjects = [
     },
     prototype: {
       inputLabel: "EMPLOYEE QUESTION",
-      disclaimer: "Interactive design demo for Module 1 (policy) — simulated answers on sample policy snippets, showing the three output states (cited answer / clarification / refusal). Not a live system; Module 2's join resolution is open-sourced as sql-table-join.",
+      disclaimer: "Interactive design demo for Module 1 (policy) — simulated answers on sample policy snippets, showing the three output states (cited answer / clarification / refusal). Not a live system; Module 2's join resolution ships in the same repository (sql-table-join/).",
       samples: [
         {
           id: "answerable",
@@ -1221,7 +1220,7 @@ export const caseDetailProjects = [
       postmortem: {
         heading: "An honest scale-down note",
         body:
-          "The policy grounding corpus is self-written synthetic policy text, not a real company's document set — a deliberate scoping decision that kept the project buildable, but it caps what it can claim: retrieval quality depends entirely on corpus coverage, and in a real enterprise the corpus is a moving target whose responsible maintenance requires a content-ops function and a legal review loop an individual project cannot sustain. The SQL module's ceiling is different: the join-resolution algorithm has already run in a live enterprise workflow for read-only analytical queries, but the open-sourced version ships a hand-declared relation graph rather than a production schema with drift, permissions, and cost constraints. Both modules therefore stop short of claiming production ownership by design: they demonstrate the gated architecture and their evaluation methods, while pressure-testing on real, anonymised policy documents and maintaining a live schema stay on the roadmap rather than being claimed as done.",
+          "The policy grounding corpus is self-written synthetic policy text, not a real company's document set — a deliberate scoping decision that kept the project buildable, but it caps what it can claim: retrieval quality depends entirely on corpus coverage, and in a real enterprise the corpus is a moving target whose responsible maintenance requires a content-ops function and a legal review loop an individual project cannot sustain. The SQL module's ceiling is different: the join-resolution algorithm has already run in a live enterprise workflow for read-only analytical queries, but the public version ships a hand-declared relation graph rather than a production schema with drift, permissions, and cost constraints. Both modules therefore stop short of claiming production ownership by design: they demonstrate the gated architecture and their evaluation methods, while pressure-testing on real, anonymised policy documents and maintaining a live schema stay on the roadmap rather than being claimed as done.",
       },
     },
     // 无 deck；有 PRD 文档 PDF 链接

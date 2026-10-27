@@ -96,7 +96,7 @@ export const projects = [
     // 无已确认的公开 demo 链接 — GitHub 链接在详情页 hero 区。
     url: "",
     summary:
-      "Two enterprise assistants, one design rule — deterministic gates before any generation. The policy module retrieves before it answers, cites its sources, and refuses when evidence is insufficient (22-case frozen evaluation: 22/22 routing, 17/17 grounding). The Text-to-SQL module computes multi-table JOIN paths by graph traversal instead of model guesswork — validated live in an enterprise reporting workflow without join hallucination, and open-sourced as sql-table-join.",
+      "Two enterprise assistants, one design rule — deterministic gates before any generation. The policy module retrieves before it answers, cites its sources, and refuses when evidence is insufficient (22-case frozen evaluation: 22/22 routing, 17/17 grounding). The Text-to-SQL module computes multi-table JOIN paths by graph traversal instead of model guesswork — validated live in an enterprise reporting workflow without join hallucination; both modules ship in one GitHub repository.",
   },
   {
     slug: "health-insurance-claim-decision-agent",
