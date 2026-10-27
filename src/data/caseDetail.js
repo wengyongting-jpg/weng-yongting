@@ -922,57 +922,61 @@ export const caseDetailProjects = [
   },
 
   // =========================================================
-  // 09 — Grounded Enterprise Policy & Procedure Assistant (Individual · Prototype)
-  // 内容迁移自远程 projects.js 的 8-section 数据；无生产部署/指标声明。
+  // 09 — Enterprise AI Assistant Suite (Policy RAG + Text-to-SQL · Individual · Prototype + Open Source)
+  // 内容迁移自远程 projects.js 的 8-section 数据；评估数字来自 individual 仓库已执行的评估输出。
   // =========================================================
   {
     slug: "grounded-enterprise-policy-assistant",
     number: "04",
-    title: "Grounded Enterprise Policy & Procedure Assistant",
-    titleEn: "Evidence-Based Internal Knowledge Assistant",
-    shortName: "Policy Assistant",
-    eyebrow: ["ENTERPRISE AI · RAG", "INDIVIDUAL PROJECT", "2026"],
+    title: "Enterprise AI Assistant Suite",
+    titleEn: "Grounded Policy RAG + Text-to-SQL Data Agent",
+    shortName: "Enterprise AI Assistant",
+    eyebrow: ["ENTERPRISE AI · RAG + TEXT-TO-SQL", "INDIVIDUAL PROJECT", "2026"],
     subtitle:
-      "Retrieval-first by design: it checks whether retrieved evidence is sufficient before answering — and refuses when it is not.",
+      "Two enterprise assistants, one design rule — deterministic gates before any generation: a policy RAG that cites or refuses, and a Text-to-SQL agent whose JOIN paths are computed, not guessed.",
     badges: [
-      { type: "neutral", text: "Prototype" },
+      { type: "neutral", text: "Prototype + Open Source" },
       { type: "role", text: "► End-to-End Builder" },
       { type: "neutral", text: "Individual project" },
     ],
-    event: "Individual Project · September 2026",
+    event: "Individual Project · Policy module Sept 2026 · SQL module 2026",
     links: [
-      { label: "PRD DOCUMENT (PDF)", url: `${import.meta.env.BASE_URL}projects/grounded-enterprise-policy-assistant/policy-assistant-prd.pdf` },
+      { label: "GITHUB — POLICY ASSISTANT", url: "https://github.com/wengyongting-jpg/individual" },
+      { label: "GITHUB — TABLE-JOIN TOOL", url: "https://github.com/wengyongting-jpg/sql-table-join" },
+      { label: "PRD DOCUMENT — POLICY MODULE (PDF)", url: `${import.meta.env.BASE_URL}projects/grounded-enterprise-policy-assistant/policy-assistant-prd.pdf` },
     ],
     context: {
-      heading: "Internal policy answers must be grounded, traceable, and careful",
+      heading: "Two questions every enterprise keeps asking — answered with the same discipline",
       body:
-        "Internal policy questions require more than helpful language. The answer must be based on authorised documents, traceable to a source, and careful when evidence is missing or uncertain. A generic LLM makes it worse: it may hallucinate, fail to cite a source, or rely on incomplete or outdated policy information.",
+        "Enterprise staff ask two kinds of questions: \"what does the policy say\" and \"what does the data show\". Both fail the same way with a generic LLM — fluent, unsourced, and wrong exactly when it matters. This suite applies one rule to both: deterministic gates run before any probabilistic generation. Module 1 is a policy RAG over a 16-document procurement corpus with a frozen-threshold decision layer (answer / clarify / abstain). Module 2 is a Text-to-SQL agent whose multi-table JOIN paths are computed by graph traversal instead of model guesswork — the join-resolution algorithm is open-sourced as sql-table-join.",
       role:
-        "Individual project / end-to-end builder · problem definition, information architecture, RAG workflow, retrieval logic, answer constraints, citation and evidence mechanisms, refusal/escalation logic, product design",
-      stack: "RAG · TF-IDF Vectorisation · Cosine Similarity · Python · Streamlit",
+        "Individual project / end-to-end builder · product definition, RAG workflow, deterministic decision layer, evaluation design; Text-to-SQL architecture, join-resolution algorithm (open-sourced), SQL evaluation design",
+      stack: "RAG · TF-IDF · Cosine Similarity · Deterministic Decision Layer · Python · Streamlit · Text-to-SQL · Graph Traversal (BFS) · sqlglot",
     },
     problem: {
-      heading: "Traditional document search is slow, fragmented, and easy to misread",
+      heading: "Both assistants answer questions the company cannot afford to get wrong",
       body:
-        "Employees need fast answers about internal policies and procedures, but documents can be misunderstood and generic LLMs answer anyway — without evidence, without sources, and without knowing when they should not answer.",
+        "Employees need fast, correct answers about internal policies and about their own data. Generic LLMs answer both anyway — without evidence, without sources, and without knowing when they should not answer.",
       bullets: [
         "<b>Hallucination risk</b> — free-form LLM answers without document evidence.",
         "<b>No traceability</b> — answers cannot be checked against an authorised source.",
         "<b>Over-answering</b> — LLMs answer questions they should decline.",
-        "<b>Stale information</b> — model priors lag behind updated policy documents.",
+        "<b>Join errors at scale</b> — single-shot Text-to-SQL guesses multi-table JOIN keys; wrong joins run successfully and return silently wrong numbers.",
+        "<b>Analyst bottleneck</b> — every ad-hoc data question queues behind someone who can write SQL.",
+        "<b>Stale information</b> — model priors lag behind updated policy documents and schemas.",
       ],
     },
     approach: {
-      heading: "Retrieve first, assess sufficiency, then answer with citation — or refuse",
+      heading: "Two pipelines, one discipline: decide deterministically, then generate",
       body:
-        "Documents are processed and chunked, indexed as TF-IDF vectors, and matched to each question by cosine similarity. At query time, retrieved evidence passes an evidence-threshold check before the foundation model composes a response — which either cites its sources or refuses. Underspecified questions trigger clarification instead of a guess.",
+        "Module 1 (policy): documents are chunked and indexed as TF-IDF vectors; retrieved evidence passes a frozen evidence-threshold decision layer before the foundation model composes a cited answer — underspecified questions trigger clarification, uncovered topics trigger refusal. Module 2 (data): the question is parsed into business intent and fields as separate stages, JOIN paths are resolved by BFS over a declarative table-relation graph, SQL is assembled and syntax-validated with sqlglot, then executed read-only with result checks; business terms and metric definitions load on demand.",
       steps: [
-        "Retrieve Evidence",
-        "Assess Sufficiency",
-        "Cited Answer",
-        "Refuse / Escalate",
+        "Parse Intent",
+        "Resolve Evidence / Joins",
+        "Generate Under Constraints",
+        "Validate & Cite",
       ],
-      tags: ["RAG", "Chunking", "Evidence threshold", "Citations", "Refusal logic", "Streamlit"],
+      tags: ["RAG", "Evidence threshold", "Refusal logic", "Text-to-SQL", "BFS join resolution", "sqlglot", "Streamlit"],
     },
     results: {
       heading: "An MVP prototype for grounded enterprise retrieval",
@@ -1006,7 +1010,7 @@ export const caseDetailProjects = [
     },
     prototype: {
       inputLabel: "EMPLOYEE QUESTION",
-      disclaimer: "Interactive design demo — simulated answers on sample policy snippets, showing the three output states (cited answer / clarification / refusal). Not a live system.",
+      disclaimer: "Interactive design demo for Module 1 (policy) — simulated answers on sample policy snippets, showing the three output states (cited answer / clarification / refusal). Not a live system; Module 2's join resolution is open-sourced as sql-table-join.",
       samples: [
         {
           id: "answerable",
@@ -1049,7 +1053,7 @@ export const caseDetailProjects = [
         },
       ],
     },
-    decisionsHeading: "Why the assistant is retrieval-first",
+    decisionsHeading: "Why both assistants are gated before they generate",
     decisions: [
       {
         question: "Generate freely like a chatbot, or retrieve before answering?",
@@ -1071,6 +1075,20 @@ export const caseDetailProjects = [
         chosen: "B — ambiguity in policy questions is usually about which policy applies, and guessing picks the wrong one.",
         evidence: "'Can I take leave?' spans at least three different policies with different rules.",
         validation: "Log clarification rate; if most clarifications resolve in one turn, the trade is worth it.",
+      },
+      {
+        question: "One-shot LLM SQL, or a staged pipeline with computed joins?",
+        options: "A · Let the model write the full SQL — fast, but multi-table JOIN keys are where it invents errors. B · Split intent parsing, field identification, join resolution and generation — and compute JOIN paths from a relation graph.",
+        chosen: "B — join errors are the dominant failure mode in generated SQL; graph traversal makes join resolution deterministic and testable.",
+        evidence: "Wrong joins fail silently: the query runs and returns plausible-but-wrong numbers.",
+        validation: "Test set across single-table, multi-table JOIN, filter, aggregation and window-function cases; baseline vs staged pipeline compared on execution success.",
+      },
+      {
+        question: "Let the agent execute anything, or read-only with validation?",
+        options: "A · Full database access — flexible, risky. B · Read-only execution plus result validation before delivery.",
+        chosen: "B — the agent answers questions; it never mutates data.",
+        evidence: "Data risk is asymmetric: a wrong read wastes a moment, a wrong write corrupts the record.",
+        validation: "SELECT-only generation enforced; sqlglot syntax check and result shape checks before delivery.",
       },
     ],
     workflow: {
@@ -1118,37 +1136,83 @@ export const caseDetailProjects = [
         },
       ],
     },
+    workflow2: {
+      heading: "Module 2 — from a plain-language question to validated, read-only SQL",
+      nodes: [
+        {
+          label: "Intent Parsing",
+          tagline: "Business intent first",
+          input: "Plain-language data request.",
+          output: "Structured intent: requested fields, filters, aggregation level.",
+          rules: "Intent parsing, field identification and query-logic generation run as separate stages, so errors are caught where they occur.",
+          exception: "Ambiguous metric name → clarified against the business glossary, not guessed.",
+        },
+        {
+          label: "Field Identification",
+          tagline: "Fields → tables",
+          input: "Parsed intent.",
+          output: "Requested fields mapped to their source tables.",
+          rules: "Field-to-table mapping resolved from the schema dictionary; no invented columns.",
+          exception: "Field not in schema → the request is narrowed and the user told, never hallucinated.",
+        },
+        {
+          label: "Join Resolution",
+          tagline: "Computed, not guessed",
+          input: "Required source tables.",
+          output: "Explicit JOIN paths with keys.",
+          rules: "BFS shortest path over the declared table-relation graph; topological ordering prevents cycles; greedy base-table selection covers the most requested fields first.",
+          exception: "Requested tables not connectable → explicit failure, never a fabricated join.",
+        },
+        {
+          label: "SQL Generation & Validation",
+          tagline: "Constrained assembly",
+          input: "Join paths + query logic.",
+          output: "Read-only, syntax-validated SQL.",
+          rules: "SELECT-only generation; generated SQL parsed with sqlglot before it is allowed to run.",
+          exception: "Parse failure → the error is surfaced and regenerated, not silently shipped.",
+        },
+        {
+          label: "Execution & Output",
+          tagline: "Read-only delivery",
+          input: "Validated SQL.",
+          output: "Result set delivered as structured data.",
+          rules: "Read-only execution; results checked for shape and completeness before delivery.",
+          exception: "Empty or malformed result → returned as a diagnostic, never padded with plausible rows.",
+        },
+      ],
+    },
     evaluation: {
-      heading: "Evaluation design — targets first, numbers when the test set runs",
+      heading: "Executed evaluation — the policy module's frozen test set ran end-to-end",
       body:
-        "The prototype ships with an evaluation design rather than invented metrics: a self-built question set across three categories (in-scope answerable, ambiguous, out-of-scope), scored on citation coverage, refusal correctness, and clarification quality. Targets are stated below; they become real numbers once the logged question set runs.",
-      disclaimer: "Prototype stage — evaluation design with explicit targets, not measured production metrics. No user-adoption or accuracy figures are claimed.",
+        "The policy module's evaluation is a frozen 22-case set (5 normal, 5 boundary, 5 ambiguous, 5 insufficient-evidence, 2 conflicting/superseded), with thresholds calibrated on a separate 90-question set and frozen before scoring. Figures below are recomputed from the committed evaluation outputs — none is hand-entered. The SQL module ships a test set across single-table, multi-table JOIN, filter, aggregation and window-function cases comparing baseline vs staged pipeline; publishing its execution-success comparison is the next milestone.",
+      disclaimer: "Policy-module figures are from the executed run committed in the repository (gpt-4o-mini via OpenRouter, 15 model calls, ~US$0.0048 total). No production deployment or user-adoption figures are claimed. SQL-module execution-success comparison pending publication.",
       metrics: [
-        { value: "3", label: "Question categories", note: "answerable · ambiguous · out-of-scope" },
-        { value: "≥90%", label: "Citation coverage target", note: "claims with a source section" },
-        { value: "100%", label: "Refusal correctness target", note: "no out-of-scope answers" },
+        { value: "22/22", label: "Routing actions", note: "vs 54.5% for both baselines" },
+        { value: "17/17", label: "Evidence grounding", note: "scorable cases" },
+        { value: "10/12", label: "Citation-grounded answers", note: "human-graded; 2 disclosure failures" },
+        { value: "10/10", label: "Non-answerable handled", note: "5/5 clarify + 5/5 abstain" },
       ],
       failures: [
         {
-          title: "Baseline LLM answered an out-of-scope question confidently",
-          issue: "Without the evidence gate, the model produced a plausible-sounding policy that does not exist.",
-          lesson: "Retrieval sufficiency check moved before generation, not after.",
+          title: "Correct routing did not guarantee complete disclosure (TC21)",
+          issue: "A superseded policy edition was retrieved and cited, but the answer text failed to flag that the rule had been superseded.",
+          lesson: "Disclosure is part of correctness — answer validation now checks that supersession/conflict evidence changes the wording, not just the routing.",
         },
         {
-          title: "Ambiguous leave question picked the wrong policy",
-          issue: "'Can I take leave?' matched annual leave but the user meant unpaid leave.",
-          lesson: "Overlap detection added — ambiguity triggers clarification instead of a guess.",
+          title: "A genuine cross-document conflict got flattened (TC22)",
+          issue: "Two policy documents contradict each other on gift acceptance; the answer reduced the conflict to a bare 'No.'",
+          lesson: "The prompt now requires both sources cited explicitly, instead of silently picking one side.",
         },
       ],
     },
     iteration: {
-      heading: "From prototype to trustworthy internal tool",
+      heading: "From validated suite to trustworthy internal tool",
       now: [
-        "Log real employee Q&A pairs and build a 30-question regression set from actual usage.",
+        "Publish the SQL module's execution-success comparison (baseline vs staged pipeline) on the JOIN test set.",
       ],
       next: [
-        "Move from TF-IDF to dense retrieval once the log shows keyword-mismatch failures.",
-        "Add answer-helpfulness feedback to catch wrong-but-cited answers.",
+        "Move the policy module from TF-IDF to dense retrieval once logged questions show vocabulary-mismatch failures.",
+        "Pressure-test the SQL pipeline on a real warehouse schema beyond the declared relation graph.",
       ],
       later: [
         "Multi-document synthesis for questions spanning several policies.",
@@ -1157,7 +1221,7 @@ export const caseDetailProjects = [
       postmortem: {
         heading: "An honest scale-down note",
         body:
-          "The grounding corpus here is self-written policy text, not a real company's document set — a deliberate scoping decision that kept the prototype buildable, but it caps what the project can claim. Retrieval quality depends entirely on corpus coverage, and in a real enterprise the corpus is a moving target: policies update, ownership is distributed across departments, and a confidently cited wrong answer carries compliance consequences. Maintaining that responsibly requires a content-ops function and a legal review loop that an individual project cannot sustain. The project therefore stops at a validated prototype by design: it demonstrates the retrieval-first architecture and its evaluation method, while the honest next step — pressure-testing on real, anonymised policy documents — stays on the roadmap rather than being claimed as done.",
+          "The policy grounding corpus is self-written synthetic policy text, not a real company's document set — a deliberate scoping decision that kept the project buildable, but it caps what it can claim: retrieval quality depends entirely on corpus coverage, and in a real enterprise the corpus is a moving target whose responsible maintenance requires a content-ops function and a legal review loop an individual project cannot sustain. The SQL module has the mirror-image ceiling: its relation graph is declared by hand, not mined from a live warehouse — realistic enough to validate the algorithm, but not a production schema with drift, permissions, and cost constraints. Both modules therefore stop at validated prototypes by design: they demonstrate the gated architecture and their evaluation methods, while pressure-testing on real, anonymised policy documents and a live warehouse stays on the roadmap rather than being claimed as done.",
       },
     },
     // 无 deck；有 PRD 文档 PDF 链接

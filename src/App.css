@@ -635,6 +635,7 @@ footer { display:flex; justify-content:space-between; align-items:center; paddin
   line-height: 1.25;
   color: var(--v5-text);
 }
+.case-detail-section-title--second { margin-top: 44px; }
 .case-detail-section-text {
   margin: 0 0 16px;
   color: var(--v5-text);

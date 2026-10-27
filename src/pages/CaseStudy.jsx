@@ -224,6 +224,14 @@ function CaseStudy() {
                   <PrototypePlayground prototype={project.prototype} />
                 )}
                 {project.workflow && <WorkflowExplorer workflow={project.workflow} />}
+                {project.workflow2 && (
+                  <>
+                    <h2 className="case-detail-section-title case-detail-section-title--second">
+                      {project.workflow2.heading}
+                    </h2>
+                    <WorkflowExplorer workflow={project.workflow2} />
+                  </>
+                )}
                 {project.approach && project.approach.tags && project.approach.tags.length > 0 && (
                   <div className="case-detail-tags">
                     {project.approach.tags.map((t, i) => (
