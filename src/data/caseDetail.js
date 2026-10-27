@@ -948,7 +948,7 @@ export const caseDetailProjects = [
     context: {
       heading: "Two questions every enterprise keeps asking — answered with the same discipline",
       body:
-        "Enterprise staff ask two kinds of questions: \"what does the policy say\" and \"what does the data show\". Both fail the same way with a generic LLM — fluent, unsourced, and wrong exactly when it matters. This suite applies one rule to both: deterministic gates run before any probabilistic generation. Module 1 is a policy RAG over a 16-document procurement corpus with a frozen-threshold decision layer (answer / clarify / abstain). Module 2 is a Text-to-SQL agent whose multi-table JOIN paths are computed by graph traversal instead of model guesswork — the join-resolution algorithm is open-sourced as sql-table-join.",
+        "Enterprise staff ask two kinds of questions: \"what does the policy say\" and \"what does the data show\". Both fail the same way with a generic LLM — fluent, unsourced, and wrong exactly when it matters. This suite applies one rule to both: deterministic gates run before any probabilistic generation. Module 1 is a policy RAG over a 16-document procurement corpus with a frozen-threshold decision layer (answer / clarify / abstain). Module 2 is a Text-to-SQL agent whose multi-table JOIN paths are computed by graph traversal instead of model guesswork — the join-resolution algorithm is open-sourced as sql-table-join and came out of a live enterprise reporting workflow, where weekly analytical reports were assembled from a relational database through this exact split: deterministic joins from the algorithm, conditions composed by the LLM.",
       role:
         "Individual project / end-to-end builder · product definition, RAG workflow, deterministic decision layer, evaluation design; Text-to-SQL architecture, join-resolution algorithm (open-sourced), SQL evaluation design",
       stack: "RAG · TF-IDF · Cosine Similarity · Deterministic Decision Layer · Python · Streamlit · Text-to-SQL · Graph Traversal (BFS) · sqlglot",
@@ -1079,9 +1079,9 @@ export const caseDetailProjects = [
       {
         question: "One-shot LLM SQL, or a staged pipeline with computed joins?",
         options: "A · Let the model write the full SQL — fast, but multi-table JOIN keys are where it invents errors. B · Split intent parsing, field identification, join resolution and generation — and compute JOIN paths from a relation graph.",
-        chosen: "B — join errors are the dominant failure mode in generated SQL; graph traversal makes join resolution deterministic and testable.",
-        evidence: "Wrong joins fail silently: the query runs and returns plausible-but-wrong numbers.",
-        validation: "Test set across single-table, multi-table JOIN, filter, aggregation and window-function cases; baseline vs staged pipeline compared on execution success.",
+        chosen: "B — join errors are the dominant failure mode in generated SQL; graph traversal makes join resolution deterministic and testable. Once joins are computed, the remaining SQL work becomes a small, well-scoped editing task for the LLM.",
+        evidence: "Wrong joins fail silently: the query runs and returns plausible-but-wrong numbers. The LLM's core weakness is not SQL syntax — it is not knowing how the tables connect.",
+        validation: "Test set across single-table, multi-table JOIN, filter, aggregation and window-function cases; in live enterprise use, the split produced complex multi-table SQL with no join hallucination. Quantitative baseline-vs-staged comparison pending publication.",
       },
       {
         question: "Let the agent execute anything, or read-only with validation?",
@@ -1144,7 +1144,7 @@ export const caseDetailProjects = [
           tagline: "Business intent first",
           input: "Plain-language data request.",
           output: "Structured intent: requested fields, filters, aggregation level.",
-          rules: "Intent parsing, field identification and query-logic generation run as separate stages, so errors are caught where they occur.",
+          rules: "Intent parsing, field identification and query-logic generation run as separate stages, so errors are caught where they occur; the router first classifies the request — metric-definition check, report query, ad-hoc analysis, or other.",
           exception: "Ambiguous metric name → clarified against the business glossary, not guessed.",
         },
         {
@@ -1165,18 +1165,18 @@ export const caseDetailProjects = [
         },
         {
           label: "SQL Generation & Validation",
-          tagline: "Constrained assembly",
-          input: "Join paths + query logic.",
+          tagline: "LLM composes, algorithm joins",
+          input: "Field list from the LLM + computed join skeleton.",
           output: "Read-only, syntax-validated SQL.",
-          rules: "SELECT-only generation; generated SQL parsed with sqlglot before it is allowed to run.",
+          rules: "Two-phase split: the LLM lists required fields without naming any table; the algorithm emits the deterministic FROM/JOIN skeleton; the LLM then layers WHERE, GROUP BY and window functions on top. SELECT-only; parsed with sqlglot before it runs.",
           exception: "Parse failure → the error is surfaced and regenerated, not silently shipped.",
         },
         {
           label: "Execution & Output",
           tagline: "Read-only delivery",
           input: "Validated SQL.",
-          output: "Result set delivered as structured data.",
-          rules: "Read-only execution; results checked for shape and completeness before delivery.",
+          output: "Result set saved as structured data.",
+          rules: "Read-only execution; results checked for shape and completeness, then saved as files feeding downstream metric calculation and template-report rendering.",
           exception: "Empty or malformed result → returned as a diagnostic, never padded with plausible rows.",
         },
       ],
@@ -1184,8 +1184,8 @@ export const caseDetailProjects = [
     evaluation: {
       heading: "Executed evaluation — the policy module's frozen test set ran end-to-end",
       body:
-        "The policy module's evaluation is a frozen 22-case set (5 normal, 5 boundary, 5 ambiguous, 5 insufficient-evidence, 2 conflicting/superseded), with thresholds calibrated on a separate 90-question set and frozen before scoring. Figures below are recomputed from the committed evaluation outputs — none is hand-entered. The SQL module ships a test set across single-table, multi-table JOIN, filter, aggregation and window-function cases comparing baseline vs staged pipeline; publishing its execution-success comparison is the next milestone.",
-      disclaimer: "Policy-module figures are from the executed run committed in the repository (gpt-4o-mini via OpenRouter, 15 model calls, ~US$0.0048 total). No production deployment or user-adoption figures are claimed. SQL-module execution-success comparison pending publication.",
+        "The policy module's evaluation is a frozen 22-case set (5 normal, 5 boundary, 5 ambiguous, 5 insufficient-evidence, 2 conflicting/superseded), with thresholds calibrated on a separate 90-question set and frozen before scoring. Figures below are recomputed from the committed evaluation outputs — none is hand-entered. The SQL module ships a test set across single-table, multi-table JOIN, filter, aggregation and window-function cases; in live enterprise use, the staged pipeline generated complex multi-table SQL — joins, filters, aggregation, window functions — against a production database with no join hallucination, and every result fed automated metric calculation and template-report rendering end to end.",
+      disclaimer: "Policy-module figures are from the executed run committed in the repository (gpt-4o-mini via OpenRouter, 15 model calls, ~US$0.0048 total). No user-adoption figures are claimed. SQL-module live-use validation is qualitative; the quantitative baseline-vs-staged execution-success comparison is pending publication.",
       metrics: [
         { value: "22/22", label: "Routing actions", note: "vs 54.5% for both baselines" },
         { value: "17/17", label: "Evidence grounding", note: "scorable cases" },
@@ -1221,7 +1221,7 @@ export const caseDetailProjects = [
       postmortem: {
         heading: "An honest scale-down note",
         body:
-          "The policy grounding corpus is self-written synthetic policy text, not a real company's document set — a deliberate scoping decision that kept the project buildable, but it caps what it can claim: retrieval quality depends entirely on corpus coverage, and in a real enterprise the corpus is a moving target whose responsible maintenance requires a content-ops function and a legal review loop an individual project cannot sustain. The SQL module has the mirror-image ceiling: its relation graph is declared by hand, not mined from a live warehouse — realistic enough to validate the algorithm, but not a production schema with drift, permissions, and cost constraints. Both modules therefore stop at validated prototypes by design: they demonstrate the gated architecture and their evaluation methods, while pressure-testing on real, anonymised policy documents and a live warehouse stays on the roadmap rather than being claimed as done.",
+          "The policy grounding corpus is self-written synthetic policy text, not a real company's document set — a deliberate scoping decision that kept the project buildable, but it caps what it can claim: retrieval quality depends entirely on corpus coverage, and in a real enterprise the corpus is a moving target whose responsible maintenance requires a content-ops function and a legal review loop an individual project cannot sustain. The SQL module's ceiling is different: the join-resolution algorithm has already run in a live enterprise workflow for read-only analytical queries, but the open-sourced version ships a hand-declared relation graph rather than a production schema with drift, permissions, and cost constraints. Both modules therefore stop short of claiming production ownership by design: they demonstrate the gated architecture and their evaluation methods, while pressure-testing on real, anonymised policy documents and maintaining a live schema stay on the roadmap rather than being claimed as done.",
       },
     },
     // 无 deck；有 PRD 文档 PDF 链接
